@@ -35,3 +35,5 @@
 @media(max-width:900px){.blog-layout{grid-template-columns:1fr}.blog-sidebar{position:static}.blog-card-grid{grid-template-columns:1fr}.blog-hero{padding-top:125px}}
 
 .cta-band h2,.cta-band p{color:#fff!important}
+
+.blog-side-card .btn,.blog-side-card .btn-primary{color:#fff!important;text-decoration:none!important}
