@@ -1,0 +1,42 @@
+.search-card-section{margin-top:-72px;position:relative;z-index:5}
+.search-card{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:1.25fr 1fr .7fr 1fr auto;gap:12px;align-items:end;border:1px solid rgba(220,230,240,.75)}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:12px;font-weight:900;color:#52677f}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;color:var(--ink);background:#fff;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#7cb6f1;box-shadow:0 0 0 3px rgba(13,103,200,.08)}
+
+.trust-strip{padding:32px 0 6px}
+.trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.trust-item{display:flex;align-items:center;gap:12px;padding:16px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+.trust-icon{width:42px;height:42px;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center;font-size:20px}
+.trust-item strong{display:block;font-size:14px}
+.trust-item span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:32px}
+.section-head h2,.about-copy h2,.booking-intro h2,#contact h2,.destination-hero h1{font-size:clamp(34px,4vw,52px);line-height:1.06;margin:10px 0 0;letter-spacing:-.04em}
+.section-head p{max-width:470px;color:var(--muted);line-height:1.75}
+.grid{display:grid;gap:22px}
+
+.destinations{grid-template-columns:repeat(3,1fr)}
+.destination-card{height:430px;border-radius:26px;overflow:hidden;position:relative;background-size:cover;background-position:center;box-shadow:var(--shadow-sm);transition:.25s}
+.destination-card:hover{transform:translateY(-5px)}
+.turkey{background-image:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=85')}
+.greece{background-image:url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=85')}
+.egypt{background-image:url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=85')}
+.shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,22,46,.90),rgba(2,22,46,.04) 68%)}
+.card-copy{position:absolute;left:26px;right:26px;bottom:24px;color:#fff}
+.card-copy span{font-size:12px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.16);padding:7px 9px;border-radius:999px}
+.card-copy h3{font-size:32px;margin:14px 0 4px}
+.card-copy p{margin:0 0 14px;color:#dbe7f3}
+.link-btn{padding:0;background:none;border:0;color:#ffda4d;font:inherit;font-weight:900;cursor:pointer;text-decoration:none}
+
+.offer-grid{grid-template-columns:repeat(3,1fr)}
+.offer-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-sm);transition:.25s}
+.offer-card:hover{transform:translateY(-4px)}
+.offer-card img{width:100%;height:235px;object-fit:cover}
+.offer-body{padding:22px}
+.tag-row{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted)}
+.tag{color:var(--blue);background:var(--blue-soft);padding:5px 9px;border-radius:999px;font-weight:900}
+.offer-body h3{font-size:22px;margin:14px 0 8px}
+.offer-body p{color:var(--muted);line-height:1.65}
+.offer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
