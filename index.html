@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AlviTravel — agenție de turism din Chișinău. Vacanțe în Turcia, Grecia, Egipt și excursii personalizate." />
+  <meta property="og:title" content="AlviTravel — Vacanța ta începe aici" />
+  <meta property="og:description" content="Turcia, Grecia, Egipt și excursii. Consultanță rapidă și rezervări prin WhatsApp." />
+  <meta property="og:type" content="website" />
+  <title>AlviTravel — Vacanța ta începe aici</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="site-root"></div>
+<script>
+(async()=>{const root=document.getElementById('site-root');const files=["home-1.html","home-2.html","home-3.html","home-4.html"];const parts=await Promise.all(files.map(f=>fetch(f).then(r=>r.text())));root.innerHTML=parts.join('');const s=document.createElement('script');s.src='script.js';document.body.appendChild(s);})();
+</script>
+</body></html>
