@@ -66,3 +66,50 @@
 @media(max-width:768px){
   .cta-offer-btn{width:100%;min-width:unset}
 }
+
+
+.contact-list a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.contact-icon{
+  width:36px;
+  height:36px;
+  border-radius:11px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  box-shadow:0 6px 16px rgba(10,45,85,.10);
+}
+.contact-icon svg{
+  width:19px;
+  height:19px;
+}
+.phone-icon{
+  background:#eaf4ff;
+}
+.phone-icon svg{
+  fill:#0875e1;
+}
+.instagram-icon{
+  background:radial-gradient(circle at 30% 105%,#ffd600 0 22%,#ff7a00 23% 38%,#ff0169 39% 62%,#d300c5 63% 78%,#7638fa 79% 100%);
+}
+.instagram-icon svg{
+  fill:none;
+  stroke:#fff;
+  stroke-width:1.9;
+}
+.instagram-icon .ig-dot{
+  fill:#fff;
+  stroke:none;
+}
+.email-icon{
+  background:#eef2ff;
+}
+.email-icon svg{
+  fill:none;
+  stroke:#5b6ee1;
+  stroke-width:1.8;
+}
