@@ -33,3 +33,5 @@
 .blog-card p{color:#6a7c90}
 .blog-meta{display:flex;gap:14px;flex-wrap:wrap;color:#6a7c90;font-size:14px;margin:12px 0 0}
 @media(max-width:900px){.blog-layout{grid-template-columns:1fr}.blog-sidebar{position:static}.blog-card-grid{grid-template-columns:1fr}.blog-hero{padding-top:125px}}
+
+.cta-band h2,.cta-band p{color:#fff!important}
