@@ -37,3 +37,32 @@
 .cta-band h2,.cta-band p{color:#fff!important}
 
 .blog-side-card .btn,.blog-side-card .btn-primary{color:#fff!important;text-decoration:none!important}
+
+
+.cta-offer-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:190px;
+  height:60px;
+  padding:0 28px;
+  background:linear-gradient(135deg,#ffd54a 0%,#f6b800 100%);
+  color:#0c2139!important;
+  font-weight:800;
+  font-size:18px;
+  line-height:1;
+  text-decoration:none!important;
+  border-radius:18px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+  white-space:nowrap;
+}
+.cta-offer-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(0,0,0,.22);
+  filter:brightness(1.03);
+}
+.cta-offer-btn:active{transform:translateY(0)}
+@media(max-width:768px){
+  .cta-offer-btn{width:100%;min-width:unset}
+}
