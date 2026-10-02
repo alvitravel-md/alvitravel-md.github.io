@@ -2,3 +2,34 @@
 
 .logo-large{width:120px;height:120px;margin:0 auto 18px;display:block}
 
+
+/* Blog */
+.blog-hero{padding:150px 0 78px;background:linear-gradient(135deg,#062b55,#0875e1);color:#fff}
+.blog-hero .breadcrumb a,.blog-hero .breadcrumb span{color:#d9eaff}
+.blog-hero h1{max-width:900px;font-size:clamp(38px,6vw,68px);line-height:1.04;margin:18px 0}
+.blog-hero p{max-width:760px;font-size:18px;color:#dcecff}
+.blog-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:48px;align-items:start}
+.blog-article{background:#fff}
+.blog-article h2{font-size:32px;margin:42px 0 14px;color:#0c2139}
+.blog-article h3{font-size:23px;margin:30px 0 12px;color:#0c2139}
+.blog-article p,.blog-article li{font-size:17px;line-height:1.78;color:#52667c}
+.blog-article ul,.blog-article ol{padding-left:24px}
+.blog-article a{color:#0875e1;text-decoration:underline}
+.blog-article .lead{font-size:20px;color:#314a64}
+.blog-note{padding:20px 22px;border-left:4px solid #0875e1;background:#f3f8ff;border-radius:12px;margin:26px 0}
+.blog-table{width:100%;border-collapse:collapse;margin:24px 0}
+.blog-table th,.blog-table td{padding:14px;border:1px solid #dce6f0;text-align:left}
+.blog-table th{background:#f3f8ff;color:#0c2139}
+.blog-sidebar{position:sticky;top:100px}
+.blog-side-card{background:#f5f8fc;border:1px solid #dce6f0;border-radius:20px;padding:24px;margin-bottom:20px}
+.blog-side-card h3{margin:0 0 12px;color:#0c2139}
+.blog-side-card a{display:block;color:#52667c;margin:10px 0;text-decoration:none}
+.blog-side-card a:hover{color:#0875e1}
+.blog-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{border:1px solid #dce6f0;border-radius:22px;overflow:hidden;background:#fff}
+.blog-card img{width:100%;height:220px;object-fit:cover}
+.blog-card .body{padding:22px}
+.blog-card h3{margin:8px 0 10px}
+.blog-card p{color:#6a7c90}
+.blog-meta{display:flex;gap:14px;flex-wrap:wrap;color:#6a7c90;font-size:14px;margin:12px 0 0}
+@media(max-width:900px){.blog-layout{grid-template-columns:1fr}.blog-sidebar{position:static}.blog-card-grid{grid-template-columns:1fr}.blog-hero{padding-top:125px}}
