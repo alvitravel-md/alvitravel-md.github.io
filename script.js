@@ -63,3 +63,21 @@ lang?.addEventListener('change',e=>{
   const title=document.querySelector('.hero h1'); if(title) title.innerHTML=t.heroTitle.replace('AlviTravel','<span>AlviTravel</span>');
   const heroP=document.querySelector('.hero p'); if(heroP) heroP.textContent=t.heroText;
 });
+
+
+function openGmailApp(event){
+  if(event) event.preventDefault();
+  const email="alvitravel.agency@gmail.com";
+  const ua=navigator.userAgent||navigator.vendor||window.opera||"";
+  if(/Android/i.test(ua)){
+    window.location.href="intent://co?to="+encodeURIComponent(email)+"#Intent;scheme=googlegmail;package=com.google.android.gm;end";
+    return false;
+  }
+  if(/iPhone|iPad|iPod/i.test(ua)){
+    window.location.href="googlegmail://co?to="+encodeURIComponent(email);
+    setTimeout(()=>{window.location.href="mailto:"+email;},1200);
+    return false;
+  }
+  window.location.href="mailto:"+email;
+  return false;
+}
