@@ -1,3 +1,17 @@
+function trackEvent(name,params={}){
+  if(typeof window.gtag==='function') window.gtag('event',name,params);
+}
+
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a');
+  if(!a) return;
+  const href=a.getAttribute('href')||'';
+  if(href.startsWith('https://wa.me/')) trackEvent('whatsapp_click',{link_url:href,link_text:(a.textContent||'').trim()});
+  else if(href.startsWith('tel:')) trackEvent('phone_click',{phone_number:href.replace('tel:','')});
+  else if(href.includes('instagram.com/alvitravel.agency')) trackEvent('instagram_click',{link_url:href});
+  else if(href.startsWith('mailto:')) trackEvent('email_click',{email:href.replace('mailto:','')});
+});
+
 const menuBtn=document.getElementById('menuBtn');
 const nav=document.getElementById('nav');
 menuBtn?.addEventListener('click',()=>nav.classList.toggle('open'));
@@ -18,6 +32,7 @@ document.querySelectorAll('.book-offer').forEach(btn=>btn.addEventListener('clic
 const quickForm=document.getElementById('quickForm');
 quickForm?.addEventListener('submit',e=>{
   e.preventDefault();
+  trackEvent('quick_search_submit');
   const d=document.getElementById('qDestination')?.value||'';
   const dt=document.getElementById('qDate')?.value||'';
   const p=document.getElementById('qPeople')?.value||'2';
@@ -40,6 +55,7 @@ bookingForm?.addEventListener('submit',e=>{
   const children=document.getElementById('children').value;
   const budget=document.getElementById('budget').value||'nespecificat';
   const message=document.getElementById('message').value.trim()||'-';
+  trackEvent('lead_submit',{destination:destination,adults:Number(adults)||0,children:Number(children)||0});
   const text=`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: ${name}\nTelefon: ${phone}\nDestinație: ${destination}\nData: ${date}\nAdulți: ${adults}\nCopii: ${children}\nBuget: ${budget}\nDetalii: ${message}`;
   window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
