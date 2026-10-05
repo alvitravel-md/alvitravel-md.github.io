@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alvitravel-md.github.io/</loc></url>
-  <url><loc>https://alvitravel-md.github.io/turcia.html</loc></url>
-  <url><loc>https://alvitravel-md.github.io/grecia.html</loc></url>
-  <url><loc>https://alvitravel-md.github.io/egipt.html</loc></url>
-  <url><loc>https://alvitravel-md.github.io/blog/</loc></url>
-  <url><loc>https://alvitravel-md.github.io/blog/sejur-egipt-din-chisinau.html</loc></url>
+  <url>
+    <loc>https://alvitravel-md.github.io/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://alvitravel-md.github.io/turcia.html</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://alvitravel-md.github.io/grecia.html</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://alvitravel-md.github.io/egipt.html</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://alvitravel-md.github.io/blog/</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://alvitravel-md.github.io/blog/sejur-egipt-din-chisinau.html</loc>
+    <lastmod>2026-10-05</lastmod>
+  </url>
 </urlset>
