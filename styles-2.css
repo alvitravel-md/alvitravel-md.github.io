@@ -122,3 +122,64 @@
   opacity:0;
   cursor:pointer;
 }
+
+
+/* Compact date control: same height as other quick-search fields */
+.search-card .date-control{
+  position:relative;
+  width:100%;
+  height:46px;
+}
+.search-card .date-control #qDateDisplay{
+  width:100%;
+  height:46px;
+  min-height:46px;
+  margin:0;
+  padding:0 42px 0 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit;
+  line-height:46px;
+  box-sizing:border-box;
+  cursor:pointer;
+}
+.search-card .date-control #qDateDisplay::placeholder{
+  color:#7f93aa;
+  opacity:1;
+}
+.search-card .date-trigger{
+  position:absolute;
+  top:50%;
+  right:10px;
+  transform:translateY(-50%);
+  width:26px;
+  height:26px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:#52677f;
+  font-size:18px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:3;
+}
+.search-card .native-date-hidden{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  left:-9999px!important;
+  top:auto!important;
+}
