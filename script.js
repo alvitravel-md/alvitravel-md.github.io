@@ -60,12 +60,22 @@ bookingForm?.addEventListener('submit',e=>{
   window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
 
-const params=new URLSearchParams(location.search);
-const preDest=params.get('destination');
-if(preDest && document.getElementById('destination')){
-  document.getElementById('destination').value=preDest;
-  if(location.hash==='#booking') setTimeout(()=>document.getElementById('booking')?.scrollIntoView({behavior:'smooth'}),150);
+function applyBookingUrlState(){
+  const params=new URLSearchParams(window.location.search);
+  const preDest=params.get('destination');
+  const destinationSelect=document.getElementById('destination');
+  if(preDest && destinationSelect){
+    const match=[...destinationSelect.options].find(o=>o.value.toLowerCase()===preDest.toLowerCase());
+    if(match) destinationSelect.value=match.value;
+  }
+  if(window.location.hash==='#booking'){
+    requestAnimationFrame(()=>setTimeout(()=>{
+      document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },250));
+  }
 }
+applyBookingUrlState();
+window.addEventListener('load',applyBookingUrlState);
 
 const translations={
   en:{reserve:'Book now',heroTitle:'Your vacation starts with AlviTravel',heroText:'Turkey • Greece • Egypt • Excursions. We find the right holiday for your budget, dates and travel style.'},
