@@ -81,3 +81,24 @@ function openGmailApp(event){
   window.location.href="mailto:"+email;
   return false;
 }
+
+
+const qDate=document.getElementById('qDate');
+const qDateDisplay=document.getElementById('qDateDisplay');
+if(qDate&&qDateDisplay){
+  const syncQuickDate=()=>{
+    if(!qDate.value){ qDateDisplay.value=''; return; }
+    const [y,m,d]=qDate.value.split('-');
+    qDateDisplay.value=d+'/'+m+'/'+y;
+  };
+  qDate.addEventListener('change',syncQuickDate);
+  qDateDisplay.addEventListener('click',()=>{
+    if(typeof qDate.showPicker==='function') qDate.showPicker();
+    else qDate.click();
+  });
+  document.querySelector('.date-trigger')?.addEventListener('click',()=>{
+    if(typeof qDate.showPicker==='function') qDate.showPicker();
+    else qDate.click();
+  });
+  syncQuickDate();
+}
