@@ -26,4 +26,30 @@
 <body>
 <div id="site-root"></div>
 <script>
-(async()=>{const root=document.getElementById('site-root');const files=["home-1.html?v=20261005-1112","home-2.html?v=20261002-2305","home-3.html?v=20261002-2305","home-4.html?v=20261002-2305"];const parts=await Promise.all(files.map(f=>fetch(f).then(r=>r.text())));root.innerHTML=parts.join('');const s=document.createElement('script');s.src='script.js?v=20261005-1112
+(async()=>{
+  const root=document.getElementById('site-root');
+  const files=[
+    "home-1.html?v=20261005-1115",
+    "home-2.html?v=20261002-2305",
+    "home-3.html?v=20261002-2305",
+    "home-4.html?v=20261002-2305"
+  ];
+  try{
+    const parts=await Promise.all(files.map(async f=>{
+      const r=await fetch(f,{cache:'no-store'});
+      if(!r.ok) throw new Error('Failed to load '+f);
+      return r.text();
+    }));
+    root.innerHTML=parts.join('');
+    const s=document.createElement('script');
+    s.src='script.js?v=20261005-1115';
+    s.defer=true;
+    document.body.appendChild(s);
+  }catch(err){
+    console.error(err);
+    root.innerHTML='<main style="font-family:Manrope,sans-serif;padding:40px;text-align:center"><h2>Site-ul se încarcă...</h2><p>Reîncarcă pagina în câteva secunde.</p></main>';
+  }
+})();
+</script>
+</body>
+</html>
