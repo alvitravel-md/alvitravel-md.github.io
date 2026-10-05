@@ -40,3 +40,35 @@
 .offer-body h3{font-size:22px;margin:14px 0 8px}
 .offer-body p{color:var(--muted);line-height:1.65}
 .offer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
+
+
+/* Normalize date field so it matches the other quick-search controls */
+.search-card input[type="date"]{
+  height:46px;
+  min-height:46px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit;
+  line-height:46px;
+  box-sizing:border-box;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.search-card input[type="date"]::-webkit-date-and-time-value{
+  text-align:left;
+  color:var(--ink);
+  line-height:1.2;
+}
+.search-card input[type="date"]::-webkit-datetime-edit{
+  padding:0;
+}
+.search-card input[type="date"]::-webkit-calendar-picker-indicator{
+  opacity:.65;
+  cursor:pointer;
+  width:18px;
+  height:18px;
+  margin-left:8px;
+}
