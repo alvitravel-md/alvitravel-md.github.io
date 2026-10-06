@@ -354,3 +354,34 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   stroke-width:1.8;
 }
 
+
+
+/* Accessibility, FAQ, legal pages, cookie consent */
+:focus-visible{outline:3px solid #f6b812;outline-offset:3px}
+#booking,#contact,#offers,#destinations,#about,#reviews{scroll-margin-top:96px}
+.menu-btn{border-radius:10px}
+.legal-links{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto}
+.legal-links a{color:#dbe7f3;text-decoration:none;font-size:12px;font-weight:700}
+.legal-links a:hover{text-decoration:underline}
+.faq-list{display:grid;gap:12px;max-width:900px}
+.faq-list details{border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px 20px}
+.faq-list summary{cursor:pointer;font-weight:800;color:var(--ink)}
+.faq-list details p{color:var(--muted);line-height:1.7;margin:12px 0 0}
+.legal-hero{padding:130px 0 54px;background:linear-gradient(135deg,#062b55,#0875e1);color:#fff}
+.legal-hero h1{font-size:clamp(38px,6vw,64px);margin:12px 0}
+.legal-wrap{max-width:900px}
+.legal-content{padding:64px 0 90px}
+.legal-content h2{margin:34px 0 12px;font-size:28px}
+.legal-content p,.legal-content li{color:#52667c;line-height:1.8}
+.legal-content ul{padding-left:22px}
+.cookie-banner{position:fixed;left:18px;right:18px;bottom:18px;z-index:120;max-width:1120px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 22px 65px rgba(3,28,57,.24);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.cookie-copy{display:flex;flex-direction:column;gap:5px;max-width:760px}
+.cookie-copy strong{font-size:16px}
+.cookie-copy span{font-size:13px;color:var(--muted);line-height:1.55}
+.cookie-copy a{font-size:12px;color:var(--blue);font-weight:800}
+.cookie-actions{display:flex;gap:9px;flex-shrink:0}
+@media(max-width:720px){
+  .cookie-banner{flex-direction:column;align-items:stretch;bottom:10px;left:10px;right:10px}
+  .cookie-actions .btn{flex:1}
+  .legal-links{margin-left:0}
+}
