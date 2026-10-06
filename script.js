@@ -1,3 +1,16 @@
+function loadAnalytics(){
+  if(document.querySelector('script[data-alvitravel-ga]')) return;
+  const s=document.createElement('script');
+  s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-T6BV3XLH2B';
+  s.dataset.alvitravelGa='1';
+  document.head.appendChild(s);
+  if(typeof window.gtag==='function'){
+    window.gtag('js',new Date());
+    window.gtag('config','G-T6BV3XLH2B');
+  }
+}
+
 function trackEvent(name,params={}){
   if(typeof window.gtag==='function') window.gtag('event',name,params);
 }
@@ -135,7 +148,10 @@ function setAnalyticsConsent(granted){
       ad_user_data:'denied',
       ad_personalization:'denied'
     });
-    if(granted) window.gtag('event','cookie_consent_update',{consent_state:'granted'});
+    if(granted){
+      loadAnalytics();
+      window.gtag('event','cookie_consent_update',{consent_state:'granted'});
+    }
   }
   document.getElementById('cookieBanner')?.remove();
 }
@@ -151,6 +167,7 @@ function initCookieConsent(){
         ad_user_data:'denied',
         ad_personalization:'denied'
       });
+      if(saved==='granted') loadAnalytics();
     }
     return;
   }
