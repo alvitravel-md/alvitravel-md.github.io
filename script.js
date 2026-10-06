@@ -14,8 +14,21 @@ document.addEventListener('click',e=>{
 
 const menuBtn=document.getElementById('menuBtn');
 const nav=document.getElementById('nav');
-menuBtn?.addEventListener('click',()=>nav.classList.toggle('open'));
-document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+if(menuBtn){
+  menuBtn.setAttribute('aria-label','Deschide meniul');
+  menuBtn.setAttribute('aria-controls','nav');
+  menuBtn.setAttribute('aria-expanded','false');
+  menuBtn.addEventListener('click',()=>{
+    const open=nav?.classList.toggle('open')||false;
+    menuBtn.setAttribute('aria-expanded',String(open));
+    menuBtn.setAttribute('aria-label',open?'Închide meniul':'Deschide meniul');
+  });
+}
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{
+  nav?.classList.remove('open');
+  menuBtn?.setAttribute('aria-expanded','false');
+  menuBtn?.setAttribute('aria-label','Deschide meniul');
+}));
 const year=document.getElementById('year'); if(year) year.textContent=new Date().getFullYear();
 
 function scrollToBooking(dest='',offer=''){
@@ -109,3 +122,80 @@ function openGmailApp(event){
 }
 
 
+
+
+function setAnalyticsConsent(granted){
+  try{
+    localStorage.setItem('alvitravel_cookie_consent',granted?'granted':'denied');
+  }catch(e){}
+  if(typeof window.gtag==='function'){
+    window.gtag('consent','update',{
+      analytics_storage:granted?'granted':'denied',
+      ad_storage:'denied',
+      ad_user_data:'denied',
+      ad_personalization:'denied'
+    });
+    if(granted) window.gtag('event','cookie_consent_update',{consent_state:'granted'});
+  }
+  document.getElementById('cookieBanner')?.remove();
+}
+
+function initCookieConsent(){
+  let saved='';
+  try{saved=localStorage.getItem('alvitravel_cookie_consent')||'';}catch(e){}
+  if(saved==='granted'||saved==='denied'){
+    if(typeof window.gtag==='function'){
+      window.gtag('consent','update',{
+        analytics_storage:saved,
+        ad_storage:'denied',
+        ad_user_data:'denied',
+        ad_personalization:'denied'
+      });
+    }
+    return;
+  }
+  const banner=document.createElement('div');
+  banner.id='cookieBanner';
+  banner.className='cookie-banner';
+  banner.setAttribute('role','dialog');
+  banner.setAttribute('aria-label','Preferințe cookie');
+  banner.innerHTML='<div class="cookie-copy"><strong>Confidențialitate și cookie-uri</strong><span>Folosim Google Analytics pentru a înțelege cum este utilizat site-ul. Poți accepta sau refuza cookie-urile de analiză.</span><a href="'+(location.pathname.includes('/blog/')?'../':'')+'politica-cookies.html">Detalii</a></div><div class="cookie-actions"><button class="btn btn-outline" type="button" id="cookieReject">Refuz</button><button class="btn btn-primary" type="button" id="cookieAccept">Accept</button></div>';
+  document.body.appendChild(banner);
+  document.getElementById('cookieReject')?.addEventListener('click',()=>setAnalyticsConsent(false));
+  document.getElementById('cookieAccept')?.addEventListener('click',()=>setAnalyticsConsent(true));
+}
+
+function ensureLegalLinks(){
+  const footer=document.querySelector('footer .footer-inner');
+  if(!footer || footer.querySelector('.legal-links')) return;
+  const prefix=location.pathname.includes('/blog/')?'../':'';
+  const nav=document.createElement('nav');
+  nav.className='legal-links';
+  nav.setAttribute('aria-label','Informații legale');
+  nav.innerHTML='<a href="'+prefix+'confidentialitate.html">Confidențialitate</a><a href="'+prefix+'politica-cookies.html">Cookie-uri</a><a href="'+prefix+'termeni.html">Termeni</a>';
+  footer.appendChild(nav);
+}
+
+function improveFormAccessibility(){
+  const map=[
+    ['qDestination','Destinație'],['qDate','Data plecării'],['qPeople','Număr persoane'],['qBudget','Buget'],
+    ['name','Nume'],['phone','Telefon'],['destination','Destinație'],['date','Perioada'],
+    ['adults','Adulți'],['children','Copii'],['budget','Buget aproximativ'],['message','Mesaj']
+  ];
+  map.forEach(([id,labelText])=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const label=el.closest('.field')?.querySelector('label');
+    if(label){ label.setAttribute('for',id); }
+    if(!el.getAttribute('name')) el.setAttribute('name',id);
+    if(!el.getAttribute('aria-label')) el.setAttribute('aria-label',labelText);
+  });
+  document.getElementById('name')?.setAttribute('autocomplete','name');
+  document.getElementById('phone')?.setAttribute('autocomplete','tel');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initCookieConsent();
+  ensureLegalLinks();
+  improveFormAccessibility();
+});
