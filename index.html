@@ -77,7 +77,7 @@
     <nav class="nav" id="nav">
       <a href="#destinations">Destinații</a><a href="#offers">Oferte</a><a href="blog/">Blog</a><a href="#about">Despre noi</a><a href="#reviews">Recenzii</a><a href="#contact">Contact</a>
     </nav>
-    <div class="nav-actions"><select id="lang"><option value="ro">RO</option><option value="ru">RU</option><option value="en">EN</option></select><a class="btn btn-primary btn-small" href="#booking">Rezervă acum</a><button class="menu-btn" id="menuBtn">☰</button></div>
+    <div class="nav-actions"><select id="lang" aria-label="Limba site-ului"><option value="ro">RO</option><option value="ru">RU</option><option value="en">EN</option></select><a class="btn btn-primary btn-small" href="#booking">Rezervă acum</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Deschide meniul" aria-controls="nav" aria-expanded="false">☰</button></div>
   </div>
 </header>
 
@@ -91,10 +91,10 @@
 </div></section>
 
 <section class="search-card-section"><div class="container"><form class="search-card" id="quickForm">
-  <div class="field"><label>Destinație</label><select id="qDestination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Excursie</option><option>Nu sunt sigur</option></select></div>
-  <div class="field"><label>Data plecării</label><input id="qDate" type="date"></div>
-  <div class="field"><label>Persoane</label><select id="qPeople"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
-  <div class="field"><label>Buget</label><select id="qBudget"><option>până la €500</option><option>€500–€800</option><option>€800–€1200</option><option>€1200+</option></select></div>
+  <div class="field"><label for="qDestination">Destinație</label><select id="qDestination" name="qDestination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Excursie</option><option>Nu sunt sigur</option></select></div>
+  <div class="field"><label for="qDate">Data plecării</label><input id="qDate" name="qDate" type="date"></div>
+  <div class="field"><label for="qPeople">Persoane</label><select id="qPeople" name="qPeople"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+  <div class="field"><label for="qBudget">Buget</label><select id="qBudget" name="qBudget"><option>până la €500</option><option>€500–€800</option><option>€800–€1200</option><option>€1200+</option></select></div>
   <button class="btn btn-primary" type="submit">Găsește vacanța</button>
 </form></div></section>
 
@@ -147,11 +147,11 @@
 <section class="section" id="booking"><div class="container booking-wrap">
   <div class="booking-intro"><span class="kicker">Rezervare / Cerere ofertă</span><h2>Spune-ne ce vacanță îți dorești</h2><p>Completează formularul, iar cererea este pregătită automat pentru WhatsApp.</p><ul><li>✓ Răspuns rapid</li><li>✓ Recomandări după buget</li><li>✓ Fără obligația de a cumpăra</li><li>✓ Potrivit pentru cupluri, familii și grupuri</li></ul></div>
   <form class="booking-form" id="bookingForm">
-    <div class="two"><div class="field"><label>Nume</label><input id="name" required placeholder="Numele tău"></div><div class="field"><label>Telefon</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+373 ..."></div></div>
-    <div class="two"><div class="field"><label>Destinație</label><select id="destination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Excursie</option><option>Nu sunt sigur</option></select></div><div class="field"><label>Perioada</label><input id="date" type="date"></div></div>
-    <div class="two"><div class="field"><label>Adulți</label><input id="adults" type="number" min="1" value="2"></div><div class="field"><label>Copii</label><input id="children" type="number" min="0" value="0"></div></div>
-    <div class="field"><label>Buget aproximativ</label><input id="budget" placeholder="ex. €1200 total"></div>
-    <div class="field"><label>Mesaj</label><textarea id="message" rows="4" placeholder="Hotel, regim de masă, oraș de plecare etc."></textarea></div>
+    <div class="two"><div class="field"><label for="name">Nume</label><input id="name" name="name" autocomplete="name" required placeholder="Numele tău"></div><div class="field"><label>Telefon</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+373 ..."></div></div>
+    <div class="two"><div class="field"><label for="destination">Destinație</label><select id="destination" name="destination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Excursie</option><option>Nu sunt sigur</option></select></div><div class="field"><label for="date">Perioada</label><input id="date" name="date" type="date"></div></div>
+    <div class="two"><div class="field"><label for="adults">Adulți</label><input id="adults" name="adults" type="number" min="1" value="2"></div><div class="field"><label for="children">Copii</label><input id="children" name="children" type="number" min="0" value="0"></div></div>
+    <div class="field"><label for="budget">Buget aproximativ</label><input id="budget" name="budget" placeholder="ex. €1200 total"></div>
+    <div class="field"><label for="message">Mesaj</label><textarea id="message" name="message" rows="4" placeholder="Hotel, regim de masă, oraș de plecare etc."></textarea></div>
     <button class="btn btn-primary btn-full" type="submit">Trimite cererea pe WhatsApp</button><small>Datele introduse sunt folosite doar pentru pregătirea mesajului către AlviTravel.</small>
   </form>
 </div></section>
