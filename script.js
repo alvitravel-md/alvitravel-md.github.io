@@ -1,3 +1,52 @@
+function applyStoredConsent(){
+  const choice=localStorage.getItem('alvitravel_cookie_choice');
+  if(typeof window.gtag==='function' && choice==='accepted'){
+    window.gtag('consent','update',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+  }
+}
+applyStoredConsent();
+
+function showCookieBanner(force=false){
+  if(!force && localStorage.getItem('alvitravel_cookie_choice')) return;
+  document.getElementById('cookieBanner')?.remove();
+  const banner=document.createElement('div');
+  banner.id='cookieBanner';
+  banner.className='cookie-banner';
+  banner.innerHTML=`<div class="cookie-copy"><strong>Confidențialitate și Analytics</strong><span>Folosim Google Analytics doar cu acordul tău pentru a înțelege cum este utilizat site-ul. <a href="/cookies.html">Detalii</a></span></div><div class="cookie-actions"><button class="btn btn-outline btn-small" id="cookieReject" type="button">Refuză Analytics</button><button class="btn btn-primary btn-small" id="cookieAccept" type="button">Acceptă Analytics</button></div>`;
+  document.body.appendChild(banner);
+  document.getElementById('cookieAccept')?.addEventListener('click',()=>{
+    localStorage.setItem('alvitravel_cookie_choice','accepted');
+    if(typeof window.gtag==='function'){
+      window.gtag('consent','update',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+      window.gtag('event','cookie_consent_update',{analytics_consent:'granted'});
+    }
+    banner.remove();
+  });
+  document.getElementById('cookieReject')?.addEventListener('click',()=>{
+    localStorage.setItem('alvitravel_cookie_choice','rejected');
+    if(typeof window.gtag==='function'){
+      window.gtag('consent','update',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+    }
+    banner.remove();
+  });
+}
+
+function addLegalFooterLinks(){
+  const footer=document.querySelector('footer .footer-inner');
+  if(!footer || footer.querySelector('.legal-links')) return;
+  const nav=document.createElement('nav');
+  nav.className='legal-links';
+  nav.setAttribute('aria-label','Linkuri legale');
+  nav.innerHTML='<a href="/confidentialitate.html">Confidențialitate</a><a href="/cookies.html">Cookies</a><a href="/termeni.html">Termeni</a><button type="button" class="legal-cookie-btn" id="cookieSettings">Setări cookies</button>';
+  footer.appendChild(nav);
+  document.getElementById('cookieSettings')?.addEventListener('click',()=>showCookieBanner(true));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  addLegalFooterLinks();
+  showCookieBanner(false);
+});
+
 function loadAnalytics(){
   if(document.querySelector('script[data-alvitravel-ga]')) return;
   const s=document.createElement('script');
