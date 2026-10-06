@@ -91,9 +91,9 @@ applyBookingUrlState();
 window.addEventListener('load',applyBookingUrlState);
 
 const translations={
-  en:{reserve:'Book now',heroTitle:'Your vacation starts with AlviTravel',heroText:'Turkey • Greece • Egypt • Excursions. We find the right holiday for your budget, dates and travel style.'},
-  ru:{reserve:'Забронировать',heroTitle:'Ваш отпуск начинается с AlviTravel',heroText:'Турция • Греция • Египет • Экскурсии. Подберем отдых под ваш бюджет, даты и предпочтения.'},
-  ro:{reserve:'Rezervă acum',heroTitle:'Vacanța ta începe cu AlviTravel',heroText:'Turcia • Grecia • Egipt • Excursii. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.'}
+  en:{reserve:'Book now',heroTitle:'Holidays from Chișinău with AlviTravel',heroText:'Turkey • Greece • Egypt • Excursions departing from Chișinău. We find the right holiday for your budget, dates and travel style.'},
+  ru:{reserve:'Забронировать',heroTitle:'Отдых из Кишинёва с AlviTravel',heroText:'Турция • Греция • Египет • Экскурсии с вылетом из Кишинёва. Подберем отдых под ваш бюджет, даты и предпочтения.'},
+  ro:{reserve:'Rezervă acum',heroTitle:'Vacanțe din Chișinău cu AlviTravel',heroText:'Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.'}
 };
 const lang=document.getElementById('lang');
 lang?.addEventListener('change',e=>{
