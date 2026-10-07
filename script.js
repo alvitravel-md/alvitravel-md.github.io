@@ -184,6 +184,7 @@ const pageTranslations={
 
 // Homepage 2026-10-07 translation additions
 Object.assign(pageTranslations.en,{
+  'Turcia':'Turkey','Grecia':'Greece','Egipt':'Egypt','Bulgaria':'Bulgaria','Muntenegru':'Montenegro','România':'Romania','Spania':'Spain','Italia':'Italy','Europa':'Europe','Moldova':'Moldova','Despre noi':'About us','Contact':'Contact',
   '6 idei pentru mare, munte și city break':'6 ideas for sea, mountains and city breaks',
   'AlviTravel poate organiza vacanțe oriunde. Acestea sunt doar câteva dintre direcțiile cerute frecvent.':'AlviTravel can arrange trips anywhere. These are just some frequently requested destinations.',
   '✈️ Zbor din Chișinău':'✈️ Flight from Chișinău','🚌 / ✈️ din Chișinău':'🚌 / ✈️ from Chișinău','✈️ Vacanță la Adriatică':'✈️ Adriatic holiday','✈️ City break & sejur':'✈️ City break & stay',
@@ -197,6 +198,7 @@ Object.assign(pageTranslations.en,{
   'Vezi detalii':'View details','Cere ofertă':'Request offer','Zbor incl.':'Flight incl.','Hotel selectat':'Selected hotel','Plajă':'Beach','Resort 4–5★':'4–5★ resort'
 });
 Object.assign(pageTranslations.ru,{
+  'Turcia':'Турция','Grecia':'Греция','Egipt':'Египет','Bulgaria':'Болгария','Muntenegru':'Черногория','România':'Румыния','Spania':'Испания','Italia':'Италия','Europa':'Европа','Moldova':'Молдова','Despre noi':'О нас','Contact':'Контакты',
   '6 idei pentru mare, munte și city break':'6 идей: море, горы и city break',
   'AlviTravel poate organiza vacanțe oriunde. Acestea sunt doar câteva dintre direcțiile cerute frecvent.':'AlviTravel может организовать поездку практически куда угодно. Это лишь несколько популярных направлений.',
   '✈️ Zbor din Chișinău':'✈️ Вылет из Кишинёва','🚌 / ✈️ din Chișinău':'🚌 / ✈️ из Кишинёва','✈️ Vacanță la Adriatică':'✈️ Отдых на Адриатике','✈️ City break & sejur':'✈️ City break и отдых',
