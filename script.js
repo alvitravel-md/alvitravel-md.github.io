@@ -46,20 +46,23 @@ document.querySelectorAll('.book-offer').forEach(btn=>btn.addEventListener('clic
 const quickForm=document.getElementById('quickForm');
 quickForm?.addEventListener('submit',e=>{
   e.preventDefault();
-  const d=document.getElementById('qDestination')?.value||'';
-  const dt=document.getElementById('qDate')?.value||'';
+  const d=document.getElementById('qDestination')?.value||'Nu sunt sigur';
+  const transport=document.getElementById('qTransport')?.value||'Oricare';
+  const dt=document.getElementById('qDate')?.value||'flexibilă';
   const p=document.getElementById('qPeople')?.value||'2';
-  const b=document.getElementById('qBudget')?.value||'';
-  trackEvent('quick_search_submit',{destination:d,people:p,budget:b});
-  const destination=document.getElementById('destination');
-  const date=document.getElementById('date');
-  const adults=document.getElementById('adults');
-  const budget=document.getElementById('budget');
-  if(destination) destination.value=d;
-  if(date) date.value=dt;
-  if(adults) adults.value=p==='5+'?5:p;
-  if(budget) budget.value=b;
-  document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
+  const b=document.getElementById('qBudget')?.value||'nespecificat';
+  trackEvent('quick_search_submit',{destination:d,transport,people:p,budget:b});
+  const text=`Bună ziua, AlviTravel!
+
+Doresc o ofertă de vacanță.
+Destinație: ${d}
+Transport: ${transport}
+Data plecării: ${dt}
+Persoane: ${p}
+Buget: ${b}
+
+Vă rog să-mi recomandați cele mai bune variante disponibile.`;
+  window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
 
 const bookingForm=document.getElementById('bookingForm');
@@ -93,22 +96,127 @@ function applyBookingUrlState(){
 applyBookingUrlState();
 window.addEventListener('load',applyBookingUrlState);
 
-const translations={
-  en:{reserve:'Book now',heroTitle:'Holidays from Chișinău with AlviTravel',heroText:'Turkey • Greece • Egypt • Excursions departing from Chișinău. We find the right holiday for your budget, dates and travel style.'},
-  ru:{reserve:'Забронировать',heroTitle:'Отдых из Кишинёва с AlviTravel',heroText:'Турция • Греция • Египет • Экскурсии с вылетом из Кишинёва. Подберем отдых под ваш бюджет, даты и предпочтения.'},
-  ro:{reserve:'Rezervă acum',heroTitle:'Vacanțe din Chișinău cu AlviTravel',heroText:'Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.'}
+const pageTranslations={
+  en:{
+    'Rezervă acum':'Book now','Destinații':'Destinations','Excursii':'Excursions','Oferte':'Offers','Blog':'Blog',
+    'Vacanțe din Chișinău cu ':'Holidays from Chișinău with ','Din 2015 • Chișinău':'Since 2015 • Chișinău',
+    'Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.':'Turkey • Greece • Egypt • Tours departing from Chișinău. We find the right trip for your budget, dates and travel style.',
+    'Vezi ofertele':'View offers','Cere o ofertă':'Request an offer','experiență':'experience','răspuns rapid':'fast reply',
+    'Destinație':'Destination','Transport':'Transport','Data plecării':'Departure date','Persoane':'Travellers','Buget':'Budget','Găsește vacanța':'Find my holiday',
+    'Oricare':'Any','Avion':'Plane','Autocar':'Coach','Nu sunt sigur':'Not sure','Excursie':'Tour',
+    'până la €500':'up to €500',
+    'Consultanță rapidă':'Fast consultation','WhatsApp & telefon':'WhatsApp & phone','Vacanțe personalizate':'Tailored holidays','după buget și stil':'by budget and style',
+    'Suport pe traseu':'Travel support','înainte și în vacanță':'before and during your trip','28 recenzii Google ↗':'28 Google reviews ↗',
+    'Destinații populare':'Popular destinations','Alege următoarea ta escapadă':'Choose your next getaway',
+    '6 destinații recomandate pentru mare, relaxare și aventură. Putem organiza și alte destinații la cerere.':'6 recommended destinations for seaside, relaxation and adventure. We can arrange other destinations on request.',
+    'Zbor din Chișinău':'Flight from Chișinău','Autocar / ✈️ Avion':'Coach / ✈️ Plane','Zbor':'Flight',
+    'All Inclusive':'All Inclusive','Soare & mare':'Sun & sea','Soare tot anul':'Year-round sun','Mare & familie':'Sea & family','Mare & munte':'Sea & mountains','City break & mare':'City break & sea',
+    'Explorează Turcia →':'Explore Turkey →','Explorează Grecia →':'Explore Greece →','Explorează Egipt →':'Explore Egypt →','Cere ofertă →':'Request offer →',
+    'Căutăm pachete și pentru ':'We also find packages for ',' și orice altă destinație disponibilă la cerere.':' and any other destination available on request.',
+    'Excursii din Chișinău':'Tours from Chișinău','3 idei populare pentru o zi memorabilă':'3 popular ideas for a memorable day',
+    'Traseele, datele și transportul se confirmă la cerere în funcție de disponibilitate.':'Routes, dates and transport are confirmed on request, subject to availability.',
+    'Cultură & vin':'Culture & wine','Enogastronomic':'Wine & gastronomy','Cultural':'Cultural',
+    'O zi cu galerii subterane, peisaje spectaculoase și patrimoniu moldovenesc.':'A day of underground galleries, spectacular scenery and Moldovan heritage.',
+    'Combinație de vinuri locale, tradiții și un traseu relaxant în afara Chișinăului.':'Local wines, traditions and a relaxing route outside Chișinău.',
+    'Istorie, meșteșuguri și obiective culturale într-o excursie de o zi.':'History, crafts and cultural sights on a one-day trip.',
+    'Oferte recomandate':'Recommended offers','Vacanțe populare':'Popular holidays',
+    'Prețurile sunt orientative și se confirmă în funcție de data plecării, hotel și disponibilitate.':'Prices are indicative and confirmed according to departure date, hotel and availability.',
+    '7 nopți':'7 nights','Zbor incl.':'Flight incl.','Hotel 4–5★':'4–5★ hotel','Hotel selectat':'Selected hotel','Resort 4–5★':'4–5★ resort',
+    'Masă la alegere':'Meal plan choice','Transfer':'Transfer','Cere ofertă':'Request offer','Vezi detalii →':'View details →',
+    'Zbor, transfer și hotel selectat la cerere.':'Flight, transfer and selected hotel on request.','Hoteluri pentru cupluri, familii și grupuri.':'Hotels for couples, families and groups.',
+    'Resorturi, plaje superbe și temperaturi excelente.':'Resorts, beautiful beaches and excellent temperatures.',
+    'De ce AlviTravel':'Why AlviTravel','Planificare simplă, suport real':'Simple planning, real support','Un proces clar de la prima întrebare până la revenirea acasă.':'A clear process from your first question until you return home.',
+    'Oferte potrivite':'Suitable offers','Filtrăm variantele în funcție de buget, perioadă și preferințe.':'We filter options by budget, dates and preferences.',
+    'Hoteluri selectate':'Selected hotels','Comparații clare între locații, regimuri de masă și facilități.':'Clear comparisons of locations, meal plans and facilities.',
+    'Comunicare rapidă':'Fast communication','Discuții simple prin WhatsApp, telefon și mesaje directe.':'Easy communication via WhatsApp, phone and direct messages.',
+    'Asistență':'Assistance','Suport înainte de plecare și pe parcursul călătoriei.':'Support before departure and throughout the trip.',
+    'Despre AlviTravel':'About AlviTravel','Călătorii fără griji, din 2015':'Stress-free travel since 2015',
+    'AlviTravel este o agenție de turism din Chișinău care ajută clienții să aleagă vacanțe potrivite pentru bugetul și preferințele lor. Oferim consultanță rapidă, suport și recomandări clare înainte de plecare.':'AlviTravel is a travel agency in Chișinău helping clients choose holidays that match their budget and preferences. We provide fast consultation, support and clear recommendations before departure.',
+    'Google rating':'Google rating','recenzii':'reviews','activi din':'active since','Cere consultanță':'Request consultation',
+    'Recenzii':'Reviews','Ce spun clienții':'What our clients say','Rating Google: 5.0 / 5':'Google rating: 5.0 / 5',
+    'Rezervare / Cerere ofertă':'Booking / Offer request','Spune-ne ce vacanță îți dorești':'Tell us what kind of holiday you want',
+    'Completează formularul, iar cererea este pregătită automat pentru WhatsApp.':'Complete the form and your request will be prepared automatically for WhatsApp.',
+    'Răspuns rapid':'Fast reply','Recomandări după buget':'Recommendations by budget','Fără obligația de a cumpăra':'No obligation to buy','Potrivit pentru cupluri, familii și grupuri':'Suitable for couples, families and groups',
+    'Nume':'Name','Telefon':'Phone','Perioada':'Period','Adulți':'Adults','Copii':'Children','Buget aproximativ':'Approximate budget','Mesaj':'Message',
+    'Trimite cererea pe WhatsApp':'Send request on WhatsApp','Datele introduse sunt folosite doar pentru pregătirea mesajului către AlviTravel.':'The entered data is used only to prepare your message to AlviTravel.',
+    'Contact':'Contact','Vezi pe hartă':'View on map'
+  },
+  ru:{
+    'Rezervă acum':'Забронировать','Destinații':'Направления','Excursii':'Экскурсии','Oferte':'Предложения','Blog':'Блог',
+    'Vacanțe din Chișinău cu ':'Отдых из Кишинёва с ','Din 2015 • Chișinău':'С 2015 года • Кишинёв',
+    'Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.':'Турция • Греция • Египет • Экскурсии из Кишинёва. Подберём путешествие под ваш бюджет, даты и стиль отдыха.',
+    'Vezi ofertele':'Смотреть предложения','Cere o ofertă':'Запросить предложение','experiență':'опыт','răspuns rapid':'быстрый ответ',
+    'Destinație':'Направление','Transport':'Транспорт','Data plecării':'Дата выезда','Persoane':'Путешественники','Buget':'Бюджет','Găsește vacanța':'Найти отдых',
+    'Oricare':'Любой','Avion':'Самолёт','Autocar':'Автобус','Nu sunt sigur':'Не уверен','Excursie':'Экскурсия','până la €500':'до €500',
+    'Consultanță rapidă':'Быстрая консультация','WhatsApp & telefon':'WhatsApp и телефон','Vacanțe personalizate':'Индивидуальные поездки','după buget și stil':'по бюджету и стилю',
+    'Suport pe traseu':'Поддержка в поездке','înainte și în vacanță':'до и во время отдыха','28 recenzii Google ↗':'28 отзывов Google ↗',
+    'Destinații populare':'Популярные направления','Alege următoarea ta escapadă':'Выберите следующую поездку',
+    '6 destinații recomandate pentru mare, relaxare și aventură. Putem organiza și alte destinații la cerere.':'6 рекомендуемых направлений для моря, отдыха и приключений. Другие направления организуем по запросу.',
+    'Zbor din Chișinău':'Вылет из Кишинёва','Autocar / ✈️ Avion':'Автобус / ✈️ Самолёт','Zbor':'Самолёт',
+    'Soare & mare':'Солнце и море','Soare tot anul':'Солнце круглый год','Mare & familie':'Море и семья','Mare & munte':'Море и горы','City break & mare':'Сити-брейк и море',
+    'Explorează Turcia →':'Открыть Турцию →','Explorează Grecia →':'Открыть Грецию →','Explorează Egipt →':'Открыть Египет →','Cere ofertă →':'Запросить предложение →',
+    'Excursii din Chișinău':'Экскурсии из Кишинёва','3 idei populare pentru o zi memorabilă':'3 популярных идеи для запоминающегося дня',
+    'Traseele, datele și transportul se confirmă la cerere în funcție de disponibilitate.':'Маршруты, даты и транспорт подтверждаются по запросу в зависимости от наличия.',
+    'Cultură & vin':'Культура и вино','Enogastronomic':'Вино и гастрономия','Cultural':'Культурная',
+    'Oferte recomandate':'Рекомендуемые предложения','Vacanțe populare':'Популярный отдых',
+    'Prețurile sunt orientative și se confirmă în funcție de data plecării, hotel și disponibilitate.':'Цены ориентировочные и подтверждаются в зависимости от даты выезда, отеля и наличия.',
+    '7 nopți':'7 ночей','Zbor incl.':'Перелёт включён','Hotel 4–5★':'Отель 4–5★','Hotel selectat':'Подобранный отель','Resort 4–5★':'Курорт 4–5★',
+    'Masă la alegere':'Питание на выбор','Transfer':'Трансфер','Cere ofertă':'Запросить предложение','Vezi detalii →':'Подробнее →',
+    'Zbor, transfer și hotel selectat la cerere.':'Перелёт, трансфер и отель подбираются по запросу.','Hoteluri pentru cupluri, familii și grupuri.':'Отели для пар, семей и групп.','Resorturi, plaje superbe și temperaturi excelente.':'Курорты, красивые пляжи и отличная погода.',
+    'De ce AlviTravel':'Почему AlviTravel','Planificare simplă, suport real':'Простое планирование, реальная поддержка','Un proces clar de la prima întrebare până la revenirea acasă.':'Понятный процесс от первого вопроса до возвращения домой.',
+    'Oferte potrivite':'Подходящие предложения','Hoteluri selectate':'Подобранные отели','Comunicare rapidă':'Быстрая связь','Asistență':'Поддержка',
+    'Despre AlviTravel':'Об AlviTravel','Călătorii fără griji, din 2015':'Путешествия без забот с 2015 года','Google rating':'Рейтинг Google','recenzii':'отзывов','activi din':'работаем с','Cere consultanță':'Получить консультацию',
+    'Recenzii':'Отзывы','Ce spun clienții':'Что говорят клиенты','Rating Google: 5.0 / 5':'Рейтинг Google: 5.0 / 5',
+    'Rezervare / Cerere ofertă':'Бронирование / Запрос','Spune-ne ce vacanță îți dorești':'Расскажите, какой отдых вы хотите',
+    'Completează formularul, iar cererea este pregătită automat pentru WhatsApp.':'Заполните форму, и запрос автоматически подготовится для WhatsApp.',
+    'Răspuns rapid':'Быстрый ответ','Recomandări după buget':'Рекомендации по бюджету','Fără obligația de a cumpăra':'Без обязательства покупать','Potrivit pentru cupluri, familii și grupuri':'Подходит для пар, семей и групп',
+    'Nume':'Имя','Telefon':'Телефон','Perioada':'Период','Adulți':'Взрослые','Copii':'Дети','Buget aproximativ':'Примерный бюджет','Mesaj':'Сообщение',
+    'Trimite cererea pe WhatsApp':'Отправить запрос в WhatsApp','Contact':'Контакты','Vezi pe hartă':'Посмотреть на карте'
+  }
 };
+
+const originalText=new WeakMap();
+const originalAttrs=new WeakMap();
+
+function applyLanguage(langCode){
+  const dict=pageTranslations[langCode]||{};
+  document.documentElement.lang=langCode==='ro'?'ro-MD':langCode;
+
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+    acceptNode(node){
+      if(!node.parentElement||['SCRIPT','STYLE'].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+      return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }
+  });
+  let node;
+  while((node=walker.nextNode())){
+    if(!originalText.has(node)) originalText.set(node,node.nodeValue);
+    const original=originalText.get(node);
+    const key=original.trim();
+    const translated=langCode==='ro'?key:(dict[key]||key);
+    node.nodeValue=original.replace(key,translated);
+  }
+
+  document.querySelectorAll('[placeholder],[aria-label]').forEach(el=>{
+    if(!originalAttrs.has(el)) originalAttrs.set(el,{placeholder:el.getAttribute('placeholder'),aria:el.getAttribute('aria-label')});
+    const orig=originalAttrs.get(el);
+    if(orig.placeholder){
+      const p=langCode==='ro'?orig.placeholder:(dict[orig.placeholder]||orig.placeholder);
+      el.setAttribute('placeholder',p);
+    }
+    if(orig.aria){
+      const a=langCode==='ro'?orig.aria:(dict[orig.aria]||orig.aria);
+      el.setAttribute('aria-label',a);
+    }
+  });
+
+  try{localStorage.setItem('alvi_lang',langCode);}catch(_){}
+}
+
 const lang=document.getElementById('lang');
-lang?.addEventListener('change',e=>{
-  const t=translations[e.target.value];
-  if(!t) return;
-  const reserve=document.querySelector('.nav-actions .btn-small');
-  if(reserve) reserve.textContent=t.reserve;
-  const title=document.querySelector('.hero h1');
-  if(title) title.innerHTML=t.heroTitle.replace('AlviTravel','<span>AlviTravel</span>');
-  const heroP=document.querySelector('.hero p');
-  if(heroP) heroP.textContent=t.heroText;
-});
+const savedLang=(()=>{try{return localStorage.getItem('alvi_lang')}catch(_){return null}})();
+if(savedLang&&['ro','ru','en'].includes(savedLang)){lang.value=savedLang;requestAnimationFrame(()=>applyLanguage(savedLang));}
+lang?.addEventListener('change',e=>applyLanguage(e.target.value));
 
 function openGmailApp(event){
   if(event) event.preventDefault();
@@ -142,7 +250,7 @@ function ensureLegalLinks(){
 
 function improveFormAccessibility(){
   const map=[
-    ['qDestination','Destinație'],['qDate','Data plecării'],['qPeople','Număr persoane'],['qBudget','Buget'],
+    ['qDestination','Destinație'],['qTransport','Transport'],['qDate','Data plecării'],['qPeople','Număr persoane'],['qBudget','Buget'],
     ['name','Nume'],['phone','Telefon'],['destination','Destinație'],['date','Perioada'],
     ['adults','Adulți'],['children','Copii'],['budget','Buget aproximativ'],['message','Mesaj']
   ];
