@@ -41,7 +41,14 @@ function scrollToBooking(dest='',offer=''){
   document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.querySelectorAll('.offer-trigger').forEach(btn=>btn.addEventListener('click',()=>scrollToBooking(btn.dataset.dest,'')));
-document.querySelectorAll('.book-offer').forEach(btn=>btn.addEventListener('click',()=>scrollToBooking(btn.dataset.dest||'',btn.dataset.offer||'')));
+document.querySelectorAll('.book-offer,.excursion-trigger').forEach(btn=>btn.addEventListener('click',()=>scrollToBooking(btn.dataset.dest||'',btn.dataset.offer||'')));
+document.querySelectorAll('.destination-card[data-destination]').forEach(card=>card.addEventListener('click',()=>{
+  const d=document.getElementById('destination');
+  if(!d) return;
+  const wanted=card.dataset.destination||'';
+  const match=[...d.options].find(o=>o.value===wanted);
+  if(match) d.value=match.value;
+}));
 
 const quickForm=document.getElementById('quickForm');
 quickForm?.addEventListener('submit',e=>{
@@ -174,6 +181,34 @@ const pageTranslations={
     'Trimite cererea pe WhatsApp':'Отправить запрос в WhatsApp','Contact':'Контакты','Vezi pe hartă':'Посмотреть на карте'
   }
 };
+
+// Homepage 2026-10-07 translation additions
+Object.assign(pageTranslations.en,{
+  '6 idei pentru mare, munte și city break':'6 ideas for sea, mountains and city breaks',
+  'AlviTravel poate organiza vacanțe oriunde. Acestea sunt doar câteva dintre direcțiile cerute frecvent.':'AlviTravel can arrange trips anywhere. These are just some frequently requested destinations.',
+  '✈️ Zbor din Chișinău':'✈️ Flight from Chișinău','🚌 / ✈️ din Chișinău':'🚌 / ✈️ from Chișinău','✈️ Vacanță la Adriatică':'✈️ Adriatic holiday','✈️ City break & sejur':'✈️ City break & stay',
+  'România • Spania • Italia':'Romania • Spain • Italy','Mare, munte, circuite și city break-uri':'Sea, mountains, tours and city breaks',
+  '3 trasee populare pentru o escapadă':'3 popular routes for a quick escape',
+  'Plecări și programe în funcție de sezon și disponibilitate. Putem organiza și alte trasee la cerere.':'Departures and itineraries depend on season and availability. Other routes can be arranged on request.',
+  'Iași • City break & shopping':'Iași • City break & shopping','O escapadă practică de o zi sau weekend, cu program adaptat grupului.':'A practical day trip or weekend escape with a schedule adapted to the group.',
+  'Brașov • Peleș • Sinaia':'Brașov • Peleș • Sinaia','Munți, castele și orașe istorice într-un circuit potrivit pentru weekend.':'Mountains, castles and historic towns in a weekend-friendly circuit.',
+  'Orheiul Vechi • Cricova':'Orheiul Vechi • Cricova','Un traseu local clasic pentru natură, istorie și experiențe vinicole.':'A classic local route for nature, history and wine experiences.',
+  'Cere programul':'Request itinerary','28 recenzii Google':'28 Google reviews','Google: 5.0 ★ • 28 recenzii ↗':'Google: 5.0 ★ • 28 reviews ↗',
+  'Vezi detalii':'View details','Cere ofertă':'Request offer','Zbor incl.':'Flight incl.','Hotel selectat':'Selected hotel','Plajă':'Beach','Resort 4–5★':'4–5★ resort'
+});
+Object.assign(pageTranslations.ru,{
+  '6 idei pentru mare, munte și city break':'6 идей: море, горы и city break',
+  'AlviTravel poate organiza vacanțe oriunde. Acestea sunt doar câteva dintre direcțiile cerute frecvent.':'AlviTravel может организовать поездку практически куда угодно. Это лишь несколько популярных направлений.',
+  '✈️ Zbor din Chișinău':'✈️ Вылет из Кишинёва','🚌 / ✈️ din Chișinău':'🚌 / ✈️ из Кишинёва','✈️ Vacanță la Adriatică':'✈️ Отдых на Адриатике','✈️ City break & sejur':'✈️ City break и отдых',
+  'România • Spania • Italia':'Румыния • Испания • Италия','Mare, munte, circuite și city break-uri':'Море, горы, туры и city break',
+  '3 trasee populare pentru o escapadă':'3 популярных маршрута для короткой поездки',
+  'Plecări și programe în funcție de sezon și disponibilitate. Putem organiza și alte trasee la cerere.':'Выезды и программы зависят от сезона и наличия мест. По запросу организуем и другие маршруты.',
+  'Iași • City break & shopping':'Яссы • City break и шопинг','O escapadă practică de o zi sau weekend, cu program adaptat grupului.':'Практичная поездка на день или выходные с программой под группу.',
+  'Brașov • Peleș • Sinaia':'Брашов • Пелеш • Синая','Munți, castele și orașe istorice într-un circuit potrivit pentru weekend.':'Горы, замки и исторические города в маршруте на выходные.',
+  'Orheiul Vechi • Cricova':'Старый Орхей • Крикова','Un traseu local clasic pentru natură, istorie și experiențe vinicole.':'Классический местный маршрут: природа, история и винные впечатления.',
+  'Cere programul':'Запросить программу','28 recenzii Google':'28 отзывов Google','Google: 5.0 ★ • 28 recenzii ↗':'Google: 5.0 ★ • 28 отзывов ↗',
+  'Vezi detalii':'Подробнее','Cere ofertă':'Запросить','Zbor incl.':'Перелёт включён','Hotel selectat':'Подобранный отель','Plajă':'Пляж','Resort 4–5★':'Курорт 4–5★'
+});
 
 const originalText=new WeakMap();
 const originalAttrs=new WeakMap();
