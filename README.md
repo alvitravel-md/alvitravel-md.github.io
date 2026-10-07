@@ -2,7 +2,7 @@
 
 Official static website for AlviTravel.
 
-Live site: https://alvitravel-md.github.io/
+Live site: https://alvitravel.md/
 
 Main destinations: Turkey, Greece and Egypt. Booking requests are prepared for WhatsApp.
 
