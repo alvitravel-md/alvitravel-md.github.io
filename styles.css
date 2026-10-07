@@ -571,3 +571,46 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .nav-actions select{max-width:62px}
   .brand span{font-size:16px}
 }
+
+
+/* Homepage UI/UX upgrade — 2026-10-07 */
+.brand-logo-img{display:block;flex:0 0 auto;object-fit:contain;background:#fff;border-radius:14px}
+.mobile-call{display:none;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue);text-decoration:none}
+.mobile-call svg{width:21px;height:21px;fill:currentColor}
+.search-card{grid-template-columns:1.15fr .85fr 1fr .65fr 1fr auto}
+.trust-link{text-decoration:none;color:inherit;transition:.2s}
+.trust-link:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);border-color:#b9d7f6}
+.destination-card{height:390px;text-decoration:none;color:inherit;display:block}
+.bulgaria{background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=82')}
+.montenegro{background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82')}
+.europe{background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=82')}
+.destination-badge{position:absolute!important;top:18px;left:18px;z-index:3;background:rgba(255,255,255,.94)!important;color:#0b3766!important;border:0!important;padding:8px 11px!important;border-radius:999px!important;font-size:12px!important;font-weight:900!important;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.offer-benefits{display:flex;flex-wrap:wrap;gap:6px;color:#35516d;font-size:12px;font-weight:800;line-height:1.6;margin:12px 0}
+.offer-benefits span{color:#9eb0c1}
+.offer-bottom{align-items:flex-end;gap:16px}
+.offer-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.details-link{font-size:12px;font-weight:900;color:var(--blue);text-decoration:none}
+.details-link:hover{text-decoration:underline}
+.excursion-grid{grid-template-columns:repeat(3,1fr)}
+.excursion-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow-sm)}
+.excursion-icon{width:52px;height:52px;border-radius:15px;background:var(--gold-soft);display:grid;place-items:center;font-size:25px;margin-bottom:16px}
+.excursion-card h3{margin:14px 0 8px;font-size:21px}
+.excursion-card p{color:var(--muted);line-height:1.7;min-height:82px}
+.review-rating-link{color:#fff;text-decoration:none;font-weight:900;border:1px solid rgba(255,255,255,.24);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.09)}
+.review-rating-link:hover{background:rgba(255,255,255,.16)}
+.floating-wa{background:#25D366;font-size:0;transition:.2s}
+.floating-wa:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 34px rgba(0,0,0,.22)}
+.floating-wa svg{width:34px;height:34px;fill:currentColor}
+.brand-logo{background:url('/logo.svg') center/contain no-repeat!important}
+@media(max-width:980px){
+  .mobile-call{display:flex}
+  .excursion-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .mobile-call{width:40px;height:40px}
+  .nav-actions{gap:6px}
+  .nav-actions select{padding:9px 6px}
+  .destination-card{height:340px}
+  .offer-bottom{align-items:flex-start;flex-direction:column}
+  .offer-actions{align-items:flex-start;width:100%}
+}
