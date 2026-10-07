@@ -23,22 +23,32 @@
   function removeBanner(){
     document.getElementById('alvi-cookie-banner')?.remove();
   }
+  function bannerCopy(){
+    let lang='ro'; try{lang=localStorage.getItem('alvi_lang')||'ro';}catch(e){}
+    const copy={
+      ro:{label:'Preferințe cookie',title:'Confidențialitatea ta contează',body:'Folosim Google Analytics numai dacă accepți cookie-urile de analiză. Cookie-urile strict necesare funcționării site-ului nu pot fi dezactivate.',details:'Detalii',reject:'Doar necesare',accept:'Acceptă analiza'},
+      en:{label:'Cookie preferences',title:'Your privacy matters',body:'We use Google Analytics only if you accept analytics cookies. Strictly necessary cookies required for the site cannot be disabled.',details:'Details',reject:'Necessary only',accept:'Accept analytics'},
+      ru:{label:'Настройки cookies',title:'Ваша конфиденциальность важна',body:'Мы используем Google Analytics только с вашего согласия на аналитические cookies. Строго необходимые cookies для работы сайта отключить нельзя.',details:'Подробнее',reject:'Только необходимые',accept:'Разрешить аналитику'}
+    };
+    return copy[lang]||copy.ro;
+  }
   function showBanner(){
     if(document.getElementById('alvi-cookie-banner')) return;
+    const t=bannerCopy();
     const wrap=document.createElement('div');
     wrap.id='alvi-cookie-banner';
     wrap.setAttribute('role','dialog');
     wrap.setAttribute('aria-live','polite');
-    wrap.setAttribute('aria-label','Preferințe cookie');
+    wrap.setAttribute('aria-label',t.label);
     wrap.innerHTML=`
       <div class="alvi-cookie-inner">
         <div class="alvi-cookie-copy">
-          <strong>Confidențialitatea ta contează</strong>
-          <span>Folosim Google Analytics numai dacă accepți cookie-urile de analiză. Cookie-urile strict necesare funcționării site-ului nu pot fi dezactivate. <a href="/cookies.html">Detalii</a></span>
+          <strong>${t.title}</strong>
+          <span>${t.body} <a href="/cookies.html">${t.details}</a></span>
         </div>
         <div class="alvi-cookie-actions">
-          <button type="button" data-cookie="reject">Doar necesare</button>
-          <button type="button" class="primary" data-cookie="accept">Acceptă analiza</button>
+          <button type="button" data-cookie="reject">${t.reject}</button>
+          <button type="button" class="primary" data-cookie="accept">${t.accept}</button>
         </div>
       </div>`;
     const style=document.createElement('style');
@@ -57,6 +67,7 @@
     wrap.querySelector('[data-cookie="reject"]').addEventListener('click',()=>{setChoice('rejected');removeBanner();});
   }
 
+  window.addEventListener('alvi-language-change',()=>{if(document.getElementById('alvi-cookie-banner')){removeBanner();showBanner();}});
   window.AlviCookieConsent={
     open:function(){showBanner();},
     reset:function(){try{localStorage.removeItem(KEY);}catch(e){} showBanner();}

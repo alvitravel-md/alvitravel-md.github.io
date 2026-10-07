@@ -638,3 +638,16 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 @media(max-width:620px){
   #lang{min-width:58px;max-width:64px}
 }
+
+/* Brand, expanded destinations and map QA — 2026-10-07 */
+.brand-logo-img{
+  width:62px!important;height:62px!important;object-fit:contain!important;
+  border-radius:14px!important;background:#fff!important;
+}
+.footer-brand .brand-logo-img{width:52px!important;height:52px!important}
+.destinations-expanded{grid-template-columns:repeat(3,minmax(0,1fr))}
+.destinations-expanded .destination-card{background-position:center;background-size:cover}
+.photo-credit{display:block;color:#7b8da0;font-size:10px;line-height:1.4;margin-top:auto}
+.excursion-body .photo-credit + .btn{margin-top:6px}
+@media(max-width:980px){.destinations-expanded{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.destinations-expanded{grid-template-columns:1fr}.brand-logo-img{width:54px!important;height:54px!important}}
