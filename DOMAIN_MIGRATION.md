@@ -1,6 +1,6 @@
 # AlviTravel custom-domain migration checklist
 
-Current production URL: https://alvitravel-md.github.io/
+Current production URL: https://alvitravel.md/
 
 When a custom domain is purchased, do not change files one-by-one manually. Complete the migration in this order:
 
