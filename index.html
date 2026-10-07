@@ -87,24 +87,11 @@
 <body>
 <header class="site-header">
   <div class="container nav-wrap">
-    <a class="brand" href="#home" aria-label="AlviTravel - pagina principală"><img class="brand-logo-img" src="/logo.svg" alt="AlviTravel"><span>AlviTravel</span></a>
-    <nav class="nav" id="nav" aria-label="Navigație principală">
-      <a href="/turcia.html">🇹🇷 Turcia</a>
-      <a href="/grecia.html">🇬🇷 Grecia</a>
-      <a href="/egipt.html">🇪🇬 Egipt</a>
-      <a href="#destinations">Destinații</a>
-      <a href="#excursions">Excursii</a>
-      <a href="#offers">Oferte</a>
-      <a href="/blog/">Blog</a>
+    <a class="brand" href="#home"><img class="brand-logo-img" src="/logo.svg" alt="AlviTravel" width="56" height="56"><span>AlviTravel</span></a>
+    <nav class="nav" id="nav">
+      <a href="turcia.html">🇹🇷 Turcia</a><a href="grecia.html">🇬🇷 Grecia</a><a href="egipt.html">🇪🇬 Egipt</a><a href="blog/">Blog</a><a href="#about">Despre noi</a><a href="#reviews">Recenzii</a><a href="#contact">Contact</a>
     </nav>
-    <div class="nav-actions">
-      <select id="lang" aria-label="Limba site-ului"><option value="ro">RO</option><option value="ru">RU</option><option value="en">EN</option></select>
-      <a class="btn btn-primary btn-small" href="#booking">Rezervă acum</a>
-      <a class="mobile-call" href="tel:+37368004449" aria-label="Sună AlviTravel la +373 68 004 449">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.3.55 3.5.55a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.19 2.4.55 3.5a1 1 0 0 1-.24 1z"/></svg>
-      </a>
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Deschide meniul" aria-controls="nav" aria-expanded="false">☰</button>
-    </div>
+    <div class="nav-actions"><select id="lang" aria-label="Limba site-ului"><option value="ro">RO</option><option value="ru">RU</option><option value="en">EN</option></select><a class="btn btn-primary btn-small" href="#booking">Rezervă acum</a><a class="mobile-call" href="tel:+37368004449" aria-label="Sună AlviTravel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.3.55 3.5.55a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.19 2.4.55 3.5a1 1 0 0 1-.24 1z"/></svg></a><button class="menu-btn" id="menuBtn" type="button" aria-label="Deschide meniul" aria-controls="nav" aria-expanded="false">☰</button></div>
   </div>
 </header>
 
@@ -118,7 +105,7 @@
 </div></section>
 
 <section class="search-card-section"><div class="container"><form class="search-card" id="quickForm">
-  <div class="field"><label for="qDestination">Destinație</label><select id="qDestination" name="qDestination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Bulgaria</option><option>Muntenegru</option><option>Spania</option><option>Italia</option><option>România</option><option>Excursie</option><option>Nu sunt sigur</option></select></div>
+  <div class="field"><label for="qDestination">Destinație</label><select id="qDestination" name="qDestination"><option>Turcia</option><option>Grecia</option><option>Egipt</option><option>Bulgaria</option><option>Muntenegru</option><option>România</option><option>Spania</option><option>Italia</option><option>Excursie</option><option>Nu sunt sigur</option></select></div>
   <div class="field"><label for="qTransport">Transport</label><select id="qTransport" name="qTransport"><option>Oricare</option><option>Avion</option><option>Autocar</option></select></div>
   <div class="field"><label for="qDate">Data plecării</label><input id="qDate" name="qDate" type="date"></div>
   <div class="field"><label for="qPeople">Persoane</label><select id="qPeople" name="qPeople"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
@@ -134,16 +121,15 @@
 </div></section>
 
 <section class="section" id="destinations"><div class="container">
-  <div class="section-head"><div><span class="kicker">Destinații populare</span><h2>Alege următoarea ta escapadă</h2></div><p>6 destinații recomandate pentru mare, relaxare și aventură. Putem organiza și alte destinații la cerere.</p></div>
-  <div class="grid destinations destinations-six">
-    <a class="destination-card turkey" href="/turcia.html" aria-label="Vacanțe în Turcia"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>All Inclusive</span><h3>Turcia</h3><p>Antalya • Alanya • Kemer • Belek</p><span class="link-btn">Explorează Turcia →</span></div></a>
-    <a class="destination-card greece" href="/grecia.html" aria-label="Vacanțe în Grecia"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>Soare & mare</span><h3>Grecia</h3><p>Creta • Halkidiki • Rhodos</p><span class="link-btn">Explorează Grecia →</span></div></a>
-    <a class="destination-card egypt" href="/egipt.html" aria-label="Vacanțe în Egipt"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>Soare tot anul</span><h3>Egipt</h3><p>Sharm El Sheikh • Hurghada</p><span class="link-btn">Explorează Egipt →</span></div></a>
-    <a class="destination-card bulgaria" href="/?destination=Bulgaria#booking" aria-label="Cere ofertă pentru Bulgaria"><span class="destination-badge">🚌 Autocar / ✈️ Avion</span><div class="shade"></div><div class="card-copy"><span>Mare & familie</span><h3>Bulgaria</h3><p>Nisipurile de Aur • Sunny Beach • Nessebar</p><span class="link-btn">Cere ofertă →</span></div></a>
-    <a class="destination-card montenegro" href="/?destination=Muntenegru#booking" aria-label="Cere ofertă pentru Muntenegru"><span class="destination-badge">🚌 Autocar / ✈️ Avion</span><div class="shade"></div><div class="card-copy"><span>Mare & munte</span><h3>Muntenegru</h3><p>Budva • Kotor • Becici</p><span class="link-btn">Cere ofertă →</span></div></a>
-    <a class="destination-card spain" href="/?destination=Spania#booking" aria-label="Cere ofertă pentru Spania"><span class="destination-badge">✈️ Zbor</span><div class="shade"></div><div class="card-copy"><span>City break & mare</span><h3>Spania</h3><p>Barcelona • Costa Brava • Mallorca</p><span class="link-btn">Cere ofertă →</span></div></a>
+  <div class="section-head"><div><span class="kicker">Destinații populare</span><h2>6 idei pentru mare, munte și city break</h2></div><p>AlviTravel poate organiza vacanțe oriunde. Acestea sunt doar câteva dintre direcțiile cerute frecvent.</p></div>
+  <div class="grid destinations">
+    <a class="destination-card turkey" href="turcia.html"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>All Inclusive</span><h3>Turcia</h3><p>Antalya • Alanya • Kemer • Belek</p><strong class="link-btn">Explorează Turcia →</strong></div></a>
+    <a class="destination-card greece" href="grecia.html"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>Soare & mare</span><h3>Grecia</h3><p>Creta • Halkidiki • Rhodos</p><strong class="link-btn">Explorează Grecia →</strong></div></a>
+    <a class="destination-card egypt" href="egipt.html"><span class="destination-badge">✈️ Zbor din Chișinău</span><div class="shade"></div><div class="card-copy"><span>Soare tot anul</span><h3>Egipt</h3><p>Sharm El Sheikh • Hurghada</p><strong class="link-btn">Explorează Egipt →</strong></div></a>
+    <a class="destination-card bulgaria" href="#booking" data-destination="Bulgaria"><span class="destination-badge">🚌 / ✈️ din Chișinău</span><div class="shade"></div><div class="card-copy"><span>Mare & familie</span><h3>Bulgaria</h3><p>Nisipurile de Aur • Sunny Beach • Nessebar</p><strong class="link-btn">Cere ofertă →</strong></div></a>
+    <a class="destination-card montenegro" href="#booking" data-destination="Muntenegru"><span class="destination-badge">✈️ Vacanță la Adriatică</span><div class="shade"></div><div class="card-copy"><span>Mare & munte</span><h3>Muntenegru</h3><p>Budva • Kotor • Herceg Novi</p><strong class="link-btn">Cere ofertă →</strong></div></a>
+    <a class="destination-card europe" href="#booking" data-destination="Europa"><span class="destination-badge">✈️ City break & sejur</span><div class="shade"></div><div class="card-copy"><span>Europa</span><h3>România • Spania • Italia</h3><p>Mare, munte, circuite și city break-uri</p><strong class="link-btn">Cere ofertă →</strong></div></a>
   </div>
-  <p class="more-destinations">Căutăm pachete și pentru <strong>Italia</strong>, <strong>România</strong> și orice altă destinație disponibilă la cerere.</p>
 </div></section>
 <section class="section soft excursions-section" id="excursions"><div class="container">
   <div class="section-head"><div><span class="kicker">Excursii din Chișinău</span><h2>3 idei populare pentru o zi memorabilă</h2></div><p>Traseele, datele și transportul se confirmă la cerere în funcție de disponibilitate.</p></div>
@@ -157,9 +143,18 @@
 <section class="section soft" id="offers"><div class="container">
   <div class="section-head"><div><span class="kicker">Oferte recomandate</span><h2>Vacanțe populare</h2></div><p>Prețurile sunt orientative și se confirmă în funcție de data plecării, hotel și disponibilitate.</p></div>
   <div class="grid offer-grid">
-    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1000&q=80" alt="Antalya, Turcia"><div class="offer-body"><div class="tag-row"><span class="tag">Turcia</span><span>7 nopți</span></div><h3>Antalya • All Inclusive</h3><div class="offer-benefits"><span>✈️ Zbor incl.</span><span>🏨 Hotel 4–5★</span><span>🍽 All Inclusive</span><span>🚌 Transfer</span></div><p>Zbor, transfer și hotel selectat la cerere.</p><div class="offer-price">de la €499</div><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Turcia" data-offer="Antalya • All Inclusive">Cere ofertă</button><a class="offer-details" href="/turcia.html">Vezi detalii →</a></div></div></article>
-    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1000&q=80" alt="Grecia"><div class="offer-body"><div class="tag-row"><span class="tag">Grecia</span><span>7 nopți</span></div><h3>Creta • Vacanță la mare</h3><div class="offer-benefits"><span>✈️ Zbor incl.</span><span>🏨 Hotel selectat</span><span>🍽 Masă la alegere</span><span>🚌 Transfer</span></div><p>Hoteluri pentru cupluri, familii și grupuri.</p><div class="offer-price">de la €549</div><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Grecia" data-offer="Creta • Vacanță la mare">Cere ofertă</button><a class="offer-details" href="/grecia.html">Vezi detalii →</a></div></div></article>
-    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=85" alt="Egipt, Sharm El Sheikh"><div class="offer-body"><div class="tag-row"><span class="tag">Egipt</span><span>7 nopți</span></div><h3>Sharm El Sheikh</h3><div class="offer-benefits"><span>✈️ Zbor incl.</span><span>🏨 Resort 4–5★</span><span>🍽 All Inclusive</span><span>🚌 Transfer</span></div><p>Resorturi, plaje superbe și temperaturi excelente.</p><div class="offer-price">de la €529</div><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Egipt" data-offer="Sharm El Sheikh">Cere ofertă</button><a class="offer-details" href="/egipt.html">Vezi detalii →</a></div></div></article>
+    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1000&q=80" alt="Antalya, Turcia"><div class="offer-body"><div class="tag-row"><span class="tag">Turcia</span><span>7 nopți</span></div><h3>Antalya • All Inclusive</h3><div class="offer-benefits">✈️ Zbor incl. <span>•</span> 🏨 Hotel 4–5★ <span>•</span> 🍽 All Inclusive <span>•</span> 🚌 Transfer</div><p>Zbor, transfer și hotel selectat la cerere.</p><div class="offer-bottom"><strong>de la €499</strong><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Turcia" data-offer="Antalya • All Inclusive">Cere ofertă</button><a class="details-link" href="turcia.html">Vezi detalii</a></div></div></div></article>
+    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1000&q=80" alt="Grecia"><div class="offer-body"><div class="tag-row"><span class="tag">Grecia</span><span>7 nopți</span></div><h3>Creta • Vacanță la mare</h3><div class="offer-benefits">✈️ Zbor incl. <span>•</span> 🏨 Hotel selectat <span>•</span> 🏖 Plajă <span>•</span> 🚌 Transfer</div><p>Hoteluri pentru cupluri, familii și grupuri.</p><div class="offer-bottom"><strong>de la €549</strong><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Grecia" data-offer="Creta • Vacanță la mare">Cere ofertă</button><a class="details-link" href="grecia.html">Vezi detalii</a></div></div></div></article>
+    <article class="offer-card"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1400&q=85" alt="Egipt, Sharm El Sheikh"><div class="offer-body"><div class="tag-row"><span class="tag">Egipt</span><span>7 nopți</span></div><h3>Sharm El Sheikh</h3><div class="offer-benefits">✈️ Zbor incl. <span>•</span> 🏨 Resort 4–5★ <span>•</span> 🍽 All Inclusive <span>•</span> 🚌 Transfer</div><p>Resorturi, plaje superbe și temperaturi excelente.</p><div class="offer-bottom"><strong>de la €529</strong><div class="offer-actions"><button class="btn btn-primary btn-small book-offer" data-dest="Egipt" data-offer="Sharm El Sheikh">Cere ofertă</button><a class="details-link" href="egipt.html">Vezi detalii</a></div></div></div></article>
+  </div>
+</div></section>
+
+<section class="section" id="excursions"><div class="container">
+  <div class="section-head"><div><span class="kicker">Excursii din Chișinău</span><h2>3 trasee populare pentru o escapadă</h2></div><p>Plecări și programe în funcție de sezon și disponibilitate. Putem organiza și alte trasee la cerere.</p></div>
+  <div class="grid excursion-grid">
+    <article class="excursion-card"><div class="excursion-icon">🇷🇴</div><span class="tag">România</span><h3>Iași • City break & shopping</h3><p>O escapadă practică de o zi sau weekend, cu program adaptat grupului.</p><button class="btn btn-outline btn-small excursion-trigger" data-dest="România" data-offer="Excursie Iași">Cere programul</button></article>
+    <article class="excursion-card"><div class="excursion-icon">🏰</div><span class="tag">România</span><h3>Brașov • Peleș • Sinaia</h3><p>Munți, castele și orașe istorice într-un circuit potrivit pentru weekend.</p><button class="btn btn-outline btn-small excursion-trigger" data-dest="România" data-offer="Brașov • Peleș • Sinaia">Cere programul</button></article>
+    <article class="excursion-card"><div class="excursion-icon">🍇</div><span class="tag">Moldova</span><h3>Orheiul Vechi • Cricova</h3><p>Un traseu local clasic pentru natură, istorie și experiențe vinicole.</p><button class="btn btn-outline btn-small excursion-trigger" data-dest="Excursie" data-offer="Orheiul Vechi • Cricova">Cere programul</button></article>
   </div>
 </div></section>
 
@@ -176,7 +171,7 @@
 </div></section>
 
 <section class="section blue-section" id="reviews"><div class="container">
-  <div class="section-head light"><div><span class="kicker">Recenzii</span><h2>Ce spun clienții</h2></div><p>Rating Google: 5.0 / 5</p></div>
+  <div class="section-head light"><div><span class="kicker">Recenzii</span><h2>Ce spun clienții</h2></div><a class="review-rating-link" href="https://www.google.com/maps/search/?api=1&query=AlviTravel%20Chi%C8%99in%C4%83u%20Alexandru%20cel%20Bun%207" target="_blank" rel="noopener">Google: 5.0 ★ • 28 recenzii ↗</a></div>
   <div class="grid review-grid">
     <article class="review-card"><div class="stars">★★★★★</div><p>„Personal amabil, profesionist și atent la toate detaliile. Comunicarea a fost excelentă.”</p><strong>Vlad S.</strong><div class="review-meta">Google Review</div></article>
     <article class="review-card"><div class="stars">★★★★★</div><p>„Vacanța a fost organizată impecabil, iar locația din Spania a fost incredibilă.”</p><strong>Oleg M.</strong><div class="review-meta">Google Review</div></article>
@@ -208,7 +203,7 @@
 </main>
 
 <a class="floating-wa" href="https://wa.me/37368004449?text=Salut!%20Doresc%20o%20consulta%C8%9Bie%20pentru%20o%20vacan%C8%9B%C4%83." target="_blank" rel="noopener" aria-label="Scrie AlviTravel pe WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C8.86 3 3.02 8.82 3.02 15.98c0 2.29.6 4.53 1.74 6.5L3 29l6.69-1.75a13 13 0 0 0 6.34 1.61h.01c7.17 0 13-5.82 13-12.98C29.04 8.82 23.21 3 16.04 3Zm0 23.67h-.01a10.8 10.8 0 0 1-5.51-1.5l-.4-.24-3.97 1.04 1.06-3.86-.26-.4a10.72 10.72 0 0 1-1.65-5.73c0-5.96 4.87-10.8 10.85-10.8 5.97 0 10.83 4.84 10.83 10.8 0 5.95-4.87 10.79-10.84 10.79Zm5.95-8.08c-.33-.16-1.93-.95-2.23-1.06-.3-.11-.52-.16-.74.16-.22.33-.85 1.06-1.04 1.28-.19.22-.38.24-.71.08-.33-.16-1.38-.51-2.63-1.62a9.84 9.84 0 0 1-1.82-2.25c-.19-.33-.02-.5.14-.67.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.79-1.02-2.45-.27-.65-.54-.56-.74-.57h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.72 0 1.6 1.17 3.15 1.33 3.37.16.22 2.3 3.51 5.56 4.92.78.34 1.38.54 1.86.69.78.25 1.49.21 2.05.13.62-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.13-.3-.21-.63-.37Z"/></svg></a>
-<footer><div class="container footer-inner"><div class="brand footer-brand"><span class="brand-logo" aria-hidden="true"></span><span>AlviTravel</span></div><p>© <span id="year"></span> AlviTravel. Toate drepturile rezervate.</p></div></footer>
+<footer><div class="container footer-inner"><div class="brand footer-brand"><img class="brand-logo-img" src="/logo.svg" alt="AlviTravel" width="48" height="48"><span>AlviTravel</span></div><p>© <span id="year"></span> AlviTravel. Toate drepturile rezervate.</p></div></footer>
 <script src="/script.js?v=20261007-ux2"></script>
 </body>
 </html>
