@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alvitravel.md/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://alvitravel.md/turcia.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://alvitravel.md/blog/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://alvitravel.md/blog/sejur-egipt-din-chisinau.html</loc>
@@ -51,4 +51,6 @@
   <url><loc>https://alvitravel.md/italia.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://alvitravel.md/franta.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://alvitravel.md/destinatii.html</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://alvitravel.md/blog/vacanta-bulgaria-din-chisinau.html</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://alvitravel.md/blog/city-break-europa-din-chisinau.html</loc><lastmod>2026-10-08</lastmod></url>
 </urlset>
