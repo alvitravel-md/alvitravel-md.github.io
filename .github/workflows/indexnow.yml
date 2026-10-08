@@ -1,0 +1,35 @@
+name: Notify IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for GitHub Pages deployment
+        run: sleep 90
+      - name: Build IndexNow payload
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          key = "a14f3c9e7b2d4f6180c6e5a9b3d7f241"
+          urls = [line.strip() for line in pathlib.Path("sitemap.txt").read_text().splitlines() if line.strip()]
+          payload = {
+              "host": "alvitravel.md",
+              "key": key,
+              "keyLocation": f"https://alvitravel.md/{key}.txt",
+              "urlList": urls[:10000],
+          }
+          pathlib.Path("indexnow-payload.json").write_text(json.dumps(payload, ensure_ascii=False))
+          print(f"Prepared {len(urls)} URLs for IndexNow")
+          PY
+      - name: Notify IndexNow
+        run: |
+          curl --fail-with-body --silent --show-error             -X POST             -H "Content-Type: application/json; charset=utf-8"             --data @indexnow-payload.json             https://api.indexnow.org/indexnow
