@@ -1089,3 +1089,18 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 @media(max-width:700px){
   .footer-seo-links{width:100%;gap:8px 12px;font-size:12px;text-align:center}
 }
+
+
+/* Lead flow: no forced external redirect */
+.optional-note{font-weight:700;color:var(--muted);text-transform:none;letter-spacing:0}
+.field small{font-size:11px;color:var(--muted);line-height:1.45}
+.privacy-check{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.55;color:var(--muted);margin:2px 0 4px}
+.privacy-check input{margin-top:3px;flex:0 0 auto}
+.privacy-check a{color:var(--blue);font-weight:800}
+.booking-result{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow-sm)}
+.booking-result-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#e9f8ef;color:#168447;font-weight:900;font-size:24px;margin-bottom:14px}
+.booking-result h3{font-size:28px;margin:0 0 8px}
+.booking-result p{color:var(--muted);line-height:1.65;margin:0 0 20px}
+.booking-result-actions{display:flex;gap:10px;flex-wrap:wrap}
+.booking-edit{margin-top:18px;border:0;background:transparent;color:var(--blue);font:inherit;font-weight:800;cursor:pointer;padding:0}
+@media(max-width:640px){.booking-result{padding:22px}.booking-result-actions .btn{width:100%}}
