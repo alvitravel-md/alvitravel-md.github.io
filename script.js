@@ -150,8 +150,8 @@ bookingForm?.addEventListener('submit',e=>{
   const budget=document.getElementById('budget')?.value||'nespecificat';
   const message=document.getElementById('message')?.value.trim()||'-';
   trackEvent('lead_submit',{destination,adults:Number(adults)||0,children:Number(children)||0});
-  const childAgesLine=childAges.length?\`\nVârste copii: \${childAges.map((age,index)=>\`Copil \${index+1}: \${age==='0'?'sub 1 an':age+' ani'}\`).join(', ')}\`:'';
-  const text=\`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: \${name}\nTelefon: \${phone}\nDestinație: \${destination}\nData: \${date}\nAdulți: \${adults}\nCopii: \${children}\${childAgesLine}\nBuget: \${budget}\nDetalii: \${message}\`;
+  const childAgesLine=childAges.length?`\nVârste copii: ${childAges.map((age,index)=>`Copil ${index+1}: ${age==='0'?'sub 1 an':age+' ani'}`).join(', ')}`:'';
+  const text=`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: ${name}\nTelefon: ${phone}\nDestinație: ${destination}\nData: ${date}\nAdulți: ${adults}\nCopii: ${children}${childAgesLine}\nBuget: ${budget}\nDetalii: ${message}`;
   window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
 
