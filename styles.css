@@ -1169,3 +1169,6 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .floating-wa{bottom:78px!important}
   body{padding-bottom:74px}
 }
+
+/* Bot trap for public lead form */
+.hp-field{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
