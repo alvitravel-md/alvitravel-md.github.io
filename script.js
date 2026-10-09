@@ -173,9 +173,10 @@ const bookingWhatsApp=document.getElementById('bookingWhatsApp');
 const bookingEmail=document.getElementById('bookingEmail');
 const bookingEdit=document.getElementById('bookingEdit');
 
-bookingForm?.addEventListener('submit',e=>{
+bookingForm?.addEventListener('submit',async e=>{
   e.preventDefault();
   if(!bookingForm.reportValidity()) return;
+  if(document.getElementById('website')?.value) return;
   const name=document.getElementById('name')?.value.trim()||'';
   const phone=document.getElementById('phone')?.value.trim()||'';
   const destination=document.getElementById('destination')?.value||'';
@@ -185,6 +186,32 @@ bookingForm?.addEventListener('submit',e=>{
   const childAges=getSelectedChildAges();
   const budget=document.getElementById('budget')?.value||'nespecificat';
   const message=document.getElementById('message')?.value.trim()||'-';
+  const source=new URLSearchParams(window.location.search).get('utm_source')||document.referrer||window.location.pathname;
+  const endpoint=(window.ALVI_LEAD_ENDPOINT||'').trim();
+  if(endpoint){
+    const payload={
+      timestamp:new Date().toISOString(),
+      name,phone,destination,date,
+      adults:Number(adults)||0,
+      children:Number(children)||0,
+      childAges,
+      budget,message,source,
+      status:'Nou'
+    };
+    try{
+      await fetch(endpoint,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload),
+        keepalive:true
+      });
+      trackEvent('lead_saved',{destination});
+    }catch(err){
+      console.error('Lead endpoint unavailable',err);
+      trackEvent('lead_save_error',{destination});
+    }
+  }
   trackEvent('lead_prepare',{destination,adults:Number(adults)||0,children:Number(children)||0});
   const childAgesLine=childAges.length?`\nVârste copii: ${childAges.map((age,index)=>`Copil ${index+1}: ${age==='0'?'sub 1 an':age+' ani'}`).join(', ')}`:'';
   const text=`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: ${name}\nTelefon: ${phone}\nDestinație: ${destination}\nData: ${date}\nAdulți: ${adults}\nCopii: ${children}${childAgesLine}\nBuget: ${budget}\nDetalii: ${message}`;
