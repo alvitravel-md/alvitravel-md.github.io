@@ -60,6 +60,33 @@ document.querySelectorAll('.group-book').forEach(btn=>btn.addEventListener('clic
   const message=document.getElementById('message');
   if(message) message.value=btn.dataset.group||'Cerere ofertă pentru grup';
 }));
+
+document.querySelectorAll('.service-prefill').forEach(btn=>btn.addEventListener('click',()=>{
+  const d=document.getElementById('destination');
+  const m=document.getElementById('message');
+  const wanted=btn.dataset.dest||'Nu sunt sigur';
+  if(d){
+    const match=[...d.options].find(o=>o.value===wanted);
+    if(match) d.value=match.value;
+  }
+  if(m) m.value=btn.dataset.message||'';
+  document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('name')?.focus({preventScroll:true}),420);
+}));
+
+const callbackForm=document.getElementById('callbackForm');
+callbackForm?.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(!callbackForm.reportValidity()) return;
+  const value=document.getElementById('callbackPhone')?.value.trim()||'';
+  const phone=document.getElementById('phone');
+  const message=document.getElementById('message');
+  if(phone) phone.value=value;
+  if(message&&!message.value.trim()) message.value='Doresc să fiu contactat(ă) telefonic pentru o ofertă.';
+  document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('name')?.focus({preventScroll:true}),420);
+  trackEvent('callback_prepare',{source:'homepage'});
+});
 document.querySelectorAll('.destination-card[data-destination]').forEach(card=>card.addEventListener('click',()=>{
   const d=document.getElementById('destination');
   if(!d) return;
@@ -194,7 +221,7 @@ const pageTranslations={
     '🇹🇷 Turcia':'🇹🇷 Turkey','🇬🇷 Grecia':'🇬🇷 Greece','🇪🇬 Egipt':'🇪🇬 Egypt','Blog':'Blog','Despre noi':'About us','Recenzii':'Reviews','Contact':'Contact','Rezervă acum':'Book now','☰':'☰',
     '✈ Din 2015 • Chișinău':'✈ Since 2015 • Chișinău','Vacanțe din Chișinău cu':'Holidays from Chișinău with',
     'Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.':'Turkey • Greece • Egypt • Tours departing from Chișinău. We find the right trip for your budget, dates and travel style.',
-    'Vezi ofertele':'View offers','Cere o ofertă':'Request an offer','experiență':'experience','răspuns rapid':'fast reply',
+    'Vezi ofertele':'View offers','Cere o ofertă':'Request an offer','Alege mai repede':'Choose faster','Ce fel de călătorie cauți?':'What kind of trip are you looking for?','Vacanțe la mare':'Beach holidays','Pentru grupuri':'For groups','Ajută-mă să aleg':'Help me choose','plus oferte personalizate':'plus custom offers','comunicare în 3 limbi':'communication in 3 languages','Te sunăm noi':'We call you','Preferi să vorbești direct cu un consultant?':'Prefer to speak directly with a consultant?','Introdu numărul, iar noi îți pregătim cererea de apel. O confirmi în formular înainte ca datele să fie folosite.':'Enter your number and we will prepare a callback request. You confirm it in the form before your data is used.','Vreau să fiu sunat':'Call me','Nu trimitem datele fără confirmarea ta.':'We do not send your data without your confirmation.','☎ Sună':'☎ Call','experiență':'experience','răspuns rapid':'fast reply',
     'Destinație':'Destination','Transport':'Transport','Data plecării':'Departure date','Persoane':'Travellers','Buget':'Budget','Găsește vacanța':'Find my holiday','Cere preț actual':'Request current price',
     '🇹🇷 Turcia':'🇹🇷 Turkey','🇬🇷 Grecia':'🇬🇷 Greece','🇪🇬 Egipt':'🇪🇬 Egypt','🇧🇬 Bulgaria':'🇧🇬 Bulgaria','🇲🇪 Muntenegru':'🇲🇪 Montenegro','🇷🇴 România':'🇷🇴 Romania','🇪🇸 Spania':'🇪🇸 Spain','🇮🇹 Italia':'🇮🇹 Italy','🇫🇷 Franța':'🇫🇷 France',
     'Excursie':'Tour','Nu sunt sigur':'Not sure','Oricare':'Any','Avion':'Plane','Autocar':'Coach','până la €500':'up to €500',
@@ -215,7 +242,7 @@ const pageTranslations={
     'Limba site-ului':'Site language','Sună AlviTravel':'Call AlviTravel','Vezi recenziile AlviTravel pe Google Maps':'View AlviTravel reviews on Google Maps','Harta AlviTravel':'AlviTravel map','Numele tău':'Your name','Hotel, regim de masă, oraș de plecare etc.':'Hotel, meal plan, departure city, etc.'
   },
   ru:{
-    '🇹🇷 Turcia':'🇹🇷 Турция','🇬🇷 Grecia':'🇬🇷 Греция','🇪🇬 Egipt':'🇪🇬 Египет','Blog':'Блог','Despre noi':'О нас','Recenzii':'Отзывы','Contact':'Контакты','Rezervă acum':'Забронировать','✈ Din 2015 • Chișinău':'✈ С 2015 года • Кишинёв','Vacanțe din Chișinău cu':'Отдых из Кишинёва с','Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.':'Турция • Греция • Египет • Экскурсии из Кишинёва. Подберём поездку под ваш бюджет, даты и стиль отдыха.','Vezi ofertele':'Смотреть предложения','Cere o ofertă':'Запросить предложение','experiență':'опыт','răspuns rapid':'быстрый ответ',
+    '🇹🇷 Turcia':'🇹🇷 Турция','🇬🇷 Grecia':'🇬🇷 Греция','🇪🇬 Egipt':'🇪🇬 Египет','Blog':'Блог','Despre noi':'О нас','Recenzii':'Отзывы','Contact':'Контакты','Rezervă acum':'Забронировать','✈ Din 2015 • Chișinău':'✈ С 2015 года • Кишинёв','Vacanțe din Chișinău cu':'Отдых из Кишинёва с','Turcia • Grecia • Egipt • Excursii cu plecare din Chișinău. Găsim vacanța potrivită pentru bugetul, perioada și stilul tău de călătorie.':'Турция • Греция • Египет • Экскурсии из Кишинёва. Подберём поездку под ваш бюджет, даты и стиль отдыха.','Vezi ofertele':'Смотреть предложения','Cere o ofertă':'Запросить предложение','Alege mai repede':'Выберите быстрее','Ce fel de călătorie cauți?':'Какое путешествие вы ищете?','Vacanțe la mare':'Отдых на море','Pentru grupuri':'Для групп','Ajută-mă să aleg':'Помогите выбрать','plus oferte personalizate':'плюс индивидуальные предложения','comunicare în 3 limbi':'общение на 3 языках','Te sunăm noi':'Мы вам позвоним','Preferi să vorbești direct cu un consultant?':'Предпочитаете поговорить с консультантом?','Introdu numărul, iar noi îți pregătim cererea de apel. O confirmi în formular înainte ca datele să fie folosite.':'Введите номер, и мы подготовим запрос на звонок. Вы подтвердите его в форме до использования данных.','Vreau să fiu sunat':'Перезвоните мне','Nu trimitem datele fără confirmarea ta.':'Мы не отправляем данные без вашего подтверждения.','☎ Sună':'☎ Позвонить','experiență':'опыт','răspuns rapid':'быстрый ответ',
     'Destinație':'Направление','Transport':'Транспорт','Data plecării':'Дата выезда','Persoane':'Путешественники','Buget':'Бюджет','Găsește vacanța':'Найти отдых','Cere preț actual':'Узнать актуальную цену','🇧🇬 Bulgaria':'🇧🇬 Болгария','🇲🇪 Muntenegru':'🇲🇪 Черногория','🇷🇴 România':'🇷🇴 Румыния','🇪🇸 Spania':'🇪🇸 Испания','🇮🇹 Italia':'🇮🇹 Италия','🇫🇷 Franța':'🇫🇷 Франция','Excursie':'Экскурсия','Nu sunt sigur':'Не уверен','Oricare':'Любой','Avion':'Самолёт','Autocar':'Автобус','până la €500':'до €500',
     'Consultanță rapidă':'Быстрая консультация','WhatsApp & telefon':'WhatsApp и телефон','Vacanțe personalizate':'Индивидуальные поездки','după buget și stil':'по бюджету и стилю','Suport pe traseu':'Поддержка в поездке','înainte și în vacanță':'до и во время отдыха','30 recenzii Google ↗':'30 отзывов Google ↗',
     'Destinații populare':'Популярные направления','9 destinații pentru mare, munte și city break':'9 направлений: море, горы и city break','AlviTravel poate organiza vacanțe oriunde. Alege una dintre destinațiile de mai jos sau cere o ofertă pentru orice alt loc.':'AlviTravel может организовать поездку практически куда угодно. Выберите направление ниже или запросите предложение для другого места.',
