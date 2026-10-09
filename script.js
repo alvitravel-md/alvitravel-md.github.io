@@ -189,21 +189,21 @@ bookingForm?.addEventListener('submit',async e=>{
   const source=new URLSearchParams(window.location.search).get('utm_source')||document.referrer||window.location.pathname;
   const endpoint=(window.ALVI_LEAD_ENDPOINT||'').trim();
   if(endpoint){
-    const payload={
-      timestamp:new Date().toISOString(),
+    const payload=new URLSearchParams({
+      siteKey:'alvitravel-web-2026',
+      website:document.getElementById('website')?.value||'',
       name,phone,destination,date,
-      adults:Number(adults)||0,
-      children:Number(children)||0,
-      childAges,
-      budget,message,source,
-      status:'Nou'
-    };
+      adults:String(Number(adults)||0),
+      children:String(Number(children)||0),
+      childAges:childAges.join(', '),
+      budget,message,source
+    });
     try{
       await fetch(endpoint,{
         method:'POST',
         mode:'no-cors',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify(payload),
+        headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+        body:payload.toString(),
         keepalive:true
       });
       trackEvent('lead_saved',{destination});
