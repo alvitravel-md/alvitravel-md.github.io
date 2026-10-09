@@ -950,3 +950,97 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .children-ages-list{grid-template-columns:1fr}
   .children-ages-wrap{padding:14px;margin-top:0}
 }
+
+
+/* Booking form control consistency — 2026-10-09 */
+.booking-form .field input,
+.booking-form .field select{
+  width:100%;
+  min-width:0;
+  height:52px;
+  min-height:52px;
+  max-height:52px;
+  box-sizing:border-box;
+  padding:0 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  font:inherit;
+  line-height:normal;
+}
+.booking-form .field textarea{
+  width:100%;
+  min-width:0;
+  box-sizing:border-box;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  font:inherit;
+}
+.booking-form input[type="date"]{
+  width:100%;
+  min-width:0;
+  height:52px!important;
+  min-height:52px!important;
+  max-height:52px!important;
+  box-sizing:border-box;
+  padding:0 14px!important;
+  margin:0;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  font:inherit;
+  line-height:normal;
+  color-scheme:light;
+}
+.booking-form input[type="date"]::-webkit-date-and-time-value{
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  text-align:left;
+}
+.booking-form input[type="date"]::-webkit-datetime-edit,
+.booking-form input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+.booking-form input[type="date"]::-webkit-datetime-edit-text,
+.booking-form input[type="date"]::-webkit-datetime-edit-day-field,
+.booking-form input[type="date"]::-webkit-datetime-edit-month-field,
+.booking-form input[type="date"]::-webkit-datetime-edit-year-field{
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+}
+.booking-form input[type="date"]::-webkit-calendar-picker-indicator{
+  opacity:.72;
+  cursor:pointer;
+}
+.booking-form .two{
+  align-items:start;
+}
+.booking-form .two>.field{
+  min-width:0;
+}
+.child-age-field select{
+  height:52px;
+  min-height:52px;
+  max-height:52px;
+}
+
+@media(max-width:620px){
+  .booking-form .field input,
+  .booking-form .field select,
+  .booking-form input[type="date"]{
+    height:50px!important;
+    min-height:50px!important;
+    max-height:50px!important;
+  }
+  .child-age-field select{
+    height:50px;
+    min-height:50px;
+    max-height:50px;
+  }
+}
