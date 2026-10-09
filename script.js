@@ -68,22 +68,18 @@ const quickForm=document.getElementById('quickForm');
 quickForm?.addEventListener('submit',e=>{
   e.preventDefault();
   const d=document.getElementById('qDestination')?.value||'Nu sunt sigur';
-  const transport=document.getElementById('qTransport')?.value||'Oricare';
-  const dt=document.getElementById('qDate')?.value||'flexibilă';
-  const p=document.getElementById('qPeople')?.value||'2';
-  const b=document.getElementById('qBudget')?.value||'nespecificat';
-  trackEvent('quick_search_submit',{destination:d,transport,people:p,budget:b});
-  const text=`Bună ziua, AlviTravel!
-
-Doresc o ofertă de vacanță.
-Destinație: ${d}
-Transport: ${transport}
-Data plecării: ${dt}
-Persoane: ${p}
-Buget: ${b}
-
-Vă rog să-mi recomandați cele mai bune variante disponibile.`;
-  window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
+  const dt=document.getElementById('qDate')?.value||'';
+  const p=Math.max(1,parseInt(document.getElementById('qPeople')?.value||'2',10)||2);
+  const b=document.getElementById('qBudget')?.value||'';
+  trackEvent('quick_search_submit',{destination:d,people:p,budget:b||'nespecificat'});
+  const destination=document.getElementById('destination');
+  const match=destination?[...destination.options].find(o=>o.value===d):null;
+  if(match) destination.value=match.value;
+  const date=document.getElementById('date'); if(date) date.value=dt;
+  const adults=document.getElementById('adults'); if(adults) adults.value=String(p);
+  const budget=document.getElementById('budget'); if(budget&&b) budget.value=b;
+  document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('name')?.focus({preventScroll:true}),450);
 });
 
 const childrenInput=document.getElementById('children');
@@ -138,8 +134,14 @@ childrenInput?.addEventListener('change',renderChildAgeFields);
 renderChildAgeFields();
 
 const bookingForm=document.getElementById('bookingForm');
+const bookingResult=document.getElementById('bookingResult');
+const bookingWhatsApp=document.getElementById('bookingWhatsApp');
+const bookingEmail=document.getElementById('bookingEmail');
+const bookingEdit=document.getElementById('bookingEdit');
+
 bookingForm?.addEventListener('submit',e=>{
   e.preventDefault();
+  if(!bookingForm.reportValidity()) return;
   const name=document.getElementById('name')?.value.trim()||'';
   const phone=document.getElementById('phone')?.value.trim()||'';
   const destination=document.getElementById('destination')?.value||'';
@@ -149,10 +151,20 @@ bookingForm?.addEventListener('submit',e=>{
   const childAges=getSelectedChildAges();
   const budget=document.getElementById('budget')?.value||'nespecificat';
   const message=document.getElementById('message')?.value.trim()||'-';
-  trackEvent('lead_submit',{destination,adults:Number(adults)||0,children:Number(children)||0});
+  trackEvent('lead_prepare',{destination,adults:Number(adults)||0,children:Number(children)||0});
   const childAgesLine=childAges.length?`\nVârste copii: ${childAges.map((age,index)=>`Copil ${index+1}: ${age==='0'?'sub 1 an':age+' ani'}`).join(', ')}`:'';
   const text=`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: ${name}\nTelefon: ${phone}\nDestinație: ${destination}\nData: ${date}\nAdulți: ${adults}\nCopii: ${children}${childAgesLine}\nBuget: ${budget}\nDetalii: ${message}`;
-  window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
+  if(bookingWhatsApp) bookingWhatsApp.href=`https://wa.me/37368004449?text=${encodeURIComponent(text)}`;
+  if(bookingEmail) bookingEmail.href=`mailto:alvitravel.agency@gmail.com?subject=${encodeURIComponent('Cerere ofertă AlviTravel — '+destination)}&body=${encodeURIComponent(text)}`;
+  bookingForm.hidden=true;
+  if(bookingResult) bookingResult.hidden=false;
+  bookingResult?.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+bookingEdit?.addEventListener('click',()=>{
+  if(bookingResult) bookingResult.hidden=true;
+  if(bookingForm) bookingForm.hidden=false;
+  bookingForm?.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
 function applyBookingUrlState(){
@@ -191,7 +203,7 @@ const pageTranslations={
     'De ce AlviTravel':'Why AlviTravel','Planificare simplă, suport real':'Simple planning, real support','Un proces clar de la prima întrebare până la revenirea acasă.':'A clear process from your first question until you return home.','Oferte potrivite':'Suitable offers','Filtrăm variantele în funcție de buget, perioadă și preferințe.':'We filter options by budget, dates and preferences.','Hoteluri selectate':'Selected hotels','Comparații clare între locații, regimuri de masă și facilități.':'Clear comparisons of locations, meal plans and facilities.','Comunicare rapidă':'Fast communication','Discuții simple prin WhatsApp, telefon și mesaje directe.':'Easy communication via WhatsApp, phone and direct messages.','Asistență':'Assistance','Suport înainte de plecare și pe parcursul călătoriei.':'Support before departure and throughout the trip.',
     'Din 2015':'Since 2015','experiență în turism':'tourism experience','Despre AlviTravel':'About AlviTravel','Călătorii fără griji, din 2015':'Stress-free travel since 2015','AlviTravel este o agenție de turism din Chișinău care ajută clienții să aleagă vacanțe potrivite pentru bugetul și preferințele lor. Oferim consultanță rapidă, suport și recomandări clare înainte de plecare.':'AlviTravel is a travel agency in Chișinău helping clients choose holidays that match their budget and preferences. We provide fast consultation, support and clear recommendations before departure.','Google rating':'Google rating','recenzii':'reviews','activi din':'active since','Cere consultanță':'Request consultation',
     'Ce spun clienții':'What our clients say','Google: 5.0 ★ • 30 recenzii ↗':'Google: 5.0 ★ • 30 reviews ↗','Google Review':'Google Review','„Personal amabil, profesionist și atent la toate detaliile. Comunicarea a fost excelentă.”':'“Friendly, professional staff attentive to every detail. Communication was excellent.”','„Vacanța a fost organizată impecabil, iar locația din Spania a fost incredibilă.”':'“The holiday was organized flawlessly, and the location in Spain was incredible.”','„Cei mai buni când vine vorba de călătorii reușite. Suport pe tot parcursul traseului.”':'“Excellent for successful trips, with support throughout the journey.”',
-    'Rezervare / Cerere ofertă':'Booking / Offer request','Spune-ne ce vacanță îți dorești':'Tell us what kind of holiday you want','Completează formularul, iar cererea este pregătită automat pentru WhatsApp.':'Complete the form and your request will be prepared automatically for WhatsApp.','✓ Răspuns rapid':'✓ Fast reply','✓ Recomandări după buget':'✓ Recommendations by budget','✓ Fără obligația de a cumpăra':'✓ No obligation to buy','✓ Potrivit pentru cupluri, familii și grupuri':'✓ Suitable for couples, families and groups','Nume':'Name','Telefon':'Phone','Europa / altă destinație':'Europe / other destination','Data plecării':'Departure date','Adulți':'Adults','Copii':'Children','Buget aproximativ':'Approximate budget','Mesaj':'Message','Trimite cererea pe WhatsApp':'Send request on WhatsApp','Datele introduse sunt folosite doar pentru pregătirea mesajului către AlviTravel.':'The entered data is used only to prepare your message to AlviTravel.',
+    'Rezervare / Cerere ofertă':'Booking / Offer request','Spune-ne ce vacanță îți dorești':'Tell us what kind of holiday you want','Completează cererea aici. Nu te redirecționăm automat — după completare alegi dacă vrei să continui pe WhatsApp, prin apel sau prin email.':'Complete the form and your request will be prepared automatically for WhatsApp.','✓ Răspuns rapid':'✓ Fast reply','✓ Recomandări după buget':'✓ Recommendations by budget','✓ Fără obligația de a cumpăra':'✓ No obligation to buy','✓ Potrivit pentru cupluri, familii și grupuri':'✓ Suitable for couples, families and groups','Nume':'Name','Telefon':'Phone','Europa / altă destinație':'Europe / other destination','Data plecării':'Departure date','Adulți':'Adults','Copii':'Children','Buget aproximativ':'Approximate budget','Mesaj':'Message','Continuă cererea':'Send request on WhatsApp','Nu vei fi redirecționat automat către o aplicație externă.':'The entered data is used only to prepare your message to AlviTravel.',
     'AlviTravel, Chișinău':'AlviTravel, Chișinău','Strada Alexandru cel Bun 7, of. 410, MD-2001, Republica Moldova':'7 Alexandru cel Bun Street, office 410, MD-2001, Republic of Moldova','Vezi pe hartă':'View on map','AlviTravel. Toate drepturile rezervate.':'AlviTravel. All rights reserved.','Confidențialitate':'Privacy','Cookies':'Cookies','Termeni':'Terms','Setări cookies':'Cookie settings','Informații legale':'Legal information',
     'Limba site-ului':'Site language','Sună AlviTravel':'Call AlviTravel','Vezi recenziile AlviTravel pe Google Maps':'View AlviTravel reviews on Google Maps','Harta AlviTravel':'AlviTravel map','Numele tău':'Your name','Hotel, regim de masă, oraș de plecare etc.':'Hotel, meal plan, departure city, etc.'
   },
@@ -208,7 +220,7 @@ const pageTranslations={
     'De ce AlviTravel':'Почему AlviTravel','Planificare simplă, suport real':'Простое планирование, реальная поддержка','Un proces clar de la prima întrebare până la revenirea acasă.':'Понятный процесс от первого вопроса до возвращения домой.','Oferte potrivite':'Подходящие предложения','Filtrăm variantele în funcție de buget, perioadă și preferințe.':'Подбираем варианты по бюджету, датам и предпочтениям.','Hoteluri selectate':'Подобранные отели','Comparații clare între locații, regimuri de masă și facilități.':'Понятное сравнение расположения, питания и удобств.','Comunicare rapidă':'Быстрая связь','Discuții simple prin WhatsApp, telefon și mesaje directe.':'Удобное общение через WhatsApp, телефон и сообщения.','Asistență':'Поддержка','Suport înainte de plecare și pe parcursul călătoriei.':'Поддержка до выезда и во время путешествия.',
     'Din 2015':'С 2015 года','experiență în turism':'опыт в туризме','Despre AlviTravel':'Об AlviTravel','Călătorii fără griji, din 2015':'Путешествия без забот с 2015 года','AlviTravel este o agenție de turism din Chișinău care ajută clienții să aleagă vacanțe potrivite pentru bugetul și preferințele lor. Oferim consultanță rapidă, suport și recomandări clare înainte de plecare.':'AlviTravel — туристическое агентство в Кишинёве, которое помогает подобрать отдых по бюджету и предпочтениям. Мы предлагаем быструю консультацию, поддержку и понятные рекомендации перед поездкой.','Google rating':'Рейтинг Google','recenzii':'отзывов','activi din':'работаем с','Cere consultanță':'Получить консультацию',
     'Ce spun clienții':'Что говорят клиенты','Google: 5.0 ★ • 30 recenzii ↗':'Google: 5.0 ★ • 30 отзывов ↗','Google Review':'Отзыв Google','„Personal amabil, profesionist și atent la toate detaliile. Comunicarea a fost excelentă.”':'«Доброжелательный и профессиональный персонал, внимательный к деталям. Общение было отличным.»','„Vacanța a fost organizată impecabil, iar locația din Spania a fost incredibilă.”':'«Отдых был организован безупречно, а место в Испании было невероятным.»','„Cei mai buni când vine vorba de călătorii reușite. Suport pe tot parcursul traseului.”':'«Отличная организация поездок и поддержка на всём маршруте.»',
-    'Rezervare / Cerere ofertă':'Бронирование / Запрос','Spune-ne ce vacanță îți dorești':'Расскажите, какой отдых вы хотите','Completează formularul, iar cererea este pregătită automat pentru WhatsApp.':'Заполните форму, и запрос автоматически подготовится для WhatsApp.','✓ Răspuns rapid':'✓ Быстрый ответ','✓ Recomandări după buget':'✓ Рекомендации по бюджету','✓ Fără obligația de a cumpăra':'✓ Без обязательства покупать','✓ Potrivit pentru cupluri, familii și grupuri':'✓ Для пар, семей и групп','Nume':'Имя','Telefon':'Телефон','Europa / altă destinație':'Европа / другое направление','Data plecării':'Дата выезда','Adulți':'Взрослые','Copii':'Дети','Buget aproximativ':'Примерный бюджет','Mesaj':'Сообщение','Trimite cererea pe WhatsApp':'Отправить запрос в WhatsApp','Datele introduse sunt folosite doar pentru pregătirea mesajului către AlviTravel.':'Введённые данные используются только для подготовки сообщения AlviTravel.',
+    'Rezervare / Cerere ofertă':'Бронирование / Запрос','Spune-ne ce vacanță îți dorești':'Расскажите, какой отдых вы хотите','Completează cererea aici. Nu te redirecționăm automat — după completare alegi dacă vrei să continui pe WhatsApp, prin apel sau prin email.':'Заполните форму, и запрос автоматически подготовится для WhatsApp.','✓ Răspuns rapid':'✓ Быстрый ответ','✓ Recomandări după buget':'✓ Рекомендации по бюджету','✓ Fără obligația de a cumpăra':'✓ Без обязательства покупать','✓ Potrivit pentru cupluri, familii și grupuri':'✓ Для пар, семей и групп','Nume':'Имя','Telefon':'Телефон','Europa / altă destinație':'Европа / другое направление','Data plecării':'Дата выезда','Adulți':'Взрослые','Copii':'Дети','Buget aproximativ':'Примерный бюджет','Mesaj':'Сообщение','Continuă cererea':'Отправить запрос в WhatsApp','Nu vei fi redirecționat automat către o aplicație externă.':'Введённые данные используются только для подготовки сообщения AlviTravel.',
     'Strada Alexandru cel Bun 7, of. 410, MD-2001, Republica Moldova':'ул. Александру чел Бун 7, офис 410, MD-2001, Республика Молдова','Vezi pe hartă':'Посмотреть на карте','AlviTravel. Toate drepturile rezervate.':'AlviTravel. Все права защищены.','Confidențialitate':'Конфиденциальность','Cookies':'Cookies','Termeni':'Условия','Setări cookies':'Настройки cookies','Informații legale':'Правовая информация',
     'Limba site-ului':'Язык сайта','Sună AlviTravel':'Позвонить AlviTravel','Vezi recenziile AlviTravel pe Google Maps':'Посмотреть отзывы AlviTravel в Google Maps','Harta AlviTravel':'Карта AlviTravel','Numele tău':'Ваше имя','Hotel, regim de masă, oraș de plecare etc.':'Отель, питание, город выезда и т. д.'
   }
