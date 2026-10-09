@@ -1069,3 +1069,23 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     text-align:center;
   }
 }
+
+
+/* SEO footer navigation — 2026-10-09 */
+.footer-seo-links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:8px 14px;
+  font-size:13px;
+}
+.footer-seo-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:700;
+}
+.footer-seo-links a:hover{color:var(--blue);text-decoration:underline}
+@media(max-width:700px){
+  .footer-seo-links{width:100%;gap:8px 12px;font-size:12px;text-align:center}
+}
