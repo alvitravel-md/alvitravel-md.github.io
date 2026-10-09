@@ -29,6 +29,20 @@ document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{
   menuBtn?.setAttribute('aria-expanded','false');
   menuBtn?.setAttribute('aria-label','Deschide meniul');
 }));
+document.addEventListener('click',e=>{
+  if(!nav?.classList.contains('open')) return;
+  if(nav.contains(e.target)||menuBtn?.contains(e.target)) return;
+  nav.classList.remove('open');
+  menuBtn?.setAttribute('aria-expanded','false');
+  menuBtn?.setAttribute('aria-label','Deschide meniul');
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape'||!nav?.classList.contains('open')) return;
+  nav.classList.remove('open');
+  menuBtn?.setAttribute('aria-expanded','false');
+  menuBtn?.setAttribute('aria-label','Deschide meniul');
+  menuBtn?.focus();
+});
 
 const year=document.getElementById('year');
 if(year) year.textContent=new Date().getFullYear();
