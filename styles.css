@@ -1044,3 +1044,28 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     max-height:50px;
   }
 }
+
+
+/* Local SEO contact consistency — 2026-10-09 */
+.footer-nap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:var(--muted);
+}
+.footer-nap a{
+  color:inherit;
+  text-decoration:none;
+  font-weight:800;
+}
+.footer-nap a:hover{text-decoration:underline}
+@media(max-width:700px){
+  .footer-nap{
+    width:100%;
+    font-size:12px;
+    text-align:center;
+  }
+}
