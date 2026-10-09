@@ -843,3 +843,76 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   #lang,.nav-actions select{min-width:48px!important;max-width:48px!important}
   .trust-row{grid-template-columns:1fr!important}
 }
+
+
+/* Quick-search field sizing polish — 2026-10-09 */
+.search-card{
+  grid-template-columns:repeat(5,minmax(0,1fr)) auto!important;
+}
+.search-card .field{
+  min-width:0;
+}
+.search-card .field input,
+.search-card .field select{
+  width:100%;
+  min-width:0;
+  height:46px;
+  min-height:46px;
+  max-height:46px;
+  padding:10px 12px;
+  line-height:24px;
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+}
+.search-card input[type="date"]{
+  appearance:none;
+  -webkit-appearance:none;
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  font:inherit;
+}
+.search-card input[type="date"]::-webkit-date-and-time-value{
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+  text-align:left;
+}
+.search-card input[type="date"]::-webkit-datetime-edit,
+.search-card input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+.search-card input[type="date"]::-webkit-datetime-edit-text,
+.search-card input[type="date"]::-webkit-datetime-edit-day-field,
+.search-card input[type="date"]::-webkit-datetime-edit-month-field,
+.search-card input[type="date"]::-webkit-datetime-edit-year-field{
+  color:#0d2138!important;
+  -webkit-text-fill-color:#0d2138!important;
+}
+.search-card input[type="date"]::-webkit-calendar-picker-indicator{
+  opacity:.72;
+}
+
+@media(max-width:700px){
+  .search-card{
+    grid-template-columns:1fr!important;
+  }
+  .search-card .field,
+  .search-card .field:nth-child(1),
+  .search-card .field:nth-child(2),
+  .search-card .field:nth-child(3),
+  .search-card .field:nth-child(4),
+  .search-card .field:nth-child(5),
+  .search-card>.btn{
+    grid-column:1!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .search-card .field input,
+  .search-card .field select{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    padding:10px 12px!important;
+    box-sizing:border-box!important;
+  }
+}
