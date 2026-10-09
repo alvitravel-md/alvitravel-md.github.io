@@ -86,6 +86,57 @@ Vă rog să-mi recomandați cele mai bune variante disponibile.`;
   window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
 
+const childrenInput=document.getElementById('children');
+const childrenAgesWrap=document.getElementById('childrenAgesWrap');
+const childrenAgesList=document.getElementById('childrenAgesList');
+
+function getSelectedChildAges(){
+  return [...(childrenAgesList?.querySelectorAll('select[data-child-age]')||[])].map(select=>select.value);
+}
+function renderChildAgeFields(){
+  if(!childrenInput||!childrenAgesWrap||!childrenAgesList) return;
+  const previous=getSelectedChildAges();
+  const count=Math.max(0,Math.min(10,parseInt(childrenInput.value,10)||0));
+  childrenInput.value=String(count);
+  childrenAgesList.innerHTML='';
+  if(count===0){
+    childrenAgesWrap.hidden=true;
+    return;
+  }
+  childrenAgesWrap.hidden=false;
+  for(let i=0;i<count;i++){
+    const field=document.createElement('div');
+    field.className='field child-age-field';
+    const label=document.createElement('label');
+    label.htmlFor=`childAge${i+1}`;
+    label.textContent=`Vârsta copilului ${i+1}`;
+    const select=document.createElement('select');
+    select.id=`childAge${i+1}`;
+    select.name=`childAge${i+1}`;
+    select.dataset.childAge=String(i+1);
+    select.required=true;
+    select.setAttribute('aria-label',`Vârsta copilului ${i+1}`);
+    const placeholder=document.createElement('option');
+    placeholder.value='';
+    placeholder.textContent='Selectează vârsta';
+    placeholder.disabled=true;
+    placeholder.selected=!previous[i];
+    select.appendChild(placeholder);
+    for(let age=0;age<=17;age++){
+      const option=document.createElement('option');
+      option.value=String(age);
+      option.textContent=age===0?'Sub 1 an':age===1?'1 an':`${age} ani`;
+      if(previous[i]===String(age)) option.selected=true;
+      select.appendChild(option);
+    }
+    field.append(label,select);
+    childrenAgesList.appendChild(field);
+  }
+}
+childrenInput?.addEventListener('input',renderChildAgeFields);
+childrenInput?.addEventListener('change',renderChildAgeFields);
+renderChildAgeFields();
+
 const bookingForm=document.getElementById('bookingForm');
 bookingForm?.addEventListener('submit',e=>{
   e.preventDefault();
@@ -95,10 +146,12 @@ bookingForm?.addEventListener('submit',e=>{
   const date=document.getElementById('date')?.value||'flexibilă';
   const adults=document.getElementById('adults')?.value||'1';
   const children=document.getElementById('children')?.value||'0';
+  const childAges=getSelectedChildAges();
   const budget=document.getElementById('budget')?.value||'nespecificat';
   const message=document.getElementById('message')?.value.trim()||'-';
   trackEvent('lead_submit',{destination,adults:Number(adults)||0,children:Number(children)||0});
-  const text=`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: ${name}\nTelefon: ${phone}\nDestinație: ${destination}\nData: ${date}\nAdulți: ${adults}\nCopii: ${children}\nBuget: ${budget}\nDetalii: ${message}`;
+  const childAgesLine=childAges.length?\`\nVârste copii: \${childAges.map((age,index)=>\`Copil \${index+1}: \${age==='0'?'sub 1 an':age+' ani'}\`).join(', ')}\`:'';
+  const text=\`Bună ziua, AlviTravel!\n\nDoresc o ofertă de vacanță.\nNume: \${name}\nTelefon: \${phone}\nDestinație: \${destination}\nData: \${date}\nAdulți: \${adults}\nCopii: \${children}\${childAgesLine}\nBuget: \${budget}\nDetalii: \${message}\`;
   window.open(`https://wa.me/37368004449?text=${encodeURIComponent(text)}`,'_blank','noopener');
 });
 
