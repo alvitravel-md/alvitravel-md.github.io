@@ -393,3 +393,24 @@ if(document.readyState==='loading'){
   ensureLegalLinks();
   improveFormAccessibility();
 }
+
+
+function loadCrispChat(){
+  const websiteId=(window.ALVI_CRISP_WEBSITE_ID||'').trim();
+  if(!websiteId||window.__alviCrispLoaded) return;
+  window.__alviCrispLoaded=true;
+  window.$crisp=window.$crisp||[];
+  window.CRISP_WEBSITE_ID=websiteId;
+  window.$crisp.push(['safe',true]);
+  window.$crisp.push(['set','session:data',[[['site','alvitravel.md']]]]);
+  const s=document.createElement('script');
+  s.src='https://client.crisp.chat/l.js';
+  s.async=true;
+  s.crossOrigin='anonymous';
+  document.head.appendChild(s);
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',loadCrispChat,{once:true});
+}else{
+  loadCrispChat();
+}
