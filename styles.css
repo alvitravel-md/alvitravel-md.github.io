@@ -1104,3 +1104,14 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 .booking-result-actions{display:flex;gap:10px;flex-wrap:wrap}
 .booking-edit{margin-top:18px;border:0;background:transparent;color:var(--blue);font:inherit;font-weight:800;cursor:pointer;padding:0}
 @media(max-width:640px){.booking-result{padding:22px}.booking-result-actions .btn{width:100%}}
+
+
+/* Group travel content */
+.group-travel-section{background:linear-gradient(180deg,#fff,#f7fbff)}
+.group-travel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.group-travel-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:18px;box-shadow:var(--shadow-sm)}
+.group-travel-icon{width:56px;height:56px;border-radius:16px;background:var(--blue-soft);display:grid;place-items:center;font-size:28px}
+.group-travel-card h3{font-size:24px;margin:2px 0 10px}
+.group-travel-card p{color:var(--muted);line-height:1.65;margin:0 0 12px}
+.group-travel-card ul{margin:0 0 20px;padding-left:20px;color:#31475e;line-height:1.8}
+@media(max-width:760px){.group-travel-grid{grid-template-columns:1fr}.group-travel-card{grid-template-columns:1fr;padding:22px}}
