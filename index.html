@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="/styles.css?v=20261009-booking2" />
+  <link rel="stylesheet" href="/styles.css?v=20261009-seo3" />
   <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -66,14 +66,33 @@
       },
       "geo":{"@type":"GeoCoordinates","latitude":47.0210181,"longitude":28.8472338},
       "hasMap":"https://www.google.com/maps/place/AlviTravel/@47.0210181,28.8472338,17z/",
-      "areaServed":{"@type":"Country","name":"Republica Moldova"},
+      "areaServed":[{"@type":"City","name":"Chișinău"},{"@type":"Country","name":"Republica Moldova"}],
       "sameAs":["https://www.instagram.com/alvitravel.agency/","https://www.facebook.com/alvitravel.md/"],
-      "contactPoint":[{
-        "@type":"ContactPoint",
-        "telephone":"+37368004449",
-        "contactType":"customer service",
-        "availableLanguage":["ro","ru","en"]
-      }]
+      "contactPoint":[
+        {"@type":"ContactPoint","telephone":"+37360884446","contactType":"sales","availableLanguage":["ro","ru","en"]},
+        {"@type":"ContactPoint","telephone":"+37368004449","contactType":"customer service","availableLanguage":["ro","ru","en"]}
+      ],
+      "hasOfferCatalog":{
+        "@type":"OfferCatalog",
+        "name":"Servicii turistice AlviTravel",
+        "itemListElement":[
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Vacanțe personalizate","url":"https://alvitravel.md/vacante-din-chisinau.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Sejururi All Inclusive","url":"https://alvitravel.md/blog/all-inclusive-din-chisinau.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"City break-uri","url":"https://alvitravel.md/blog/city-break-europa-din-chisinau.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Excursii din Chișinău","url":"https://alvitravel.md/excursii-din-chisinau.html"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Consultanță turistică","url":"https://alvitravel.md/agentie-turism-chisinau.html"}}
+        ]
+      }
+    },
+    {
+      "@type":"FAQPage",
+      "@id":"https://alvitravel.md/#faq",
+      "mainEntity":[
+        {"@type":"Question","name":"Ce agenție de turism din Chișinău oferă vacanțe personalizate?","acceptedAnswer":{"@type":"Answer","text":"AlviTravel este o agenție de turism din Chișinău, activă din 2015, care oferă consultanță pentru vacanțe, sejururi All Inclusive, city break-uri și excursii."}},
+        {"@type":"Question","name":"Ce vacanțe pot rezerva cu plecare din Chișinău?","acceptedAnswer":{"@type":"Answer","text":"În funcție de sezon și disponibilitate, poți solicita oferte pentru Turcia, Grecia, Egipt, Bulgaria, Muntenegru, România, Spania, Italia, Franța și alte destinații."}},
+        {"@type":"Question","name":"Pot cere o ofertă de vacanță direct pe WhatsApp?","acceptedAnswer":{"@type":"Answer","text":"Da. Poți trimite perioada, numărul de persoane, bugetul și preferințele direct prin formularul AlviTravel sau pe WhatsApp."}},
+        {"@type":"Question","name":"AlviTravel organizează și excursii din Chișinău?","acceptedAnswer":{"@type":"Answer","text":"Da. AlviTravel poate propune excursii și escapade cu plecare din Chișinău, în funcție de program și disponibilitate."}}
+      ]
     }
   ]
 }
@@ -195,6 +214,15 @@
   </form>
 </div></section>
 
+<section class="section" id="faq"><div class="container">
+  <div class="section-head"><div><span class="kicker">Întrebări frecvente</span><h2>Agenție de turism și vacanțe din Chișinău</h2></div><p>Răspunsuri rapide pentru cei care caută vacanțe, sejururi sau excursii cu plecare din Chișinău.</p></div>
+  <div class="faq-list">
+    <details class="faq-item"><summary>Ce agenție de turism din Chișinău oferă vacanțe personalizate?</summary><p>AlviTravel este o agenție de turism din Chișinău, activă din 2015, care oferă consultanță pentru vacanțe, sejururi All Inclusive, city break-uri și excursii. <a href="/agentie-turism-chisinau.html">Vezi serviciile agenției</a>.</p></details>
+    <details class="faq-item"><summary>Ce vacanțe pot rezerva cu plecare din Chișinău?</summary><p>În funcție de sezon și disponibilitate, poți solicita oferte pentru Turcia, Grecia, Egipt, Bulgaria, Muntenegru, România, Spania, Italia, Franța și alte destinații. <a href="/vacante-din-chisinau.html">Vezi vacanțele din Chișinău</a>.</p></details>
+    <details class="faq-item"><summary>Pot cere o ofertă de vacanță direct pe WhatsApp?</summary><p>Da. Trimite perioada, numărul de persoane, vârsta copiilor, bugetul și preferințele prin formularul AlviTravel sau direct pe WhatsApp.</p></details>
+    <details class="faq-item"><summary>AlviTravel organizează și excursii din Chișinău?</summary><p>Da. Putem propune excursii și escapade cu plecare din Chișinău, în funcție de program și disponibilitate. <a href="/excursii-din-chisinau.html">Vezi excursii din Chișinău</a>.</p></details>
+  </div>
+</div></section>
 <section class="section soft" id="contact"><div class="container contact-grid">
   <div class="contact-card"><span class="kicker">Contact</span><h2>AlviTravel, Chișinău</h2><p>Strada Alexandru cel Bun 7, of. 410, MD-2001, Republica Moldova</p><div class="contact-list">
   <a href="tel:+37360884446"><span class="contact-icon phone-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.3.55 3.5.55a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.19 2.4.55 3.5a1 1 0 0 1-.24 1z"/></svg></span><span>+373 60 884 446</span></a>
@@ -207,7 +235,7 @@
 </main>
 
 <a class="floating-wa" href="https://wa.me/37368004449?text=Salut!%20Doresc%20o%20consulta%C8%9Bie%20pentru%20o%20vacan%C8%9B%C4%83." target="_blank" rel="noopener" aria-label="Scrie AlviTravel pe WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C8.86 3 3.02 8.82 3.02 15.98c0 2.29.6 4.53 1.74 6.5L3 29l6.69-1.75a13 13 0 0 0 6.34 1.61h.01c7.17 0 13-5.82 13-12.98C29.04 8.82 23.21 3 16.04 3Zm0 23.67h-.01a10.8 10.8 0 0 1-5.51-1.5l-.4-.24-3.97 1.04 1.06-3.86-.26-.4a10.72 10.72 0 0 1-1.65-5.73c0-5.96 4.87-10.8 10.85-10.8 5.97 0 10.83 4.84 10.83 10.8 0 5.95-4.87 10.79-10.84 10.79Zm5.95-8.08c-.33-.16-1.93-.95-2.23-1.06-.3-.11-.52-.16-.74.16-.22.33-.85 1.06-1.04 1.28-.19.22-.38.24-.71.08-.33-.16-1.38-.51-2.63-1.62a9.84 9.84 0 0 1-1.82-2.25c-.19-.33-.02-.5.14-.67.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.79-1.02-2.45-.27-.65-.54-.56-.74-.57h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.72 0 1.6 1.17 3.15 1.33 3.37.16.22 2.3 3.51 5.56 4.92.78.34 1.38.54 1.86.69.78.25 1.49.21 2.05.13.62-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.13-.3-.21-.63-.37Z"/></svg></a>
-<footer><div class="container footer-inner"><div class="brand footer-brand"><img class="brand-logo-img" src="/logo.png" alt="AlviTravel" width="48" height="48"><span>AlviTravel</span></div><p>© <span id="year"></span> AlviTravel. Toate drepturile rezervate.</p></div></footer>
+<footer><div class="container footer-inner"><div class="brand footer-brand"><img class="brand-logo-img" src="/logo.png" alt="AlviTravel" width="48" height="48"><span>AlviTravel</span></div><div class="footer-nap"><a href="tel:+37360884446">+373 60 884 446</a><span>•</span><span>Str. Alexandru cel Bun 7, of. 410, Chișinău</span></div><p>© <span id="year"></span> AlviTravel. Toate drepturile rezervate.</p></div></footer>
 <script src="/script.js?v=20261009-booking2"></script>
 </body>
 </html>
