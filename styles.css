@@ -668,3 +668,178 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .cookie-actions{width:100%;gap:7px}
   .cookie-actions .btn{min-height:42px;padding:9px 10px;font-size:12px}
 }
+
+
+/* Header simplification + mobile-first usability — 2026-10-09 */
+.header-phone{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:42px;
+  padding:9px 12px;
+  border:1px solid #cfe2f7;
+  border-radius:12px;
+  background:#f3f8fe;
+  color:#075cae;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+  letter-spacing:-.01em;
+}
+.header-phone:hover{background:#eaf4ff;color:#064f96}
+.header-phone span{display:inline}
+.header-booking{white-space:nowrap}
+
+@media(max-width:700px){
+  html,body{max-width:100%;overflow-x:hidden}
+  body{font-size:15px}
+  .container{width:calc(100% - 28px)!important;max-width:100%;margin-left:auto;margin-right:auto}
+  .site-header{background:rgba(255,255,255,.98)}
+  .nav-wrap{height:68px!important;gap:7px!important}
+  .brand{gap:7px;min-width:0}
+  .brand-logo-img,.brand img{width:44px!important;height:44px!important;border-radius:12px!important}
+  .brand span{font-size:16px!important;white-space:nowrap}
+  .nav-actions{gap:6px!important;margin-left:auto}
+  .header-booking{display:none!important}
+  .header-phone{height:40px;min-height:40px;padding:7px 9px;border-radius:11px;font-size:12px}
+  #lang,.nav-actions select{min-width:52px!important;max-width:54px!important;height:40px;padding:7px 5px!important;font-size:13px}
+  .menu-btn{
+    display:inline-flex!important;
+    width:40px;height:40px;
+    align-items:center;justify-content:center;
+    padding:0;border-radius:11px;
+    background:#eef6ff!important;color:#0875e1;
+    font-size:22px!important;line-height:1;
+  }
+  .nav{
+    display:none!important;
+    position:absolute!important;
+    top:68px!important;
+    left:10px!important;
+    right:10px!important;
+    width:auto!important;
+    max-height:calc(100vh - 84px);
+    overflow:auto;
+    padding:8px!important;
+    gap:0!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    background:rgba(255,255,255,.99)!important;
+    border:1px solid var(--line);
+    border-radius:18px!important;
+    box-shadow:0 20px 55px rgba(7,56,111,.18)!important;
+  }
+  .nav.open{display:flex!important}
+  .nav a{
+    width:100%;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    padding:12px 14px;
+    border-radius:11px;
+    font-size:15px!important;
+    line-height:1.2;
+  }
+  .nav a:hover,.nav a:focus{background:#eef6ff}
+  .nav a+a{border-top:1px solid #edf2f7}
+  .hero{min-height:auto!important}
+  .hero-bg{object-position:58% center}
+  .hero-overlay{background:linear-gradient(90deg,rgba(4,30,61,.92) 0%,rgba(4,42,85,.70) 60%,rgba(4,42,85,.30) 100%)}
+  .hero-content{padding:52px 0 96px!important}
+  .hero .eyebrow{font-size:10px;padding:7px 9px}
+  .hero h1{font-size:clamp(38px,11vw,46px)!important;line-height:1.02!important;letter-spacing:-.045em!important;margin:14px 0 16px!important}
+  .hero p{font-size:15.5px!important;line-height:1.58!important;margin:0;max-width:100%}
+  .hero-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;margin-top:24px!important}
+  .hero-actions .btn{min-width:0;min-height:50px;padding:12px 10px;font-size:14px}
+  .hero-trust{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:10px 14px!important;
+    margin-top:24px!important;
+    font-size:12px!important;
+  }
+  .hero-trust span{min-width:0}
+  .hero-trust span:last-child{grid-column:1/-1}
+  .search-card-section{margin-top:-46px!important;padding:0!important}
+  .search-card-section>.container{width:calc(100% - 20px)!important}
+  .search-card{
+    width:100%!important;
+    max-width:100%!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:10px!important;
+    padding:14px!important;
+    border-radius:20px!important;
+    align-items:end!important;
+  }
+  .search-card .field{min-width:0!important;width:100%!important}
+  .search-card .field:nth-child(1),
+  .search-card .field:nth-child(3),
+  .search-card .field:nth-child(5),
+  .search-card>.btn{grid-column:1/-1!important}
+  .search-card .field input,
+  .search-card .field select{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:46px;
+    padding:10px 11px!important;
+    font-size:16px!important;
+    border-radius:11px!important;
+  }
+  .search-card .field label{font-size:11px!important}
+  .search-card>.btn{min-height:50px!important;width:100%!important;margin:0!important}
+  .trust-strip{padding:24px 0 4px!important}
+  .trust-row{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .trust-item{
+    min-width:0;
+    min-height:88px;
+    padding:12px!important;
+    gap:9px!important;
+    align-items:flex-start!important;
+  }
+  .trust-icon{width:36px!important;height:36px!important;min-width:36px;font-size:17px!important;border-radius:10px!important}
+  .trust-item strong{font-size:13px!important;line-height:1.25}
+  .trust-item span{font-size:11px!important;line-height:1.35}
+  .section{padding:56px 0!important}
+  .section-head{gap:12px!important;margin-bottom:22px!important}
+  .section-head h2,.about-copy h2,.booking-intro h2,#contact h2,.destination-hero h1{font-size:clamp(30px,8.5vw,38px)!important;line-height:1.08!important}
+  .section-head p{font-size:14px;line-height:1.6;margin:0}
+  .grid{gap:16px!important}
+  .destinations-expanded{grid-template-columns:1fr!important}
+  .destination-card{height:300px!important;border-radius:20px!important}
+  .card-copy{left:18px!important;right:18px!important;bottom:18px!important}
+  .card-copy h3{font-size:27px!important;margin:11px 0 4px!important}
+  .destination-badge{top:12px!important;left:12px!important;font-size:10px!important;padding:7px 9px!important}
+  .offer-card,.excursion-card,.review-card,.why-card,.fact-card{border-radius:18px!important}
+  .offer-card img,.excursion-card img{height:205px!important}
+  .offer-body,.excursion-body{padding:17px!important}
+  .booking-wrap,.contact-grid,.split{gap:20px!important}
+  .cta-band{padding:24px!important;border-radius:20px!important;gap:18px!important}
+  .cta-band .btn{width:100%}
+  .destination-hero{min-height:430px!important}
+  .destination-hero .hero-actions{grid-template-columns:1fr!important}
+  .blog-hero{padding:82px 0 46px!important}
+  .blog-hero h1{font-size:clamp(32px,9vw,42px)!important}
+  .blog-card-grid{grid-template-columns:1fr!important;gap:16px!important}
+  .floating-wa{right:16px!important;bottom:16px!important;width:56px!important;height:56px!important;font-size:25px!important}
+  .cookie-banner{left:10px!important;right:10px!important;bottom:10px!important;max-width:none!important;width:auto!important}
+}
+
+@media(max-width:460px){
+  .brand span{display:none!important}
+  .header-phone{font-size:12px;padding:7px 8px}
+  .hero-actions{grid-template-columns:1fr!important}
+  .hero-trust{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:360px){
+  .header-phone span{font-size:11px}
+  #lang,.nav-actions select{min-width:48px!important;max-width:48px!important}
+  .trust-row{grid-template-columns:1fr!important}
+}
