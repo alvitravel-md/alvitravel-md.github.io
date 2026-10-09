@@ -1115,3 +1115,57 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 .group-travel-card p{color:var(--muted);line-height:1.65;margin:0 0 12px}
 .group-travel-card ul{margin:0 0 20px;padding-left:20px;color:#31475e;line-height:1.8}
 @media(max-width:760px){.group-travel-grid{grid-template-columns:1fr}.group-travel-card{grid-template-columns:1fr;padding:22px}}
+
+/* Conversion patterns inspired by category-leading travel sites */
+.service-ribbon{padding:34px 0 20px;background:#fff}
+.service-ribbon-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.service-ribbon-head strong{font-size:24px;letter-spacing:-.025em}
+.service-ribbon-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.service-pill{min-height:88px;padding:16px 12px;border:1px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;font:inherit;font-weight:850;cursor:pointer;box-shadow:0 8px 22px rgba(7,56,111,.06);transition:.2s}
+.service-pill:hover{transform:translateY(-3px);border-color:#b8d8f7;box-shadow:var(--shadow-sm)}
+.service-pill span{font-size:13px;text-align:center}
+
+.proof-band{padding:20px 0 34px;background:#fff}
+.proof-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.proof-item{padding:18px 20px;border-radius:18px;background:linear-gradient(180deg,#f8fbff,#eef6ff);border:1px solid #d9eafa}
+.proof-item strong{display:block;font-size:22px;color:var(--blue-deep);letter-spacing:-.03em}
+.proof-item span{display:block;margin-top:4px;font-size:12px;color:var(--muted);font-weight:700}
+
+.callback-section{padding:0 0 14px}
+.callback-card{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding:34px;border-radius:26px;background:linear-gradient(135deg,#07386f,#0a63c7);color:#fff;box-shadow:var(--shadow)}
+.callback-copy .kicker{color:#ffe178}
+.callback-copy h2{font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.04em;margin:8px 0 10px}
+.callback-copy p{margin:0;color:#dcecff;line-height:1.65;max-width:620px}
+.callback-form{display:grid;grid-template-columns:1fr auto;gap:10px}
+.callback-form input{min-width:0;height:52px;border:1px solid rgba(255,255,255,.38);border-radius:13px;padding:0 14px;font:inherit;background:#fff;color:var(--ink);outline:none}
+.callback-form small{grid-column:1/-1;color:#dcecff;font-size:11px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+.mobile-action-bar{display:none}
+
+@media(max-width:900px){
+  .service-ribbon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .callback-card{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .service-ribbon{padding:22px 0 12px}
+  .service-ribbon-head{align-items:flex-start;flex-direction:column;gap:5px}
+  .service-ribbon-head strong{font-size:20px}
+  .service-ribbon-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .service-pill{min-height:78px;padding:12px 8px;border-radius:15px}
+  .proof-band{padding:12px 0 24px}
+  .proof-grid{gap:8px}
+  .proof-item{padding:14px;border-radius:15px}
+  .proof-item strong{font-size:18px}
+  .callback-section{padding:0 0 8px}
+  .callback-card{width:calc(100% - 20px)!important;padding:24px 18px;border-radius:22px;gap:20px}
+  .callback-form{grid-template-columns:1fr}
+  .callback-form .btn{width:100%}
+  .mobile-action-bar{position:fixed;left:10px;right:10px;bottom:10px;z-index:95;display:grid;grid-template-columns:.8fr 1.2fr;gap:8px;padding:8px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border:1px solid rgba(220,230,240,.9);border-radius:18px;box-shadow:0 14px 38px rgba(7,56,111,.20)}
+  .mobile-action-bar a{min-height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:900;font-size:13px}
+  .mobile-action-bar a:first-child{background:#eef6ff;color:var(--blue)}
+  .mobile-action-bar a:last-child{background:linear-gradient(135deg,var(--blue),#2488ec);color:#fff}
+  .floating-wa{bottom:78px!important}
+  body{padding-bottom:74px}
+}
