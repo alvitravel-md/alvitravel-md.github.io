@@ -1672,3 +1672,28 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+
+/* Final spacing: standalone Crisp above contact hub */
+@media(min-width:701px){
+  .contact-hub{
+    right:22px!important;
+    bottom:24px!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:24px!important;
+    bottom:120px!important;
+    z-index:1004!important;
+  }
+}
+@media(max-width:700px){
+  .contact-hub{
+    right:16px!important;
+    bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:17px!important;
+    bottom:calc(176px + env(safe-area-inset-bottom,0px))!important;
+    z-index:1004!important;
+  }
+}
