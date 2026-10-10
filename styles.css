@@ -1204,3 +1204,25 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   #reviews{padding-bottom:64px}
   .callback-section{padding:28px 0 22px}
 }
+
+
+/* International phone input styling */
+.iti{width:100%}
+.booking-form .iti input,
+.callback-form .iti input{
+  width:100%;
+}
+.iti__selected-country{
+  padding:0 10px 0 14px;
+}
+.iti__country-container{
+  z-index:5;
+}
+.iti__dropdown-content{
+  border-radius:14px;
+  box-shadow:0 18px 45px rgba(3,28,57,.18);
+  border:1px solid var(--line);
+}
+@media(max-width:700px){
+  .iti{width:100%}
+}
