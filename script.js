@@ -75,17 +75,41 @@ document.querySelectorAll('.service-prefill').forEach(btn=>btn.addEventListener(
 }));
 
 const callbackForm=document.getElementById('callbackForm');
-callbackForm?.addEventListener('submit',e=>{
+callbackForm?.addEventListener('submit',async e=>{
   e.preventDefault();
   if(!callbackForm.reportValidity()) return;
-  const value=document.getElementById('callbackPhone')?.value.trim()||'';
-  const phone=document.getElementById('phone');
-  const message=document.getElementById('message');
-  if(phone) phone.value=value;
-  if(message&&!message.value.trim()) message.value='Doresc să fiu contactat(ă) telefonic pentru o ofertă.';
-  document.getElementById('booking')?.scrollIntoView({behavior:'smooth',block:'start'});
-  setTimeout(()=>document.getElementById('name')?.focus({preventScroll:true}),420);
-  trackEvent('callback_prepare',{source:'homepage'});
+  const phone=document.getElementById('callbackPhone')?.value.trim()||'';
+  const endpoint=(window.ALVI_LEAD_ENDPOINT||'').trim();
+  const button=callbackForm.querySelector('button[type="submit"]');
+  const small=callbackForm.querySelector('small');
+  if(!phone||!endpoint) return;
+  if(button){button.disabled=true;button.textContent='Se trimite…';}
+  try{
+    const payload=new URLSearchParams({
+      siteKey:'alvitravel-web-2026',
+      type:'callback',
+      phone
+    });
+    await fetch(endpoint,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+      body:payload.toString(),
+      keepalive:true
+    });
+    callbackForm.reset();
+    if(button) button.textContent='Trimis ✓';
+    if(small) small.textContent='Numărul a fost trimis. Te contactăm cât mai curând.';
+    trackEvent('callback_saved',{source:'homepage'});
+    setTimeout(()=>{
+      if(button){button.disabled=false;button.textContent='Vreau să fiu sunat';}
+    },2200);
+  }catch(err){
+    console.error('Callback endpoint unavailable',err);
+    if(button){button.disabled=false;button.textContent='Încearcă din nou';}
+    if(small) small.textContent='Nu am putut trimite numărul. Încearcă din nou.';
+    trackEvent('callback_save_error',{source:'homepage'});
+  }
 });
 document.querySelectorAll('.destination-card[data-destination]').forEach(card=>card.addEventListener('click',()=>{
   const d=document.getElementById('destination');
