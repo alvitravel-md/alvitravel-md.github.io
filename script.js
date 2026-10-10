@@ -87,8 +87,16 @@ callbackForm?.addEventListener('submit',async e=>{
   try{
     const payload=new URLSearchParams({
       siteKey:'alvitravel-web-2026',
-      type:'callback',
-      phone
+      name:'Solicitare apel',
+      phone,
+      destination:'',
+      date:'',
+      adults:'0',
+      children:'0',
+      childAges:'',
+      budget:'',
+      message:'Solicitare apel',
+      source:'callback-homepage'
     });
     await fetch(endpoint,{
       method:'POST',
