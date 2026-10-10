@@ -604,3 +604,89 @@ if(document.readyState==='loading'){
 }else{
   enforceMobileContactHub();
 }
+
+
+/* Cross-platform destination picker (real flag images; avoids Windows flag/option rendering issues) */
+function initQuickDestinationPicker(){
+  const select=document.getElementById('qDestination');
+  if(!select||select.dataset.customReady==='1') return;
+  select.dataset.customReady='1';
+
+  const flags={
+    'Turcia':'tr','Grecia':'gr','Egipt':'eg','Bulgaria':'bg','Muntenegru':'me',
+    'România':'ro','Spania':'es','Italia':'it','Franța':'fr'
+  };
+
+  const wrap=document.createElement('div');
+  wrap.className='quick-destination-picker';
+
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='quick-destination-trigger';
+  button.setAttribute('aria-haspopup','listbox');
+  button.setAttribute('aria-expanded','false');
+
+  const menu=document.createElement('div');
+  menu.className='quick-destination-menu';
+  menu.setAttribute('role','listbox');
+  menu.hidden=true;
+
+  const renderTrigger=()=>{
+    const value=select.value;
+    const code=flags[value];
+    button.innerHTML=(code
+      ? '<img src="https://flagcdn.com/w40/'+code+'.png" alt="" width="24" height="18">'
+      : '<span class="quick-destination-generic">✦</span>')+
+      '<span>'+value+'</span><span class="quick-destination-chevron">⌄</span>';
+  };
+
+  [...select.options].forEach(option=>{
+    const item=document.createElement('button');
+    item.type='button';
+    item.className='quick-destination-option';
+    item.dataset.value=option.value;
+    item.setAttribute('role','option');
+    const code=flags[option.value];
+    item.innerHTML=(code
+      ? '<img src="https://flagcdn.com/w40/'+code+'.png" alt="" width="24" height="18">'
+      : '<span class="quick-destination-generic">'+(option.value==='Excursie'?'🚌':'?')+'</span>')+
+      '<span>'+option.textContent+'</span>';
+    item.addEventListener('click',()=>{
+      select.value=option.value;
+      select.dispatchEvent(new Event('change',{bubbles:true}));
+      renderTrigger();
+      menu.hidden=true;
+      button.setAttribute('aria-expanded','false');
+      button.focus();
+    });
+    menu.appendChild(item);
+  });
+
+  button.addEventListener('click',()=>{
+    const opening=menu.hidden;
+    menu.hidden=!opening;
+    button.setAttribute('aria-expanded',String(opening));
+  });
+  document.addEventListener('click',e=>{
+    if(wrap.contains(e.target)) return;
+    menu.hidden=true;
+    button.setAttribute('aria-expanded','false');
+  });
+  button.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      menu.hidden=true;
+      button.setAttribute('aria-expanded','false');
+    }
+  });
+  select.addEventListener('change',renderTrigger);
+
+  select.classList.add('quick-destination-native-hidden');
+  select.insertAdjacentElement('afterend',wrap);
+  wrap.append(button,menu);
+  renderTrigger();
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',initQuickDestinationPicker,{once:true});
+}else{
+  initQuickDestinationPicker();
+}
