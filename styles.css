@@ -1773,3 +1773,39 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 .contact-hub-phone .contact-hub-icon svg{
   fill:#fff;
 }
+
+
+/* Brand-faithful social icons + aligned menu rows */
+.contact-hub-item{
+  width:190px!important;
+  justify-content:flex-end!important;
+}
+.contact-hub-label{
+  min-width:92px!important;
+  text-align:center!important;
+}
+.contact-hub-icon{
+  overflow:hidden!important;
+  background:transparent!important;
+  padding:0!important;
+}
+.contact-hub-icon .brand-svg{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+}
+.contact-hub-brand-instagram,
+.contact-hub-brand-messenger,
+.contact-hub-brand-whatsapp,
+.contact-hub-brand-phone{
+  background:transparent!important;
+}
+.contact-hub-instagram .contact-hub-icon,
+.contact-hub-messenger .contact-hub-icon,
+.contact-hub-whatsapp .contact-hub-icon,
+.contact-hub-phone .contact-hub-icon{
+  background:transparent!important;
+}
+.contact-hub-phone .contact-hub-label{
+  min-width:92px!important;
+}
