@@ -606,51 +606,55 @@ if(document.readyState==='loading'){
 }
 
 
-/* Cross-platform destination picker (real flag images; avoids Windows flag/option rendering issues) */
-function initQuickDestinationPicker(){
-  const select=document.getElementById('qDestination');
+
+
+
+/* Cross-platform destination pickers: real flag images on Windows, macOS and mobile */
+const ALVI_DESTINATION_FLAGS={
+  'Turcia':'tr','Grecia':'gr','Egipt':'eg','Bulgaria':'bg','Muntenegru':'me',
+  'România':'ro','Spania':'es','Italia':'it','Franța':'fr'
+};
+
+function initDestinationPicker(selectId){
+  const select=document.getElementById(selectId);
   if(!select||select.dataset.customReady==='1') return;
   select.dataset.customReady='1';
 
-  const flags={
-    'Turcia':'tr','Grecia':'gr','Egipt':'eg','Bulgaria':'bg','Muntenegru':'me',
-    'România':'ro','Spania':'es','Italia':'it','Franța':'fr'
-  };
-
   const wrap=document.createElement('div');
-  wrap.className='quick-destination-picker';
+  wrap.className='alvi-destination-picker';
 
   const button=document.createElement('button');
   button.type='button';
-  button.className='quick-destination-trigger';
+  button.className='alvi-destination-trigger';
   button.setAttribute('aria-haspopup','listbox');
   button.setAttribute('aria-expanded','false');
 
   const menu=document.createElement('div');
-  menu.className='quick-destination-menu';
+  menu.className='alvi-destination-menu';
   menu.setAttribute('role','listbox');
   menu.hidden=true;
 
+  const iconHtml=value=>{
+    const code=ALVI_DESTINATION_FLAGS[value];
+    if(code) return '<img src="https://flagcdn.com/w40/'+code+'.png" alt="" width="24" height="18">';
+    if(value==='Excursie') return '<span class="alvi-destination-generic">🚌</span>';
+    if(value==='Nu sunt sigur') return '<span class="alvi-destination-generic">?</span>';
+    return '<span class="alvi-destination-generic">✦</span>';
+  };
+
   const renderTrigger=()=>{
-    const value=select.value;
-    const code=flags[value];
-    button.innerHTML=(code
-      ? '<img src="https://flagcdn.com/w40/'+code+'.png" alt="" width="24" height="18">'
-      : '<span class="quick-destination-generic">✦</span>')+
-      '<span>'+value+'</span><span class="quick-destination-chevron">⌄</span>';
+    button.innerHTML=iconHtml(select.value)+
+      '<span class="alvi-destination-value">'+select.options[select.selectedIndex]?.textContent+'</span>'+
+      '<span class="alvi-destination-chevron" aria-hidden="true">⌄</span>';
   };
 
   [...select.options].forEach(option=>{
     const item=document.createElement('button');
     item.type='button';
-    item.className='quick-destination-option';
+    item.className='alvi-destination-option';
     item.dataset.value=option.value;
     item.setAttribute('role','option');
-    const code=flags[option.value];
-    item.innerHTML=(code
-      ? '<img src="https://flagcdn.com/w40/'+code+'.png" alt="" width="24" height="18">'
-      : '<span class="quick-destination-generic">'+(option.value==='Excursie'?'🚌':'?')+'</span>')+
-      '<span>'+option.textContent+'</span>';
+    item.innerHTML=iconHtml(option.value)+'<span>'+option.textContent+'</span>';
     item.addEventListener('click',()=>{
       select.value=option.value;
       select.dispatchEvent(new Event('change',{bubbles:true}));
@@ -664,6 +668,7 @@ function initQuickDestinationPicker(){
 
   button.addEventListener('click',()=>{
     const opening=menu.hidden;
+    document.querySelectorAll('.alvi-destination-menu').forEach(m=>{if(m!==menu)m.hidden=true;});
     menu.hidden=!opening;
     button.setAttribute('aria-expanded',String(opening));
   });
@@ -680,13 +685,98 @@ function initQuickDestinationPicker(){
   });
   select.addEventListener('change',renderTrigger);
 
-  select.classList.add('quick-destination-native-hidden');
+  select.classList.add('alvi-native-select-hidden');
   select.insertAdjacentElement('afterend',wrap);
   wrap.append(button,menu);
   renderTrigger();
 }
+
+/* Cross-platform date field: Romanian visual format regardless of Windows/browser locale */
+function initRomanianDateField(inputId){
+  const native=document.getElementById(inputId);
+  if(!native||native.dataset.roDateReady==='1') return;
+  native.dataset.roDateReady='1';
+
+  const wrap=document.createElement('div');
+  wrap.className='alvi-date-field';
+
+  const display=document.createElement('input');
+  display.type='text';
+  display.className='alvi-date-display';
+  display.inputMode='numeric';
+  display.autocomplete='off';
+  display.placeholder='ZZ.LL.AAAA';
+  display.setAttribute('aria-label','Data plecării, format zi.lună.an');
+
+  const pickerButton=document.createElement('button');
+  pickerButton.type='button';
+  pickerButton.className='alvi-date-picker-button';
+  pickerButton.setAttribute('aria-label','Alege data din calendar');
+  pickerButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M4 9h16M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>';
+
+  const isoToRo=iso=>{
+    const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');
+    return m?m[3]+'.'+m[2]+'.'+m[1]:'';
+  };
+  const roToIso=value=>{
+    const clean=(value||'').trim();
+    const m=/^(\d{1,2})[.\/\-](\d{1,2})[.\/\-](\d{4})$/.exec(clean);
+    if(!m) return '';
+    const d=Number(m[1]),mo=Number(m[2]),y=Number(m[3]);
+    const dt=new Date(y,mo-1,d);
+    if(dt.getFullYear()!==y||dt.getMonth()!==mo-1||dt.getDate()!==d) return '';
+    return String(y).padStart(4,'0')+'-'+String(mo).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  };
+
+  const syncFromNative=()=>{ display.value=isoToRo(native.value); };
+  const syncFromDisplay=()=>{
+    if(!display.value.trim()){
+      native.value='';
+      display.setCustomValidity('');
+      native.dispatchEvent(new Event('change',{bubbles:true}));
+      return;
+    }
+    const iso=roToIso(display.value);
+    if(!iso){
+      display.setCustomValidity('Folosește formatul ZZ.LL.AAAA');
+      return;
+    }
+    display.setCustomValidity('');
+    native.value=iso;
+    display.value=isoToRo(iso);
+    native.dispatchEvent(new Event('change',{bubbles:true}));
+  };
+
+  display.addEventListener('input',()=>{
+    let v=display.value.replace(/[^0-9]/g,'').slice(0,8);
+    if(v.length>4) v=v.slice(0,2)+'.'+v.slice(2,4)+'.'+v.slice(4);
+    else if(v.length>2) v=v.slice(0,2)+'.'+v.slice(2);
+    display.value=v;
+    display.setCustomValidity('');
+  });
+  display.addEventListener('blur',syncFromDisplay);
+  native.addEventListener('change',syncFromNative);
+  pickerButton.addEventListener('click',()=>{
+    try{
+      if(typeof native.showPicker==='function') native.showPicker();
+      else native.click();
+    }catch(_){ native.click(); }
+  });
+
+  native.classList.add('alvi-native-date-hidden');
+  native.insertAdjacentElement('afterend',wrap);
+  wrap.append(display,pickerButton);
+  syncFromNative();
+}
+
+function initCrossPlatformFormControls(){
+  initDestinationPicker('qDestination');
+  initDestinationPicker('destination');
+  initRomanianDateField('qDate');
+  initRomanianDateField('date');
+}
 if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',initQuickDestinationPicker,{once:true});
+  document.addEventListener('DOMContentLoaded',initCrossPlatformFormControls,{once:true});
 }else{
-  initQuickDestinationPicker();
+  initCrossPlatformFormControls();
 }
