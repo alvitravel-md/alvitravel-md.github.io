@@ -2469,3 +2469,48 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     left:0;
   }
 }
+
+
+/* Final About section image fit: show the full team photo naturally */
+#about .about-photo{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:0;
+  background:#f4f7fb;
+  border-radius:26px;
+  overflow:visible;
+}
+#about .about-photo img{
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  aspect-ratio:3 / 2;
+  object-fit:contain!important;
+  object-position:center center!important;
+  display:block!important;
+  border-radius:26px!important;
+  background:#f4f7fb;
+}
+#about .about-badge{
+  right:-18px!important;
+  bottom:26px!important;
+  z-index:2;
+}
+@media(max-width:700px){
+  #about .about-photo{
+    border-radius:20px;
+  }
+  #about .about-photo img{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:3 / 2;
+    object-fit:contain!important;
+    border-radius:20px!important;
+  }
+  #about .about-badge{
+    right:12px!important;
+    bottom:12px!important;
+  }
+}
