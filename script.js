@@ -553,3 +553,36 @@ if(document.readyState==='loading'){
 }else{
   loadCrispChat();
 }
+
+
+/* Expandable contact hub */
+const contactHub=document.getElementById('contactHub');
+const contactHubToggle=document.getElementById('contactHubToggle');
+const contactHubMenu=document.getElementById('contactHubMenu');
+
+function setContactHub(open){
+  if(!contactHub||!contactHubToggle||!contactHubMenu) return;
+  contactHub.classList.toggle('is-open',open);
+  contactHubToggle.setAttribute('aria-expanded',String(open));
+  contactHubToggle.setAttribute('aria-label',open?'Închide opțiunile de contact':'Deschide opțiunile de contact');
+  contactHubMenu.setAttribute('aria-hidden',String(!open));
+  if(open) contactHub.querySelector('.contact-hub-badge')?.classList.add('is-hidden');
+}
+contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
+contactHub?.querySelector('[data-contact-action="crisp"]')?.addEventListener('click',()=>{
+  window.$crisp=window.$crisp||[];
+  window.$crisp.push(['do','chat:open']);
+  setContactHub(false);
+});
+contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
+document.addEventListener('click',e=>{
+  if(!contactHub?.classList.contains('is-open')) return;
+  if(contactHub.contains(e.target)) return;
+  setContactHub(false);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&contactHub?.classList.contains('is-open')){
+    setContactHub(false);
+    contactHubToggle?.focus();
+  }
+});
