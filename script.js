@@ -1,3 +1,36 @@
+
+/* International phone selectors */
+function initInternationalPhoneInput(inputId){
+  const input=document.getElementById(inputId);
+  if(!input||typeof window.intlTelInput!=='function') return null;
+  const instance=window.intlTelInput(input,{
+    initialCountry:'md',
+    separateDialCode:true,
+    nationalMode:true,
+    autoPlaceholder:'aggressive',
+    formatAsYouType:true,
+    useFullscreenPopup:window.matchMedia('(max-width:700px)').matches,
+    loadUtils:()=>import('https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.2/build/js/utils.js')
+  });
+  input.addEventListener('countrychange',()=>input.setCustomValidity(''));
+  input.addEventListener('input',()=>input.setCustomValidity(''));
+  return instance;
+}
+const bookingPhoneIti=initInternationalPhoneInput('phone');
+const callbackPhoneIti=initInternationalPhoneInput('callbackPhone');
+
+function getInternationalPhone(inputId,iti){
+  const input=document.getElementById(inputId);
+  if(!input) return '';
+  const raw=input.value.trim();
+  if(!raw) return '';
+  if(iti){
+    const full=iti.getNumber();
+    if(full) return full;
+  }
+  return raw;
+}
+
 function trackEvent(name,params={}){
   if(typeof window.gtag==='function') window.gtag('event',name,params);
 }
@@ -78,7 +111,7 @@ const callbackForm=document.getElementById('callbackForm');
 callbackForm?.addEventListener('submit',async e=>{
   e.preventDefault();
   if(!callbackForm.reportValidity()) return;
-  const phone=document.getElementById('callbackPhone')?.value.trim()||'';
+  const phone=getInternationalPhone('callbackPhone',callbackPhoneIti);
   const endpoint=(window.ALVI_LEAD_ENDPOINT||'').trim();
   const button=callbackForm.querySelector('button[type="submit"]');
   const small=callbackForm.querySelector('small');
@@ -210,7 +243,7 @@ bookingForm?.addEventListener('submit',async e=>{
   if(!bookingForm.reportValidity()) return;
   if(document.getElementById('website')?.value) return;
   const name=document.getElementById('name')?.value.trim()||'';
-  const phone=document.getElementById('phone')?.value.trim()||'';
+  const phone=getInternationalPhone('phone',bookingPhoneIti);
   const destination=document.getElementById('destination')?.value||'';
   const date=document.getElementById('date')?.value||'flexibilă';
   const adults=document.getElementById('adults')?.value||'1';
