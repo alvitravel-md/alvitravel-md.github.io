@@ -2594,3 +2594,12 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .reviews-track{animation:none}
   .reviews-marquee{overflow-x:auto;mask-image:none;-webkit-mask-image:none}
 }
+
+/* 32-review carousel sizing */
+.reviews-track{animation-duration:115s!important}
+.reviews-marquee .review-card{flex:0 0 390px!important;min-height:245px!important}
+.review-no-text{font-style:italic;color:#dcecff!important;opacity:.82}
+@media(max-width:700px){
+  .reviews-track{animation-duration:105s!important}
+  .reviews-marquee .review-card{flex-basis:292px!important;min-height:220px!important}
+}
