@@ -1185,3 +1185,22 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     bottom:calc(84px + env(safe-area-inset-bottom, 0px))!important;
   }
 }
+
+
+/* Reviews → callback visual separation — 2026-10-10 */
+#reviews{
+  padding-bottom:96px;
+}
+.callback-section{
+  padding:42px 0 34px;
+  background:linear-gradient(180deg,#f7fbff 0%,#fff 72%);
+}
+.callback-card{
+  position:relative;
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 22px 55px rgba(7,56,111,.16);
+}
+@media(max-width:700px){
+  #reviews{padding-bottom:64px}
+  .callback-section{padding:28px 0 22px}
+}
