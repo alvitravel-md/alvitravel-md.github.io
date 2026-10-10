@@ -1490,3 +1490,11 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     background:#6d63c9;
   }
 }
+
+/* contact hub hard hide for legacy floating launchers */
+@media(max-width:700px){
+  a.floating-wa{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  .alvi-chat-nudge,.alvi-chat-badge{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  .crisp-client [aria-label="Open chat"]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  .contact-hub{display:flex!important}
+}
