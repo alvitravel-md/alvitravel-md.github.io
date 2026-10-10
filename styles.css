@@ -1638,3 +1638,37 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     bottom:calc(82px + env(safe-area-inset-bottom,0px));
   }
 }
+
+
+/* Crisp is a separate launcher from the expandable contact hub */
+.alvi-chat-nudge,.alvi-chat-badge{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+@media(min-width:701px){
+  .crisp-client [aria-label="Open chat"]{
+    display:flex!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    right:24px!important;
+    bottom:100px!important;
+    z-index:1004!important;
+  }
+  .contact-hub{
+    right:22px!important;
+    bottom:24px!important;
+  }
+}
+
+@media(max-width:700px){
+  .crisp-client [aria-label="Open chat"]{
+    display:flex!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    right:17px!important;
+    bottom:calc(154px + env(safe-area-inset-bottom,0px))!important;
+    z-index:1004!important;
+  }
+  .contact-hub{
+    right:16px!important;
+    bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
