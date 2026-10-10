@@ -1751,3 +1751,25 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     border-radius:50%!important;
   }
 }
+
+
+/* Social brand icon rendering inside contact hub */
+.contact-hub-icon svg{
+  width:28px;
+  height:28px;
+  display:block;
+}
+.contact-hub-instagram .contact-hub-icon svg{
+  fill:none;
+  stroke:#fff;
+  stroke-width:1.8;
+}
+.contact-hub-instagram .contact-hub-icon svg .solid{
+  fill:#fff;
+  stroke:none;
+}
+.contact-hub-messenger .contact-hub-icon svg,
+.contact-hub-whatsapp .contact-hub-icon svg,
+.contact-hub-phone .contact-hub-icon svg{
+  fill:#fff;
+}
