@@ -924,3 +924,210 @@ if(document.readyState==='loading'){
 }else{
   initCrossPlatformFormControls();
 }
+
+/* Google reviews snapshot from AlviTravel Business Profile — 32 reviews, fetched 2026-10-11 */
+const ALVI_GOOGLE_REVIEWS=[
+  {
+    "name": "Marius",
+    "text": "Am fost în Turcia, Belek, prin AlviTravel și sincer totul a mers fără stres. Ne-au ajutat să alegem hotelul după buget…",
+    "rating": 5
+  },
+  {
+    "name": "vlada Mirza",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Laurențiu",
+    "text": "Sunt foarte mulțumit că am avut ocazia de a călători cu așa minunată agenție, s-au meritat toți banii investiți 😍❤️",
+    "rating": 5
+  },
+  {
+    "name": "Melinda Țurcanu",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Marilena",
+    "text": "Am fost în Cipru prin AlviTravel și am avut o experiență foarte frumoasă! Totul a fost organizat foarte bine, de la…",
+    "rating": 5
+  },
+  {
+    "name": "Natalia Fală",
+    "text": "Am avut cea mai frumoasă vacanță împreună cu prietenii datorită echipei AlviTravel !!",
+    "rating": 5
+  },
+  {
+    "name": "Александра Гюмюшлю",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Кристина Машнев",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Alex anihcrut",
+    "text": "Am avut o vacanță minunată în Kemer, Turcia, datorită echipei AlviTravel! Totul a fost bine organizat și ne-am simțit…",
+    "rating": 5
+  },
+  {
+    "name": "Oleg Sleahta",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Alvian Turcanu",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Alik Tural",
+    "text": "Sincer am ramas foarte încântat de serviciile oferite de agenție, am avut parte de o experiență faină pe insula Creta, totul a fost extraordinar de frumos, recomand cu tot sufletul 🤍",
+    "rating": 5
+  },
+  {
+    "name": "Burdujan Dan",
+    "text": "AlviTravel a dat dovadă de profesionalism și excelență prin serviciile oferite. O experiență plăcută, bine organizată și de calitate. Recomand cu încredere!",
+    "rating": 5
+  },
+  {
+    "name": "Vlad Serbuşco",
+    "text": "O experiență foarte plăcută cu AlviTravel! Personal amabil, profesionist și atent la toate detaliile. Am primit toate…",
+    "rating": 5
+  },
+  {
+    "name": "Oleg Musteata",
+    "text": "Vacanța a fost organizată impecabil , și locația din Spania ( tossa de mar) a fost incredibilă , marea și plaja erau curate și drumul a decurs fără nici un impediment. Recomand cu drag .",
+    "rating": 5
+  },
+  {
+    "name": "Иван Акулов",
+    "text": "Это редкость в Кишинёве- найти такое агенство, где тебе помогут бодобрать отдых твоей мечты, учитыаая все твои запросы! И что не мало важно, на любой адекватный бюджет! Прекрасное агенство! Выбираю только их!",
+    "rating": 5
+  },
+  {
+    "name": "Calin Ciugureanu",
+    "text": "Cei mai buni când vine vorba de călătorii reușite! Comunicare excelentă, suport pe tot parcursul traseului și oferte excelente. Recomand AlviTravel din tot sufletul!",
+    "rating": 5
+  },
+  {
+    "name": "Varvara Gorshenina",
+    "text": "A huge thank you to AlviTravel for a wonderful vacation! I booked a tour with them and was…",
+    "rating": 5
+  },
+  {
+    "name": "Carnauh Maxim",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Tverdun Gabriela",
+    "text": "Recomand cu mare drag AlviTravel! Am avut o experiență foarte plăcută, de la prima discuție și până la finalul…",
+    "rating": 5
+  },
+  {
+    "name": "Bogdan Tenu",
+    "text": "Cea mai bună agenție de turism! Echipa de la AlviTravel ne-a oferit o consultanță excelentă și ne-a ajutat să găsesc…",
+    "rating": 5
+  },
+  {
+    "name": "Grosu Vladislav",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Даниил Поян (Moterinl)",
+    "text": "Остались очень довольны поездкой! Организация была на отличном уровне: всё прошло комфортно, без лишних проблем и…",
+    "rating": 5
+  },
+  {
+    "name": "Marin Toderica",
+    "text": "Mulțumesc Alvitravel pentru o vacanță excepțională. Au fost luate în calcul toate dorințele mele și mi s-a organizat o odihnă anume cum mi-am dorit. Recomand!!!!",
+    "rating": 5
+  },
+  {
+    "name": "Artemie Rohin",
+    "text": "Sunt foarte mulțumit de experiența la această agenție. Profesionalismul și amabilitatea angajaților sunt la un nivel…",
+    "rating": 5
+  },
+  {
+    "name": "Maria Botezatu",
+    "text": "Servicii excelente si organizare impecabila! O experienta de nota 10!",
+    "rating": 5
+  },
+  {
+    "name": "AlexHGT7",
+    "text": "O experiență foarte plăcută cu AlviTravel! Servicii de calitate, comunicare bună și multă atenție la detalii. Recomand cu încredere! ✈️🌴",
+    "rating": 5
+  },
+  {
+    "name": "ICE VENTURa",
+    "text": "Am petrecut un EuroTour fascinant împreună cu AlviTravel , totul a fost la nivel , transportul comod cu climatizare, alimentație bună si ghid minunat!",
+    "rating": 5
+  },
+  {
+    "name": "Cris",
+    "text": "",
+    "rating": 5
+  },
+  {
+    "name": "Aaron Sareth",
+    "text": "Am fost în Budapesta și Slovenia cu echipa AlviTravel. Fiecare etapă a călătoriei a fost foarte clară, dar chiar dacă apăreau întrebări, fetele de la asistență mereu erau la legătură. Recomand din toată inima!",
+    "rating": 5
+  },
+  {
+    "name": "Sebastian Sîrbu",
+    "text": "Experienţa mea în Spania și pe Coasta de Azur a fost nemaipomenit de plăcută. Agenția a demonstrat un profesionalism…",
+    "rating": 5
+  },
+  {
+    "name": "Carnauh Daniil",
+    "text": "Experiența mea cu Alvitravel pentru vacanța din Turcia a fost pur și simplu excelentă! Echipa s-a ocupat de absolut tot…",
+    "rating": 5
+  }
+];
+
+function renderGoogleReviewsMarquee(){
+  const track=document.getElementById('reviewsTrack');
+  if(!track||track.dataset.ready==='1') return;
+  track.dataset.ready='1';
+  const makeSet=(hidden=false)=>{
+    const set=document.createElement('div');
+    set.className='reviews-set';
+    if(hidden) set.setAttribute('aria-hidden','true');
+    ALVI_GOOGLE_REVIEWS.forEach(review=>{
+      const card=document.createElement('article');
+      card.className='review-card';
+      const stars=document.createElement('div');
+      stars.className='stars';
+      stars.textContent='★★★★★';
+      card.appendChild(stars);
+      if(review.text){
+        const p=document.createElement('p');
+        p.textContent='„'+review.text+'”';
+        card.appendChild(p);
+      }else{
+        const p=document.createElement('p');
+        p.className='review-no-text';
+        p.textContent='Recenzie de 5 stele';
+        card.appendChild(p);
+      }
+      const strong=document.createElement('strong');
+      strong.textContent=review.name;
+      const meta=document.createElement('div');
+      meta.className='review-meta';
+      meta.textContent='Google Review';
+      card.append(strong,meta);
+      set.appendChild(card);
+    });
+    return set;
+  };
+  track.append(makeSet(false),makeSet(true));
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',renderGoogleReviewsMarquee,{once:true});
+}else{
+  renderGoogleReviewsMarquee();
+}
