@@ -1966,3 +1966,35 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     font-size:15px!important;
   }
 }
+
+
+/* Prevent one phone selector from overlapping another */
+.callback-section,
+.callback-card,
+.callback-form{
+  position:relative;
+}
+.callback-section{z-index:20}
+.callback-card{z-index:21}
+.callback-form{z-index:22}
+.callback-form .iti{
+  position:relative!important;
+  z-index:100!important;
+}
+.callback-form .iti__country-container,
+.callback-form .iti__dropdown-content{
+  z-index:10000!important;
+}
+#booking,
+.booking-wrap,
+.booking-form{
+  position:relative;
+  z-index:1;
+}
+.booking-form .iti{
+  position:relative!important;
+  z-index:2!important;
+}
+.booking-form .iti__country-container{
+  z-index:3!important;
+}
