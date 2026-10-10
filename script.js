@@ -714,6 +714,10 @@ function initRomanianDateField(inputId){
   pickerButton.setAttribute('aria-label','Alege data din calendar');
   pickerButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M4 9h16M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>';
 
+  const popup=document.createElement('div');
+  popup.className='alvi-calendar-popup';
+  popup.hidden=true;
+
   const isoToRo=iso=>{
     const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');
     return m?m[3]+'.'+m[2]+'.'+m[1]:'';
@@ -728,6 +732,118 @@ function initRomanianDateField(inputId){
     return String(y).padStart(4,'0')+'-'+String(mo).padStart(2,'0')+'-'+String(d).padStart(2,'0');
   };
 
+  const monthNames=['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+  const weekDays=['Lu','Ma','Mi','Jo','Vi','Sâ','Du'];
+  const today=new Date(); today.setHours(0,0,0,0);
+
+  let viewDate=native.value?new Date(native.value+'T00:00:00'):new Date();
+  viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
+
+  const renderCalendar=()=>{
+    popup.innerHTML='';
+    const header=document.createElement('div');
+    header.className='alvi-calendar-header';
+
+    const prev=document.createElement('button');
+    prev.type='button';
+    prev.className='alvi-calendar-nav';
+    prev.setAttribute('aria-label','Luna precedentă');
+    prev.textContent='‹';
+
+    const title=document.createElement('div');
+    title.className='alvi-calendar-title';
+    title.textContent=monthNames[viewDate.getMonth()]+' '+viewDate.getFullYear();
+
+    const next=document.createElement('button');
+    next.type='button';
+    next.className='alvi-calendar-nav';
+    next.setAttribute('aria-label','Luna următoare');
+    next.textContent='›';
+
+    prev.addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);renderCalendar();});
+    next.addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);renderCalendar();});
+    header.append(prev,title,next);
+
+    const weekdays=document.createElement('div');
+    weekdays.className='alvi-calendar-weekdays';
+    weekDays.forEach(w=>{
+      const el=document.createElement('span');
+      el.textContent=w;
+      weekdays.appendChild(el);
+    });
+
+    const grid=document.createElement('div');
+    grid.className='alvi-calendar-grid';
+    const y=viewDate.getFullYear(), m=viewDate.getMonth();
+    const first=new Date(y,m,1);
+    const offset=(first.getDay()+6)%7;
+    const days=new Date(y,m+1,0).getDate();
+    const prevDays=new Date(y,m,0).getDate();
+
+    for(let i=0;i<42;i++){
+      let dayNum, cellMonth=m, cellYear=y, muted=false;
+      if(i<offset){
+        dayNum=prevDays-offset+i+1;
+        cellMonth=m-1; muted=true;
+      }else if(i>=offset+days){
+        dayNum=i-(offset+days)+1;
+        cellMonth=m+1; muted=true;
+      }else{
+        dayNum=i-offset+1;
+      }
+      const date=new Date(cellYear,cellMonth,dayNum);
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='alvi-calendar-day';
+      if(muted) btn.classList.add('is-muted');
+      if(date.getTime()===today.getTime()) btn.classList.add('is-today');
+
+      const iso=date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
+      if(native.value===iso) btn.classList.add('is-selected');
+
+      btn.textContent=String(dayNum);
+      btn.addEventListener('click',()=>{
+        native.value=iso;
+        display.value=isoToRo(iso);
+        display.setCustomValidity('');
+        native.dispatchEvent(new Event('change',{bubbles:true}));
+        popup.hidden=true;
+        pickerButton.setAttribute('aria-expanded','false');
+      });
+      grid.appendChild(btn);
+    }
+
+    const footer=document.createElement('div');
+    footer.className='alvi-calendar-footer';
+    const todayBtn=document.createElement('button');
+    todayBtn.type='button';
+    todayBtn.className='alvi-calendar-today';
+    todayBtn.textContent='Astăzi';
+    todayBtn.addEventListener('click',()=>{
+      const iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+      native.value=iso;
+      display.value=isoToRo(iso);
+      native.dispatchEvent(new Event('change',{bubbles:true}));
+      popup.hidden=true;
+      pickerButton.setAttribute('aria-expanded','false');
+    });
+
+    const clearBtn=document.createElement('button');
+    clearBtn.type='button';
+    clearBtn.className='alvi-calendar-clear';
+    clearBtn.textContent='Șterge';
+    clearBtn.addEventListener('click',()=>{
+      native.value='';
+      display.value='';
+      native.dispatchEvent(new Event('change',{bubbles:true}));
+      popup.hidden=true;
+      pickerButton.setAttribute('aria-expanded','false');
+    });
+    footer.append(todayBtn,clearBtn);
+
+    popup.append(header,weekdays,grid,footer);
+  };
+
   const syncFromNative=()=>{ display.value=isoToRo(native.value); };
   const syncFromDisplay=()=>{
     if(!display.value.trim()){
@@ -739,12 +855,15 @@ function initRomanianDateField(inputId){
     const iso=roToIso(display.value);
     if(!iso){
       display.setCustomValidity('Folosește formatul ZZ.LL.AAAA');
+      display.reportValidity();
       return;
     }
     display.setCustomValidity('');
     native.value=iso;
     display.value=isoToRo(iso);
     native.dispatchEvent(new Event('change',{bubbles:true}));
+    viewDate=new Date(iso+'T00:00:00');
+    viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
   };
 
   display.addEventListener('input',()=>{
@@ -756,16 +875,41 @@ function initRomanianDateField(inputId){
   });
   display.addEventListener('blur',syncFromDisplay);
   native.addEventListener('change',syncFromNative);
-  pickerButton.addEventListener('click',()=>{
-    try{
-      if(typeof native.showPicker==='function') native.showPicker();
-      else native.click();
-    }catch(_){ native.click(); }
+
+  const toggleCalendar=()=>{
+    const opening=popup.hidden;
+    document.querySelectorAll('.alvi-calendar-popup').forEach(p=>{if(p!==popup)p.hidden=true;});
+    if(opening){
+      if(native.value){
+        const d=new Date(native.value+'T00:00:00');
+        viewDate=new Date(d.getFullYear(),d.getMonth(),1);
+      }else{
+        viewDate=new Date(today.getFullYear(),today.getMonth(),1);
+      }
+      renderCalendar();
+    }
+    popup.hidden=!opening;
+    pickerButton.setAttribute('aria-expanded',String(opening));
+  };
+  pickerButton.addEventListener('click',toggleCalendar);
+  display.addEventListener('focus',()=>{ if(popup.hidden) toggleCalendar(); });
+
+  document.addEventListener('click',e=>{
+    if(wrap.contains(e.target)) return;
+    popup.hidden=true;
+    pickerButton.setAttribute('aria-expanded','false');
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&!popup.hidden){
+      popup.hidden=true;
+      pickerButton.setAttribute('aria-expanded','false');
+      pickerButton.focus();
+    }
   });
 
   native.classList.add('alvi-native-date-hidden');
   native.insertAdjacentElement('afterend',wrap);
-  wrap.append(display,pickerButton);
+  wrap.append(display,pickerButton,popup);
   syncFromNative();
 }
 
