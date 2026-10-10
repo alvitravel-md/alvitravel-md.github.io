@@ -2167,3 +2167,34 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+
+/* FINAL floating controls alignment fix */
+@media(min-width:701px){
+  .contact-hub{
+    right:24px!important;
+    bottom:84px!important;
+    align-items:flex-end!important;
+  }
+  .contact-hub-toggle{
+    margin:0!important;
+    align-self:flex-end!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:24px!important;
+  }
+}
+@media(max-width:700px){
+  .contact-hub{
+    right:16px!important;
+    bottom:calc(131px + env(safe-area-inset-bottom,0px))!important;
+    align-items:flex-end!important;
+  }
+  .contact-hub-toggle{
+    margin:0!important;
+    align-self:flex-end!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:16px!important;
+  }
+}
