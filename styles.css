@@ -2148,3 +2148,22 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   top:-4px!important;
   right:-4px!important;
 }
+
+
+/* Tighten vertical gap between contact hub and Crisp */
+@media(min-width:701px){
+  .contact-hub{
+    bottom:96px!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    bottom:24px!important;
+  }
+}
+@media(max-width:700px){
+  .contact-hub{
+    bottom:calc(146px + env(safe-area-inset-bottom,0px))!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
