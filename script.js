@@ -586,3 +586,29 @@ document.addEventListener('keydown',e=>{
     contactHubToggle?.focus();
   }
 });
+
+
+/* Mobile contact hub enforcement */
+function enforceMobileContactHub(){
+  if(!window.matchMedia('(max-width:700px)').matches) return;
+  const wa=document.querySelector('.floating-wa');
+  if(wa) wa.style.setProperty('display','none','important');
+
+  const hideCrispLauncher=()=>{
+    const launcher=document.querySelector('.crisp-client [aria-label="Open chat"]');
+    if(launcher) launcher.style.setProperty('display','none','important');
+    const badge=document.querySelector('.alvi-chat-badge');
+    if(badge) badge.style.setProperty('display','none','important');
+    const nudge=document.querySelector('.alvi-chat-nudge');
+    if(nudge) nudge.style.setProperty('display','none','important');
+  };
+  hideCrispLauncher();
+  const mo=new MutationObserver(hideCrispLauncher);
+  mo.observe(document.documentElement,{subtree:true,childList:true});
+  setTimeout(()=>mo.disconnect(),15000);
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',enforceMobileContactHub,{once:true});
+}else{
+  enforceMobileContactHub();
+}
