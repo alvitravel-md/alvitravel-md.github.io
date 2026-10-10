@@ -2069,3 +2069,82 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     max-height:62px!important;
   }
 }
+
+
+/* FINAL symmetrical floating controls: contact hub above, Crisp below */
+@media(min-width:701px){
+  .contact-hub{
+    right:24px!important;
+    bottom:108px!important;
+    align-items:center!important;
+  }
+  .contact-hub-toggle{
+    width:64px!important;
+    height:64px!important;
+    min-width:64px!important;
+    min-height:64px!important;
+    max-width:64px!important;
+    max-height:64px!important;
+    border-radius:50%!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:24px!important;
+    bottom:24px!important;
+    left:auto!important;
+    top:auto!important;
+    width:64px!important;
+    height:64px!important;
+    min-width:64px!important;
+    min-height:64px!important;
+    max-width:64px!important;
+    max-height:64px!important;
+    border-radius:50%!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    transform:none!important;
+    margin:0!important;
+  }
+}
+@media(max-width:700px){
+  .contact-hub{
+    right:16px!important;
+    bottom:calc(156px + env(safe-area-inset-bottom,0px))!important;
+    align-items:center!important;
+  }
+  .contact-hub-toggle{
+    width:62px!important;
+    height:62px!important;
+    min-width:62px!important;
+    min-height:62px!important;
+    max-width:62px!important;
+    max-height:62px!important;
+    border-radius:50%!important;
+    display:grid!important;
+    place-items:center!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:16px!important;
+    bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+    left:auto!important;
+    top:auto!important;
+    width:62px!important;
+    height:62px!important;
+    min-width:62px!important;
+    min-height:62px!important;
+    max-width:62px!important;
+    max-height:62px!important;
+    border-radius:50%!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    transform:none!important;
+    margin:0!important;
+  }
+}
+.contact-hub-badge{
+  top:-4px!important;
+  right:-4px!important;
+}
