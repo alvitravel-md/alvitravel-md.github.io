@@ -473,6 +473,80 @@ function loadCrispChat(){
   s.async=true;
   s.crossOrigin='anonymous';
   document.head.appendChild(s);
+  setupCrispNudge();
+}
+
+function setupCrispNudge(){
+  if(window.__alviCrispNudgeReady) return;
+  window.__alviCrispNudgeReady=true;
+
+  const copy={
+    ro:'Suntem online. Scrie-ne și un consultant AlviTravel îți răspunde. 👇',
+    en:'We are online. Message us and an AlviTravel consultant will reply. 👇',
+    ru:'Мы онлайн. Напишите нам, и консультант AlviTravel ответит вам. 👇'
+  };
+  const getLang=()=>{
+    try{return localStorage.getItem('alvi_lang')||'ro';}catch(_){return 'ro';}
+  };
+  const openChat=()=>{
+    window.$crisp=window.$crisp||[];
+    window.$crisp.push(['do','chat:open']);
+    document.querySelector('.alvi-chat-nudge')?.classList.add('is-hidden');
+    document.querySelector('.alvi-chat-badge')?.classList.add('is-hidden');
+    try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
+  };
+  const ensureUi=()=>{
+    const launcher=document.querySelector('.crisp-client [aria-label="Open chat"]');
+    if(!launcher) return false;
+
+    if(!document.querySelector('.alvi-chat-badge')){
+      const badge=document.createElement('span');
+      badge.className='alvi-chat-badge';
+      badge.textContent='1';
+      badge.setAttribute('aria-hidden','true');
+      document.body.appendChild(badge);
+    }
+    if(!document.querySelector('.alvi-chat-nudge')){
+      const nudge=document.createElement('button');
+      nudge.type='button';
+      nudge.className='alvi-chat-nudge';
+      nudge.setAttribute('aria-label','Deschide chatul AlviTravel');
+      nudge.innerHTML='<span class="alvi-chat-nudge__status"></span><span class="alvi-chat-nudge__text"></span><span class="alvi-chat-nudge__close" aria-hidden="true">×</span>';
+      nudge.querySelector('.alvi-chat-nudge__text').textContent=copy[getLang()]||copy.ro;
+      nudge.addEventListener('click',e=>{
+        if(e.target.closest('.alvi-chat-nudge__close')){
+          e.stopPropagation();
+          nudge.classList.add('is-hidden');
+          try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
+          return;
+        }
+        openChat();
+      });
+      document.body.appendChild(nudge);
+      let seen=false;
+      try{seen=sessionStorage.getItem('alvi_crisp_seen')==='1';}catch(_){}
+      if(!seen) setTimeout(()=>nudge.classList.add('is-visible'),1200);
+      else nudge.classList.add('is-hidden');
+    }
+    launcher.addEventListener('click',()=>{
+      document.querySelector('.alvi-chat-nudge')?.classList.add('is-hidden');
+      document.querySelector('.alvi-chat-badge')?.classList.add('is-hidden');
+      try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
+    },{once:true});
+
+    return true;
+  };
+
+  const observer=new MutationObserver(()=>{
+    if(ensureUi()) observer.disconnect();
+  });
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  ensureUi();
+
+  window.addEventListener('alvi-language-change',e=>{
+    const n=document.querySelector('.alvi-chat-nudge__text');
+    if(n) n.textContent=copy[e.detail?.lang]||copy.ro;
+  });
 }
 if(document.readyState==='loading'){
   document.addEventListener('DOMContentLoaded',loadCrispChat,{once:true});
