@@ -1724,3 +1724,30 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
     z-index:1005!important;
   }
 }
+
+
+/* Match Crisp and main contact hub button sizes */
+@media(min-width:701px){
+  .contact-hub-toggle,
+  .crisp-client [aria-label="Open chat"]{
+    width:64px!important;
+    height:64px!important;
+    min-width:64px!important;
+    min-height:64px!important;
+    max-width:64px!important;
+    max-height:64px!important;
+    border-radius:50%!important;
+  }
+}
+@media(max-width:700px){
+  .contact-hub-toggle,
+  .crisp-client [aria-label="Open chat"]{
+    width:62px!important;
+    height:62px!important;
+    min-width:62px!important;
+    min-height:62px!important;
+    max-width:62px!important;
+    max-height:62px!important;
+    border-radius:50%!important;
+  }
+}
