@@ -590,7 +590,6 @@ document.addEventListener('keydown',e=>{
 
 /* Mobile contact hub enforcement */
 function enforceMobileContactHub(){
-  if(!window.matchMedia('(max-width:700px)').matches) return;
   const wa=document.querySelector('.floating-wa');
   if(wa) wa.style.setProperty('display','none','important');
 
