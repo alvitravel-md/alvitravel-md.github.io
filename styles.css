@@ -1226,3 +1226,32 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 @media(max-width:700px){
   .iti{width:100%}
 }
+
+
+/* Fix intl-tel-input country search spacing on mobile */
+.iti__search-input{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:48px!important;
+  padding:10px 14px 10px 48px!important;
+  font-size:16px!important;
+  line-height:1.35!important;
+}
+.iti__search-icon{
+  left:16px!important;
+  right:auto!important;
+  width:20px!important;
+  height:20px!important;
+  pointer-events:none!important;
+}
+.iti__search-input::placeholder{
+  font-size:16px!important;
+  line-height:1.35!important;
+}
+@media(max-width:700px){
+  .iti__search-input{
+    min-height:50px!important;
+    padding-left:50px!important;
+    font-size:16px!important;
+  }
+}
