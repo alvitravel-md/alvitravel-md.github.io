@@ -568,33 +568,7 @@ function setContactHub(open){
   contactHubMenu.setAttribute('aria-hidden',String(!open));
   if(open) contactHub.querySelector('.contact-hub-badge')?.classList.add('is-hidden');
 }
-contactHubToggle?.addEventListener('click',()=>{
-  if(contactHub?.classList.contains('crisp-open')){
-    window.$crisp=window.$crisp||[];
-    window.$crisp.push(['do','chat:close']);
-    return;
-  }
-  setContactHub(!contactHub?.classList.contains('is-open'));
-});
-contactHub?.querySelector('[data-contact-action="crisp"]')?.addEventListener('click',()=>{
-  window.$crisp=window.$crisp||[];
-  window.$crisp.push(['do','chat:open']);
-  setContactHub(false);
-});
-
-function syncContactHubWithCrisp(){
-  window.$crisp=window.$crisp||[];
-  window.$crisp.push(['on','chat:opened',()=>{
-    setContactHub(false);
-    contactHub?.classList.add('crisp-open');
-    contactHubToggle?.setAttribute('aria-label','Închide chatul');
-  }]);
-  window.$crisp.push(['on','chat:closed',()=>{
-    contactHub?.classList.remove('crisp-open');
-    contactHubToggle?.setAttribute('aria-label','Deschide opțiunile de contact');
-  }]);
-}
-syncContactHubWithCrisp();
+contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
 contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
 document.addEventListener('click',e=>{
   if(!contactHub?.classList.contains('is-open')) return;
@@ -614,16 +588,14 @@ function enforceMobileContactHub(){
   const wa=document.querySelector('.floating-wa');
   if(wa) wa.style.setProperty('display','none','important');
 
-  const hideCrispLauncher=()=>{
-    const launcher=document.querySelector('.crisp-client [aria-label="Open chat"]');
-    if(launcher) launcher.style.setProperty('display','none','important');
+  const cleanLegacyCrispExtras=()=>{
     const badge=document.querySelector('.alvi-chat-badge');
     if(badge) badge.style.setProperty('display','none','important');
     const nudge=document.querySelector('.alvi-chat-nudge');
     if(nudge) nudge.style.setProperty('display','none','important');
   };
-  hideCrispLauncher();
-  const mo=new MutationObserver(hideCrispLauncher);
+  cleanLegacyCrispExtras();
+  const mo=new MutationObserver(cleanLegacyCrispExtras);
   mo.observe(document.documentElement,{subtree:true,childList:true});
   setTimeout(()=>mo.disconnect(),15000);
 }
