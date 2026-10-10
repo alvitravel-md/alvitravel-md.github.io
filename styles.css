@@ -1498,3 +1498,108 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .crisp-client [aria-label="Open chat"]{display:none!important;visibility:hidden!important;pointer-events:none!important}
   .contact-hub{display:flex!important}
 }
+
+
+/* Desktop contact hub */
+@media(min-width:701px){
+  a.floating-wa{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  .alvi-chat-nudge,.alvi-chat-badge{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  .crisp-client [aria-label="Open chat"]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+  .contact-hub{
+    position:fixed;
+    right:22px;
+    bottom:24px;
+    z-index:1005;
+    display:flex!important;
+    flex-direction:column;
+    align-items:flex-end;
+    pointer-events:none;
+  }
+  .contact-hub-toggle,
+  .contact-hub-item{pointer-events:auto}
+  .contact-hub-toggle{
+    position:relative;
+    width:64px;
+    height:64px;
+    border:0;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(145deg,#0b8f3a,#0a6f2f);
+    color:#fff;
+    box-shadow:0 14px 32px rgba(0,0,0,.22);
+    cursor:pointer;
+    transition:transform .22s ease,background .22s ease;
+  }
+  .contact-hub-toggle:hover{transform:translateY(-2px)}
+  .contact-hub-dots,
+  .contact-hub-close{
+    position:absolute;
+    font-weight:800;
+    line-height:1;
+    transition:opacity .2s ease,transform .22s ease;
+  }
+  .contact-hub-dots{font-size:24px;letter-spacing:2px;transform:translateY(-2px)}
+  .contact-hub-close{opacity:0;font-size:42px;font-weight:400;transform:rotate(-90deg) scale(.8)}
+  .contact-hub.is-open .contact-hub-dots{opacity:0;transform:rotate(90deg) scale(.8)}
+  .contact-hub.is-open .contact-hub-close{opacity:1;transform:rotate(0) scale(1)}
+  .contact-hub-badge{
+    position:absolute;
+    top:-4px;
+    right:-2px;
+    width:24px;
+    height:24px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#ef5350;
+    color:#fff;
+    border:2px solid #fff;
+    font-size:12px;
+    font-weight:800;
+    box-shadow:0 5px 13px rgba(0,0,0,.18);
+  }
+  .contact-hub-badge.is-hidden{display:none}
+  .contact-hub-menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:12px;
+    align-items:flex-end;
+  }
+  .contact-hub-item{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    border:0;
+    background:transparent;
+    text-decoration:none;
+    transform:translateY(12px) scale(.82);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .18s ease,transform .24s cubic-bezier(.2,.8,.2,1),visibility .18s ease;
+  }
+  .contact-hub.is-open .contact-hub-item{opacity:1;visibility:visible;transform:none}
+  .contact-hub.is-open .contact-hub-item:nth-child(1){transition-delay:.04s}
+  .contact-hub.is-open .contact-hub-item:nth-child(2){transition-delay:.08s}
+  .contact-hub.is-open .contact-hub-item:nth-child(3){transition-delay:.12s}
+  .contact-hub.is-open .contact-hub-item:nth-child(4){transition-delay:.16s}
+  .contact-hub.is-open .contact-hub-item:nth-child(5){transition-delay:.20s}
+  .contact-hub-icon{
+    width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+    color:#fff;font-size:23px;font-weight:800;box-shadow:0 10px 24px rgba(0,0,0,.18);
+  }
+  .contact-hub-label{
+    padding:7px 10px;border-radius:10px;background:rgba(7,27,49,.9);
+    color:#fff;font-size:12px;font-weight:800;box-shadow:0 7px 18px rgba(0,0,0,.14);
+  }
+  .contact-hub-instagram .contact-hub-icon{
+    background:radial-gradient(circle at 30% 110%,#ffd600 0 19%,#ff7a00 20% 36%,#ff0169 37% 62%,#d300c5 63% 78%,#7638fa 79% 100%);
+    font-size:30px;
+  }
+  .contact-hub-messenger .contact-hub-icon{background:linear-gradient(145deg,#8b5cf6,#1877f2)}
+  .contact-hub-whatsapp .contact-hub-icon{background:#25d366}
+  .contact-hub-crisp .contact-hub-icon{background:linear-gradient(145deg,#1c8bff,#0b69d4);letter-spacing:1px}
+  .contact-hub-phone .contact-hub-icon{background:#6d63c9}
+}
