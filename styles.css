@@ -1172,3 +1172,16 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
 
 /* Bot trap for public lead form */
 .hp-field{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+
+
+/* Mobile floating contact buttons — keep Crisp and WhatsApp aligned above the bottom action bar */
+@media (max-width:700px){
+  .floating-wa{
+    right:16px!important;
+    bottom:calc(148px + env(safe-area-inset-bottom, 0px))!important;
+  }
+  .crisp-client [aria-label="Open chat"]{
+    right:17px!important;
+    bottom:calc(84px + env(safe-area-inset-bottom, 0px))!important;
+  }
+}
