@@ -568,12 +568,33 @@ function setContactHub(open){
   contactHubMenu.setAttribute('aria-hidden',String(!open));
   if(open) contactHub.querySelector('.contact-hub-badge')?.classList.add('is-hidden');
 }
-contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
+contactHubToggle?.addEventListener('click',()=>{
+  if(contactHub?.classList.contains('crisp-open')){
+    window.$crisp=window.$crisp||[];
+    window.$crisp.push(['do','chat:close']);
+    return;
+  }
+  setContactHub(!contactHub?.classList.contains('is-open'));
+});
 contactHub?.querySelector('[data-contact-action="crisp"]')?.addEventListener('click',()=>{
   window.$crisp=window.$crisp||[];
   window.$crisp.push(['do','chat:open']);
   setContactHub(false);
 });
+
+function syncContactHubWithCrisp(){
+  window.$crisp=window.$crisp||[];
+  window.$crisp.push(['on','chat:opened',()=>{
+    setContactHub(false);
+    contactHub?.classList.add('crisp-open');
+    contactHubToggle?.setAttribute('aria-label','Închide chatul');
+  }]);
+  window.$crisp.push(['on','chat:closed',()=>{
+    contactHub?.classList.remove('crisp-open');
+    contactHubToggle?.setAttribute('aria-label','Deschide opțiunile de contact');
+  }]);
+}
+syncContactHubWithCrisp();
 contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
 document.addEventListener('click',e=>{
   if(!contactHub?.classList.contains('is-open')) return;
