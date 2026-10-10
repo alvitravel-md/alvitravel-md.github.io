@@ -2368,3 +2368,104 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .alvi-destination-trigger,.alvi-date-field,.alvi-date-display{height:48px!important}
   .alvi-destination-menu{max-height:300px}
 }
+
+
+/* Aesthetic anchored custom calendar */
+.alvi-date-field{
+  position:relative!important;
+  z-index:20;
+}
+.alvi-calendar-popup{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  z-index:1000;
+  width:310px;
+  max-width:min(310px,calc(100vw - 32px));
+  padding:14px;
+  border:1px solid #dbe6f1;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 20px 55px rgba(5,35,68,.22);
+}
+.alvi-calendar-popup[hidden]{display:none!important}
+.alvi-calendar-header{
+  display:grid;
+  grid-template-columns:40px 1fr 40px;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+.alvi-calendar-title{
+  text-align:center;
+  font-size:15px;
+  font-weight:800;
+  color:#17314b;
+}
+.alvi-calendar-nav{
+  width:36px;height:36px;border:0;border-radius:10px;background:#f2f7fc;
+  color:#1a4f80;font-size:26px;line-height:1;cursor:pointer;
+}
+.alvi-calendar-nav:hover{background:#e6f1fb}
+.alvi-calendar-weekdays,
+.alvi-calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+}
+.alvi-calendar-weekdays{
+  margin-bottom:5px;
+}
+.alvi-calendar-weekdays span{
+  display:grid;place-items:center;height:28px;font-size:11px;font-weight:800;color:#7a8da2;
+}
+.alvi-calendar-day{
+  aspect-ratio:1/1;
+  min-width:0;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:#18314f;
+  font:700 13px/1 Manrope,system-ui,sans-serif;
+  cursor:pointer;
+}
+.alvi-calendar-day:hover{background:#edf5fd;color:#0b67c8}
+.alvi-calendar-day.is-muted{color:#b6c1cc}
+.alvi-calendar-day.is-today{box-shadow:inset 0 0 0 1.5px #7db7f2}
+.alvi-calendar-day.is-selected{
+  background:linear-gradient(135deg,#0d67c8,#2488ec);
+  color:#fff;
+  box-shadow:0 7px 16px rgba(13,103,200,.25);
+}
+.alvi-calendar-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid #edf2f7;
+}
+.alvi-calendar-today,
+.alvi-calendar-clear{
+  border:0;
+  background:transparent;
+  padding:7px 9px;
+  border-radius:8px;
+  font:800 12px/1 Manrope,system-ui,sans-serif;
+  cursor:pointer;
+}
+.alvi-calendar-today{color:#0d67c8}
+.alvi-calendar-clear{color:#718398}
+.alvi-calendar-today:hover,.alvi-calendar-clear:hover{background:#f2f7fc}
+
+.search-card .field,
+.booking-form .field{
+  position:relative;
+}
+@media(max-width:700px){
+  .alvi-calendar-popup{
+    width:min(310px,calc(100vw - 40px));
+    left:0;
+  }
+}
