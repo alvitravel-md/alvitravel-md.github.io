@@ -1603,3 +1603,38 @@ footer{background:#071b31;color:#c8d4e0;padding:28px 0}
   .contact-hub-crisp .contact-hub-icon{background:linear-gradient(145deg,#1c8bff,#0b69d4);letter-spacing:1px}
   .contact-hub-phone .contact-hub-icon{background:#6d63c9}
 }
+
+
+/* Crisp-open contact hub state: keep a dedicated close control visible */
+.contact-hub.crisp-open .contact-hub-menu{
+  display:none!important;
+}
+.contact-hub.crisp-open .contact-hub-dots{
+  opacity:0!important;
+  transform:rotate(90deg) scale(.8)!important;
+}
+.contact-hub.crisp-open .contact-hub-close{
+  opacity:1!important;
+  transform:rotate(0) scale(1)!important;
+}
+.contact-hub.crisp-open .contact-hub-toggle{
+  background:#fff!important;
+  color:#0a7a32!important;
+  border:3px solid #0a7a32!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.20)!important;
+}
+.contact-hub.crisp-open .contact-hub-badge{
+  display:none!important;
+}
+@media(min-width:701px){
+  .contact-hub.crisp-open{
+    right:22px;
+    bottom:24px;
+  }
+}
+@media(max-width:700px){
+  .contact-hub.crisp-open{
+    right:16px;
+    bottom:calc(82px + env(safe-area-inset-bottom,0px));
+  }
+}
