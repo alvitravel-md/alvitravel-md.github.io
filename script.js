@@ -570,7 +570,15 @@ function setContactHub(open){
   if(open) contactHub.querySelector('.contact-hub-badge')?.classList.add('is-hidden');
 }
 contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
-document.getElementById('contactHubChat')?.addEventListener('click',()=>{window.$crisp=window.$crisp||[];window.$crisp.push(['do','chat:show']);window.$crisp.push(['do','chat:open']);setContactHub(false);});
+/* Keep controls separate from the Crisp panel while it is open. */
+window.$crisp=window.$crisp||[];
+window.$crisp.push(['on','chat:opened',()=>{setContactHub(false);document.body.classList.add('alvi-crisp-open');}]);
+window.$crisp.push(['on','chat:closed',()=>{document.body.classList.remove('alvi-crisp-open');window.$crisp.push(['do','chat:hide']);}]);
+document.getElementById('contactHubChat')?.addEventListener('click',()=>{
+  setContactHub(false);
+  window.$crisp.push(['do','chat:show']);
+  window.$crisp.push(['do','chat:open']);
+});
 contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
 document.addEventListener('click',e=>{
   if(!contactHub?.classList.contains('is-open')) return;
