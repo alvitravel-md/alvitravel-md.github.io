@@ -4,6 +4,11 @@
 <script src="/analytics-consent.js" defer></script>
 <!-- Google tag (gtag.js) -->
 
+<script>
+if (location.pathname === '/index.html') {
+  location.replace('/' + location.search + location.hash);
+}
+</script>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
