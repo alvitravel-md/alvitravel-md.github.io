@@ -467,6 +467,7 @@ function loadCrispChat(){
   window.$crisp=window.$crisp||[];
   window.CRISP_WEBSITE_ID=websiteId;
   window.$crisp.push(['safe',true]);
+  window.$crisp.push(['do','chat:hide']);
   window.$crisp.push(['set','session:data',[[['site','alvitravel.md']]]]);
   const s=document.createElement('script');
   s.src='https://client.crisp.chat/l.js';
@@ -569,6 +570,7 @@ function setContactHub(open){
   if(open) contactHub.querySelector('.contact-hub-badge')?.classList.add('is-hidden');
 }
 contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
+document.getElementById('contactHubChat')?.addEventListener('click',()=>{window.$crisp=window.$crisp||[];window.$crisp.push(['do','chat:show']);window.$crisp.push(['do','chat:open']);setContactHub(false);});
 contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
 document.addEventListener('click',e=>{
   if(!contactHub?.classList.contains('is-open')) return;
