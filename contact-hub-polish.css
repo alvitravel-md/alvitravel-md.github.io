@@ -34,3 +34,23 @@ footer .footer-nap a{white-space:nowrap}
 footer .footer-seo-links{grid-column:1/-1;display:flex!important;flex-wrap:wrap!important;gap:10px 18px!important;min-width:0}
 footer .footer-inner>p{grid-column:1/-1;margin:0!important;line-height:1.5}
 @media(max-width:700px){footer .footer-inner{grid-template-columns:minmax(0,1fr)!important;justify-items:start!important;gap:18px!important;text-align:left!important}footer .footer-brand{max-width:100%}footer .footer-nap,footer .footer-seo-links,footer .footer-inner>p{grid-column:1!important}footer .footer-nap{align-items:flex-start!important}footer .footer-seo-links{gap:10px 16px!important}}
+
+/* Independent chat button: separate from the expandable contacts menu */
+.standalone-chat-button{
+ position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom,0px));
+ z-index:1101;display:flex;align-items:center;gap:9px;padding:5px 5px 5px 14px;
+ border:1px solid #d6e6f7;border-radius:18px;background:rgba(255,255,255,.98);
+ color:#1b446b;font:750 12px/1.2 Manrope,system-ui,sans-serif;
+ box-shadow:0 8px 23px rgba(7,32,59,.16);cursor:pointer;
+ transition:transform .2s ease,box-shadow .2s ease;
+}
+.standalone-chat-label{white-space:nowrap}
+.standalone-chat-icon{width:42px;height:42px;display:grid;place-items:center;flex:none;border-radius:14px;background:linear-gradient(145deg,#268de9,#0f62c4);color:white}
+.standalone-chat-icon svg{display:block}
+.standalone-chat-button:focus-visible{outline:3px solid #59a8ff;outline-offset:3px}
+@media(hover:hover){.standalone-chat-button:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(7,32,59,.22)}}
+@media(max-width:700px){
+ .standalone-chat-button{right:14px;bottom:calc(146px + env(safe-area-inset-bottom,0px));border-radius:16px;padding:4px 4px 4px 12px}
+ .standalone-chat-icon{width:38px;height:38px;border-radius:12px}
+}
+@media(prefers-reduced-motion:reduce){.standalone-chat-button{transition:none}}
