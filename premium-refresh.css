@@ -372,3 +372,45 @@ html[data-alvi-theme="dark"] .destination-card .destination-badge{color:#17324c!
   .callback-form .iti__country-container{max-width:47%!important}
   .callback-form .iti input[type=tel]{font-size:16px!important}
 }
+
+/* All inner pages: readable dark-mode cards, destination articles, FAQs and legal pages. */
+html[data-alvi-theme="dark"] :is(.highlight-card,.fact-card,.blog-article,.blog-side-card,.other-destination-link,.booking-result,.faq-list details,.blog-note,.blog-table th,.blog-table td){
+  background-color:#122d48!important;border-color:#304b68!important;color:#eff5fc!important
+}
+html[data-alvi-theme="dark"] :is(.highlight-card,.fact-card,.blog-side-card,.other-destination-link,.booking-result,.faq-list details,.blog-article) :is(h1,h2,h3,h4,strong,summary){
+  color:#f0f7fd!important
+}
+html[data-alvi-theme="dark"] :is(.highlight-card,.fact-card,.blog-side-card,.other-destination-link,.booking-result,.faq-list details,.blog-article,.legal-content) :is(p,li,span,small){
+  color:#c7d9eb!important
+}
+html[data-alvi-theme="dark"] .blog-article :is(h2,h3){color:#eff7fd!important}
+html[data-alvi-theme="dark"] .blog-article :is(p,li,.lead){color:#cbdcec!important}
+html[data-alvi-theme="dark"] .blog-article a,
+html[data-alvi-theme="dark"] .blog-side-card a,
+html[data-alvi-theme="dark"] .other-destination-link a,
+html[data-alvi-theme="dark"] .legal-content a{color:#91caff!important}
+html[data-alvi-theme="dark"] .blog-meta{color:#b9ccdd!important}
+html[data-alvi-theme="dark"] .legal-content :is(h2,h3,h4){color:#f0f7fd!important}
+html[data-alvi-theme="dark"] .blog-table{border-color:#39556f!important}
+html[data-alvi-theme="dark"] .blog-table :is(td,th){color:#e1effb!important}
+html[data-alvi-theme="dark"] .group-travel-section{background:linear-gradient(180deg,#0b2034,#0d2943)!important}
+html[data-alvi-theme="dark"] .group-travel-card{background:#122d48!important;border-color:#34516e!important}
+html[data-alvi-theme="dark"] .group-travel-card :is(h3,h2,strong){color:#eef6fd!important}
+html[data-alvi-theme="dark"] .group-travel-card :is(p,small,li){color:#c5d6e8!important}
+html[data-alvi-theme="dark"] .about-photo img,
+html[data-alvi-theme="dark"] .offer-card img,
+html[data-alvi-theme="dark"] .excursion-card img,
+html[data-alvi-theme="dark"] .highlight-card img,
+html[data-alvi-theme="dark"] .blog-card img,
+html[data-alvi-theme="dark"] .hero-bg{visibility:visible!important;opacity:1!important;filter:none!important}
+html[data-alvi-theme="dark"] .hero .hero-overlay{background:linear-gradient(90deg,rgba(4,23,43,.93),rgba(5,35,66,.60) 60%,rgba(5,35,66,.12))!important}
+html[data-alvi-theme="dark"] .search-card-section{background:transparent!important}
+html[data-alvi-theme="dark"] .booking-result-icon{background:#15513e!important;color:#a1f5c1!important}
+html[data-alvi-theme="dark"] .privacy-check a{color:#9bcdff!important}
+html[data-alvi-theme="dark"] :is(.callback-card,.hero,.destination-hero,.legal-hero,.blue-section,.cta-band) :is(h1,h2,h3,p,small,strong){
+  color:#f3f8fe!important
+}
+html[data-alvi-theme="dark"] .contact-card .contact-list a{color:#d1e5f8!important}
+html[data-alvi-theme="dark"] .about-badge,html[data-alvi-theme="dark"] .about-badge span{color:#edf6ff!important}
+html[data-alvi-theme="dark"] .search-card .quick-destination-trigger{background-color:#142e48!important;color:#eef7ff!important}
+@media(max-width:700px){.blog-article,.blog-side-card,.highlight-card,.fact-card{min-width:0!important;max-width:100%!important}}
