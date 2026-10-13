@@ -1,0 +1,203 @@
+
+/* AlviTravel 2026 premium refinement. This layer loads after legacy and contact styles. */
+:root{--alvi-gold:#e5ad35;--alvi-gold-hover:#f2bf53;--alvi-navy:#102941;--alvi-surface:#fff;--alvi-hairline:#e4ebf2;--alvi-shadow:0 12px 36px rgba(14,42,70,.095)}
+body{font-kerning:normal}
+button,.btn,a{ -webkit-tap-highlight-color:transparent }
+.btn{letter-spacing:-.01em}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid #78aeed;outline-offset:3px}
+.btn.btn-primary{background:#1469bf;box-shadow:0 6px 18px rgba(13,86,165,.16);border:1px solid rgba(255,255,255,.08)}
+.btn.btn-primary:hover{background:#0f5ba9;box-shadow:0 10px 22px rgba(13,86,165,.20)}
+.btn.btn-gold,.btn.alvi-premium-cta{
+  background:var(--alvi-gold)!important;color:#172837!important;
+  border:1px solid #ca962a!important;border-radius:12px!important;
+  box-shadow:0 5px 15px rgba(98,67,13,.14)!important;
+  font-weight:850;gap:9px;transition:transform .18s ease,background .18s ease,box-shadow .18s ease
+}
+.btn.btn-gold:hover,.btn.alvi-premium-cta:hover{background:var(--alvi-gold-hover)!important;box-shadow:0 10px 22px rgba(98,67,13,.19)!important;transform:translateY(-2px)}
+.btn.alvi-premium-cta{min-height:45px;padding:11px 17px!important;white-space:nowrap}
+.btn.alvi-premium-cta span{font-size:17px;font-weight:500}
+#destinations{padding-top:clamp(64px,7vw,92px)}
+.excursions-section{background:linear-gradient(180deg,#f8fafc 0%,#eff5fa 100%)!important}
+.excursion-grid{align-items:stretch;gap:24px}
+.excursion-card{
+  display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  padding:0!important;border:1px solid var(--alvi-hairline)!important;
+  border-radius:20px!important;background:var(--alvi-surface)!important;
+  box-shadow:var(--alvi-shadow)!important;transition:transform .22s ease,box-shadow .22s ease
+}
+.excursion-card:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(14,42,70,.14)!important}
+.excursion-card>img{display:block;width:100%;height:220px!important;object-fit:cover!important;object-position:center!important;background:#e8edf3}
+.excursion-card:nth-child(1)>img{object-position:center 47%!important}
+.excursion-card:nth-child(3)>img{object-position:center 42%!important}
+.excursion-body{display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:13px;padding:23px!important}
+.excursion-body .tag{background:#f7f0df!important;color:#755519!important;border-radius:8px;padding:7px 10px}
+.excursion-body h3{font-size:clamp(18px,2vw,21px)!important;line-height:1.28!important;letter-spacing:-.02em!important;margin:0!important}
+.excursion-body p{color:var(--muted)!important;font-size:14px;line-height:1.7!important;min-height:0!important;margin:0!important}
+.excursion-highlights{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 3px;padding:0;list-style:none}
+.excursion-highlights li{font-size:11px;font-weight:750;color:#50647c;background:#edf2f7;border:1px solid #e2eaf1;border-radius:999px;padding:6px 10px;white-space:nowrap}
+.excursion-body .photo-credit{font-size:10px;color:var(--muted)!important;line-height:1.4;margin:0}
+.excursion-body .btn{margin-top:auto!important;max-width:100%}
+#offers{background:#fff!important}
+.offer-grid{gap:24px;align-items:stretch}
+.offer-card{
+  display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  border-radius:20px!important;border:1px solid var(--alvi-hairline)!important;
+  background:var(--alvi-surface)!important;box-shadow:var(--alvi-shadow)!important;
+  transition:transform .22s ease,box-shadow .22s ease!important
+}
+.offer-card:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(14,42,70,.14)!important}
+.offer-card>img{height:225px!important;object-fit:cover;object-position:center}
+.offer-body{display:flex;flex:1;flex-direction:column;gap:10px;padding:23px!important}
+.offer-body h3{font-size:clamp(20px,2.2vw,23px);line-height:1.3;margin:4px 0!important}
+.offer-body>p{font-size:14px;line-height:1.55;margin:0!important}
+.offer-body .tag-row{align-items:center;font-weight:750}
+.offer-body .tag{background:#e8f3ff;border-radius:8px}
+.offer-benefits{font-size:12px;line-height:1.8;color:#4c647b;min-height:46px}
+.offer-bottom{margin-top:auto!important;padding-top:18px;border-top:1px solid #edf0f4;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:13px!important}
+.offer-bottom>strong{font-size:23px!important;letter-spacing:-.02em}
+.offer-bottom>strong small{display:block;font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--muted);margin-bottom:4px}
+.offer-actions{display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center;gap:10px;width:100%}
+.offer-actions .btn{min-width:150px}
+.offer-actions .details-link{font-size:13px;font-weight:800;text-underline-offset:4px}
+.reviews-marquee{mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%)}
+.reviews-marquee:hover .reviews-track,.reviews-marquee:focus-within .reviews-track{animation-play-state:paused!important}
+.contact-card .hero-actions{display:flex!important;flex-wrap:wrap;gap:10px;margin-top:20px}
+.contact-card .hero-actions .btn{min-height:47px;padding:11px 17px;border-radius:12px}
+.contact-whatsapp-btn{background:#f0faf4!important;color:#17683a!important;border:1px solid #bfe6cf!important;box-shadow:none!important}
+.contact-whatsapp-btn:hover{background:#e3f5e9!important}
+.contact-whatsapp-btn img{display:block;flex:none;width:23px;height:23px}
+.contact-whatsapp-btn span{font-size:17px;color:#17683a}
+.mobile-action-bar a:first-child{background:#eef4fb!important;color:#133a5e!important}
+.mobile-action-bar a:last-child{background:#e6ad37!important;color:#14263c!important}
+.mobile-action-bar a{box-shadow:none!important;font-size:13px!important}
+/* One cohesive, professional menu with platform brand glyphs.
+   Contact toggle is ABOVE independent Chat, never at its coordinates. */
+:root{--alvi-control-right:18px;--alvi-chat-bottom:calc(18px + env(safe-area-inset-bottom,0px));--alvi-hub-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.contact-hub{right:var(--alvi-control-right)!important;bottom:var(--alvi-hub-bottom)!important}
+.contact-hub-menu{
+  box-sizing:border-box!important;width:234px!important;max-width:calc(100vw - 26px)!important;
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:2px!important;padding:8px!important;margin:0 0 10px!important;
+  background:rgba(255,255,255,.98)!important;border:1px solid #dfe9f2!important;
+  border-radius:19px!important;box-shadow:0 16px 48px rgba(13,42,75,.19)!important;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  max-height:calc(100dvh - 200px)!important;overflow-y:auto!important;
+}
+.contact-hub-item{
+  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+  box-sizing:border-box!important;width:100%!important;min-height:51px!important;
+  gap:12px!important;padding:6px 9px!important;border-radius:12px!important;
+  background:transparent!important;color:#15314e!important;border:1px solid transparent!important;
+  box-shadow:none!important;transition:background .16s ease!important
+}
+.contact-hub-item:hover,.contact-hub-item:focus-visible{background:#f0f5fa!important}
+.contact-hub-label{
+  order:2!important;flex:1!important;justify-content:flex-start!important;
+  width:auto!important;min-width:0!important;height:auto!important;min-height:0!important;
+  padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;
+  color:#183654!important;font:750 13px/1.3 Manrope,system-ui,sans-serif!important;
+  text-align:left!important;box-shadow:none!important
+}
+.contact-hub-icon,.contact-hub-instagram .contact-hub-icon{
+  order:1!important;flex:none!important;width:39px!important;height:39px!important;
+  min-width:39px!important;min-height:39px!important;max-width:39px!important;max-height:39px!important;
+  border-radius:12px!important;padding:0!important;overflow:hidden!important;background:none!important;
+  box-shadow:0 3px 8px rgba(13,42,75,.10)!important
+}
+.contact-hub-icon img{width:100%!important;height:100%!important;object-fit:contain!important}
+.contact-hub-toggle{
+  width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;
+  max-width:52px!important;max-height:52px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid rgba(255,255,255,.2)!important;border-radius:16px!important;
+  background:#143956!important;box-shadow:0 9px 26px rgba(11,37,65,.22)!important;
+}
+.contact-hub-dots svg{display:block}
+.contact-hub-close{font-weight:400!important;line-height:1}
+.standalone-chat-button{
+  right:var(--alvi-control-right)!important;bottom:var(--alvi-chat-bottom)!important;
+  height:52px;min-height:52px!important;padding:5px 5px 5px 15px!important;
+  background:rgba(255,255,255,.985)!important;border:1px solid #d9e5ee!important;
+  border-radius:15px!important;color:#173b60!important;
+  box-shadow:0 8px 24px rgba(13,42,75,.14)!important;
+  font:750 12px/1.2 Manrope,system-ui,sans-serif!important;gap:10px!important
+}
+.standalone-chat-icon{width:40px;height:40px;border-radius:11px;background:#196dbd;box-shadow:none}
+.standalone-chat-button:focus-visible,.contact-hub-toggle:focus-visible,.contact-hub-item:focus-visible{outline:3px solid #86b9ed!important;outline-offset:3px!important}
+/* Clear, discreet site-wide theme switch. */
+.alvi-theme-toggle{
+  display:inline-grid;place-items:center;flex:none;width:40px;height:40px;
+  border:1px solid #d9e5ef;border-radius:12px;background:#fff;color:#184269;
+  box-shadow:0 2px 8px rgba(10,39,70,.06);cursor:pointer;
+  transition:background .18s ease,transform .18s ease
+}
+.alvi-theme-toggle:hover{background:#eef5fc;transform:translateY(-1px)}
+.alvi-theme-toggle svg{width:18px;height:18px;display:block}
+.alvi-theme-toggle:focus-visible{outline:3px solid #86b9ed;outline-offset:3px}
+html[data-alvi-theme="dark"]{
+  --ink:#ebf3fb;--muted:#aec0d1;--soft:#0b2034;--line:#2d4560;
+  --blue-soft:#123c5f;--gold-soft:#423720;--white:#102943;
+  --alvi-surface:#102943;--alvi-hairline:#29435c;--alvi-shadow:0 14px 34px rgba(0,0,0,.18);
+  color-scheme:dark
+}
+html[data-alvi-theme="dark"] body{background:#0b1e32!important;color:var(--ink)!important}
+html[data-alvi-theme="dark"] .site-header{background:rgba(10,28,47,.97)!important;border-color:#28415b!important}
+html[data-alvi-theme="dark"] .brand,html[data-alvi-theme="dark"] .nav a{color:#eaf2fa!important}
+html[data-alvi-theme="dark"] .nav a:hover{color:#f0bc57!important}
+html[data-alvi-theme="dark"] .nav-actions select,html[data-alvi-theme="dark"] #lang,
+html[data-alvi-theme="dark"] .alvi-theme-toggle{background:#152f49!important;color:#e9f3fc!important;border-color:#34516f!important}
+html[data-alvi-theme="dark"] .alvi-theme-toggle:hover{background:#1e4060!important}
+html[data-alvi-theme="dark"] .section:not(.blue-section):not(.hero),html[data-alvi-theme="dark"] #offers,
+html[data-alvi-theme="dark"] .excursions-section{background:#0b1e32!important;color:#edf4fb!important}
+html[data-alvi-theme="dark"] .soft,html[data-alvi-theme="dark"] .callback-section{background:#0c2237!important;color:#edf4fb!important}
+html[data-alvi-theme="dark"] .section-head p,html[data-alvi-theme="dark"] .offer-body p,
+html[data-alvi-theme="dark"] .excursion-body p{color:#b5c7da!important}
+html[data-alvi-theme="dark"] :is(.offer-card,.excursion-card,.destination-card,.why-card,.booking-form,.booking-intro,.contact-card,.callback-card,.search-card,.about-badge,.group-travel-card,.faq-card,.blog-card,.cta-band,.destination-facts,.stats div){
+  background:#122e49!important;border-color:#304965!important;color:#edf4fb!important
+}
+html[data-alvi-theme="dark"] :is(.offer-body,.excursion-body,.booking-intro,.contact-card,.destination-card) h2,
+html[data-alvi-theme="dark"] :is(.offer-body,.excursion-body,.booking-intro,.contact-card,.destination-card) h3{color:#edf4fb!important}
+html[data-alvi-theme="dark"] .offer-bottom{border-color:#324960}
+html[data-alvi-theme="dark"] .offer-benefits,html[data-alvi-theme="dark"] .details-link,
+html[data-alvi-theme="dark"] .offer-bottom strong small{color:#bed0e2!important}
+html[data-alvi-theme="dark"] .excursion-highlights li{background:#193b56;border-color:#32526e;color:#d5e5f2}
+html[data-alvi-theme="dark"] :is(input,textarea,select){background:#122d48!important;color:#e8f1fa!important;border-color:#36536f!important}
+html[data-alvi-theme="dark"] :is(input,textarea)::placeholder{color:#a1b7cb!important}
+html[data-alvi-theme="dark"] .mobile-action-bar{background:rgba(13,35,56,.98)!important;border-color:#284864!important}
+html[data-alvi-theme="dark"] .contact-hub-menu{background:#102b46!important;border-color:#2f4d67!important}
+html[data-alvi-theme="dark"] .contact-hub-item{color:#eef6fb!important}
+html[data-alvi-theme="dark"] .contact-hub-label{color:#eef6fb!important}
+html[data-alvi-theme="dark"] .contact-hub-item:hover{background:#1d405f!important}
+html[data-alvi-theme="dark"] .standalone-chat-button{background:#142f49!important;border-color:#34516f!important;color:#f0f7fd!important}
+html[data-alvi-theme="dark"] .contact-whatsapp-btn{background:#123d32!important;color:#c1f4d7!important;border-color:#2c7055!important}
+html[data-alvi-theme="dark"] .contact-whatsapp-btn span{color:#c1f4d7!important}
+html[data-alvi-theme="dark"] .menu-btn{background:#1b405f!important;color:#f0f7fd!important}
+html[data-alvi-theme="dark"] .nav{background:#0c2943!important;border-color:#294767!important}
+@media(max-width:700px){
+  :root{--alvi-control-right:14px;--alvi-chat-bottom:calc(83px + env(safe-area-inset-bottom,0px));--alvi-hub-bottom:calc(148px + env(safe-area-inset-bottom,0px))}
+  .contact-hub-menu{width:219px!important;max-height:calc(100dvh - 225px)!important;gap:2px!important;margin-bottom:9px!important}
+  .contact-hub-item{min-height:48px!important;padding:5px 8px!important}
+  .contact-hub-icon,.contact-hub-instagram .contact-hub-icon{width:37px!important;height:37px!important;min-width:37px!important;min-height:37px!important;max-width:37px!important;max-height:37px!important}
+  .contact-hub-toggle{width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important;max-width:50px!important;max-height:50px!important}
+  .standalone-chat-button{height:49px;min-height:49px!important;padding:4px 4px 4px 12px!important}
+  .standalone-chat-icon{height:39px;width:39px}
+  .alvi-theme-toggle{width:38px;height:38px;border-radius:11px}
+  .excursion-grid,.offer-grid{gap:18px}
+  .excursion-body,.offer-body{padding:19px!important}
+  .excursion-card>img,.offer-card>img{height:195px!important}
+  .offer-actions .btn{flex:1}
+  .contact-card .hero-actions{align-items:stretch}
+  .contact-card .hero-actions a{max-width:100%}
+}
+@media(max-width:390px){.alvi-theme-toggle{width:35px;height:36px}.offer-actions{align-items:stretch}.offer-actions .details-link{padding:9px 0}}
+@media(prefers-reduced-motion:reduce){.btn,.offer-card,.excursion-card,.alvi-theme-toggle,.standalone-chat-button{transition:none!important}.reviews-track{animation:none!important}}
+
+/* Preserve comfortable tap targets on the narrowest iPhones. */
+@media(max-width:360px){
+  .site-header .header-phone{display:none!important}
+  .site-header .nav-actions{gap:5px!important}
+  .contact-hub-menu{max-width:calc(100vw - 30px)!important}
+}
+.contact-list .instagram-icon{border:0!important;background:transparent!important;overflow:hidden!important}
+.contact-list .instagram-icon img{display:block;width:100%!important;height:100%!important;object-fit:contain}
+@media(max-width:700px){#destinations{padding-top:56px!important}}
