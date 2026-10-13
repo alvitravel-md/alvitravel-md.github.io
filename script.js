@@ -488,111 +488,32 @@ if(document.readyState==='loading'){
 }
 
 
+/* Crisp is intentionally not loaded until the visitor explicitly opens Chat online.
+   Loading it on every page produced an empty white third-party iframe overlay. */
 function loadCrispChat(){
   const websiteId=(window.ALVI_CRISP_WEBSITE_ID||'').trim();
-  if(!websiteId||window.__alviCrispLoaded) return;
+  if(!websiteId||window.__alviCrispLoaded)return !!websiteId;
   window.__alviCrispLoaded=true;
   window.$crisp=window.$crisp||[];
   window.CRISP_WEBSITE_ID=websiteId;
   window.$crisp.push(['safe',true]);
-  // Crisp can retain an opened conversation between navigation/page reloads.
-  // Keep its floating panel closed until the visitor explicitly taps Chat online.
-  window.$crisp.push(['do','chat:close']);
   window.$crisp.push(['do','chat:hide']);
   window.$crisp.push(['set','session:data',[[['site','alvitravel.md']]]]);
-  const s=document.createElement('script');
-  s.src='https://client.crisp.chat/l.js';
-  s.async=true;
-  s.crossOrigin='anonymous';
-  s.onerror=()=>{
+  const script=document.createElement('script');
+  script.src='https://client.crisp.chat/l.js';
+  script.async=true;
+  script.crossOrigin='anonymous';
+  script.onerror=()=>{
     window.__alviCrispLoadFailed=true;
+    document.body.classList.remove('alvi-crisp-open');
     const button=document.getElementById('contactHubChat');
+    if(button)button.setAttribute('aria-label','Chat indisponibil. Contactează-ne prin WhatsApp');
     const label=button?.querySelector('.standalone-chat-label');
-    if(label) label.textContent='Scrie pe WhatsApp';
-    if(button) button.setAttribute('aria-label','Chat temporar indisponibil. Scrie pe WhatsApp');
+    if(label)label.textContent='WhatsApp';
   };
-  document.head.appendChild(s);
-  setupCrispNudge();
+  document.head.appendChild(script);
+  return true;
 }
-
-function setupCrispNudge(){
-  if(window.__alviCrispNudgeReady) return;
-  window.__alviCrispNudgeReady=true;
-
-  const copy={
-    ro:'Suntem online. Scrie-ne și un consultant AlviTravel îți răspunde. 👇',
-    en:'We are online. Message us and an AlviTravel consultant will reply. 👇',
-    ru:'Мы онлайн. Напишите нам, и консультант AlviTravel ответит вам. 👇'
-  };
-  const getLang=()=>{
-    try{return localStorage.getItem('alvi_lang')||'ro';}catch(_){return 'ro';}
-  };
-  const openChat=()=>{
-    window.$crisp=window.$crisp||[];
-    window.$crisp.push(['do','chat:open']);
-    document.querySelector('.alvi-chat-nudge')?.classList.add('is-hidden');
-    document.querySelector('.alvi-chat-badge')?.classList.add('is-hidden');
-    try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
-  };
-  const ensureUi=()=>{
-    const launcher=document.querySelector('.crisp-client [aria-label="Open chat"]');
-    if(!launcher) return false;
-
-    if(!document.querySelector('.alvi-chat-badge')){
-      const badge=document.createElement('span');
-      badge.className='alvi-chat-badge';
-      badge.textContent='1';
-      badge.setAttribute('aria-hidden','true');
-      document.body.appendChild(badge);
-    }
-    if(!document.querySelector('.alvi-chat-nudge')){
-      const nudge=document.createElement('button');
-      nudge.type='button';
-      nudge.className='alvi-chat-nudge';
-      nudge.setAttribute('aria-label','Deschide chatul AlviTravel');
-      nudge.innerHTML='<span class="alvi-chat-nudge__status"></span><span class="alvi-chat-nudge__text"></span><span class="alvi-chat-nudge__close" aria-hidden="true">×</span>';
-      nudge.querySelector('.alvi-chat-nudge__text').textContent=copy[getLang()]||copy.ro;
-      nudge.addEventListener('click',e=>{
-        if(e.target.closest('.alvi-chat-nudge__close')){
-          e.stopPropagation();
-          nudge.classList.add('is-hidden');
-          try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
-          return;
-        }
-        openChat();
-      });
-      document.body.appendChild(nudge);
-      let seen=false;
-      try{seen=sessionStorage.getItem('alvi_crisp_seen')==='1';}catch(_){}
-      if(!seen) setTimeout(()=>nudge.classList.add('is-visible'),1200);
-      else nudge.classList.add('is-hidden');
-    }
-    launcher.addEventListener('click',()=>{
-      document.querySelector('.alvi-chat-nudge')?.classList.add('is-hidden');
-      document.querySelector('.alvi-chat-badge')?.classList.add('is-hidden');
-      try{sessionStorage.setItem('alvi_crisp_seen','1');}catch(_){}
-    },{once:true});
-
-    return true;
-  };
-
-  const observer=new MutationObserver(()=>{
-    if(ensureUi()) observer.disconnect();
-  });
-  observer.observe(document.documentElement,{childList:true,subtree:true});
-  ensureUi();
-
-  window.addEventListener('alvi-language-change',e=>{
-    const n=document.querySelector('.alvi-chat-nudge__text');
-    if(n) n.textContent=copy[e.detail?.lang]||copy.ro;
-  });
-}
-if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',loadCrispChat,{once:true});
-}else{
-  loadCrispChat();
-}
-
 
 /* Expandable contact hub */
 const contactHub=document.getElementById('contactHub');
@@ -610,15 +531,22 @@ function setContactHub(open){
 contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
 /* Keep controls separate from the Crisp panel while it is open. */
 window.$crisp=window.$crisp||[];
-window.$crisp.push(['on','chat:opened',()=>{setContactHub(false);document.body.classList.add('alvi-crisp-open');}]);
-window.$crisp.push(['on','chat:closed',()=>{document.body.classList.remove('alvi-crisp-open');window.$crisp.push(['do','chat:hide']);}]);
+window.$crisp.push(['on','chat:opened',()=>{setContactHub(false);if(window.__alviUserOpenedChat)document.body.classList.add('alvi-crisp-open');else window.$crisp.push(['do','chat:close']);}]);
+window.$crisp.push(['on','chat:closed',()=>{window.__alviUserOpenedChat=false;document.body.classList.remove('alvi-crisp-open');window.$crisp.push(['do','chat:hide']);}]);
 document.getElementById('contactHubChat')?.addEventListener('click',()=>{
   setContactHub(false);
   if(window.__alviCrispLoadFailed){
     window.open('https://wa.me/37368004449','_blank','noopener');
     return;
   }
+  // Show only on an explicit visitor click; never render a Crisp panel on page load.
   window.__alviUserOpenedChat=true;
+  document.body.classList.add('alvi-crisp-open');
+  if(!loadCrispChat()){
+    document.body.classList.remove('alvi-crisp-open');
+    window.open('https://wa.me/37368004449','_blank','noopener');
+    return;
+  }
   window.$crisp.push(['do','chat:show']);
   window.$crisp.push(['do','chat:open']);
 });
@@ -634,6 +562,7 @@ document.getElementById('contactHubChat')?.addEventListener('click',()=>{
     window.$crisp.push(['do','chat:close']);
     window.$crisp.push(['do','chat:hide']);
     document.body.classList.remove('alvi-crisp-open');
+    window.__alviUserOpenedChat=false;
   });
   document.body.appendChild(button);
 })();

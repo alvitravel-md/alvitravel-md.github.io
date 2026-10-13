@@ -414,3 +414,21 @@ html[data-alvi-theme="dark"] .contact-card .contact-list a{color:#d1e5f8!importa
 html[data-alvi-theme="dark"] .about-badge,html[data-alvi-theme="dark"] .about-badge span{color:#edf6ff!important}
 html[data-alvi-theme="dark"] .search-card .quick-destination-trigger{background-color:#142e48!important;color:#eef7ff!important}
 @media(max-width:700px){.blog-article,.blog-side-card,.highlight-card,.fact-card{min-width:0!important;max-width:100%!important}}
+
+
+/* HARD FIX: prevent the empty white Crisp chat overlay from ever appearing
+   unless the visitor intentionally presses the separate "Chat online" button.
+   The Crisp SDK itself is lazy-loaded in script.js. */
+body:not(.alvi-crisp-open) .crisp-client,
+body:not(.alvi-crisp-open) iframe[src*="crisp.chat"],
+body:not(.alvi-crisp-open) iframe[src*="crisp.im"]{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+body.alvi-crisp-open .crisp-client{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+body:not(.alvi-crisp-open) #alviCrispDismiss{display:none!important}

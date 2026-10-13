@@ -68,6 +68,8 @@ function contrast(c1,c2){
               faq:faq?{bg:style(faq.parentElement).backgroundColor,text:style(faq).color}:null,
               button:button?box(button):null,nav:document.querySelector('.site-header')?.getBoundingClientRect().width,
               crispOpen:document.body.classList.contains('alvi-crisp-open'),
+              crispScriptBeforeClick:!!document.querySelector('script[src*="client.crisp.chat/l.js"]'),
+              crispClientBeforeClick:!!document.querySelector('.crisp-client'),
               close:document.querySelector('#alviCrispDismiss')!==null,
               imgVisibility:[...document.querySelectorAll('.offer-card>img,.excursion-card>img,.highlight-card img')].map(x=>style(x).visibility)
             };
@@ -90,7 +92,21 @@ function contrast(c1,c2){
             }
             check(!report.crispOpen,viewport.width+' '+mode+' Crisp closed by default');
             check(report.close,viewport.width+' '+mode+' Crisp failsafe dismiss exists');
+            check(!report.crispScriptBeforeClick,viewport.width+' '+mode+' Crisp widget script NEVER loads on page entry');
+            check(!report.crispClientBeforeClick,viewport.width+' '+mode+' no empty floating Crisp widget on page entry');
+            const activated=await page.evaluate(()=>{
+              const chat=document.getElementById('contactHubChat');
+              if(!chat)return {missing:true};
+              chat.click();
+              const active=document.body.classList.contains('alvi-crisp-open');
+              const loaded=!!document.querySelector('script[src*="client.crisp.chat/l.js"]');
+              document.querySelector('#alviCrispDismiss')?.click();
+              return {active,loaded,closed:!document.body.classList.contains('alvi-crisp-open')};
+            });
+            check(activated.active&&activated.loaded&&activated.closed,viewport.width+' '+mode+' chat starts ONLY on click and can be dismissed');
+
           }
+          if(link!=='/')check(!report.crispScriptBeforeClick,link+' '+viewport.width+' '+mode+' inner page does not auto-create Crisp widget');
           if(mode==='dark'&&report.blog && report.blog.bg.startsWith('rgb('))check(contrast(report.blog.pcolor,report.blog.bg)>=4.5,link+' '+viewport.width+' dark blog text contrast');
           if(mode==='dark'&&report.faq && report.faq.bg.startsWith('rgb('))check(contrast(report.faq.text,report.faq.bg)>=4.5,link+' '+viewport.width+' dark FAQ contrast');
           check(errors.length===0,link+' '+viewport.width+' '+mode+' no JavaScript exceptions'+(errors.length?': '+errors.slice(0,2).join('; '):''));
