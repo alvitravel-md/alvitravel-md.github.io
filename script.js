@@ -495,12 +495,22 @@ function loadCrispChat(){
   window.$crisp=window.$crisp||[];
   window.CRISP_WEBSITE_ID=websiteId;
   window.$crisp.push(['safe',true]);
+  // Crisp can retain an opened conversation between navigation/page reloads.
+  // Keep its floating panel closed until the visitor explicitly taps Chat online.
+  window.$crisp.push(['do','chat:close']);
   window.$crisp.push(['do','chat:hide']);
   window.$crisp.push(['set','session:data',[[['site','alvitravel.md']]]]);
   const s=document.createElement('script');
   s.src='https://client.crisp.chat/l.js';
   s.async=true;
   s.crossOrigin='anonymous';
+  s.onerror=()=>{
+    window.__alviCrispLoadFailed=true;
+    const button=document.getElementById('contactHubChat');
+    const label=button?.querySelector('.standalone-chat-label');
+    if(label) label.textContent='Scrie pe WhatsApp';
+    if(button) button.setAttribute('aria-label','Chat temporar indisponibil. Scrie pe WhatsApp');
+  };
   document.head.appendChild(s);
   setupCrispNudge();
 }
@@ -604,8 +614,36 @@ window.$crisp.push(['on','chat:opened',()=>{setContactHub(false);document.body.c
 window.$crisp.push(['on','chat:closed',()=>{document.body.classList.remove('alvi-crisp-open');window.$crisp.push(['do','chat:hide']);}]);
 document.getElementById('contactHubChat')?.addEventListener('click',()=>{
   setContactHub(false);
+  if(window.__alviCrispLoadFailed){
+    window.open('https://wa.me/37368004449','_blank','noopener');
+    return;
+  }
+  window.__alviUserOpenedChat=true;
   window.$crisp.push(['do','chat:show']);
   window.$crisp.push(['do','chat:open']);
+});
+// Failsafe dismiss control even if the third-party chat iframe renders blank.
+(function(){
+  const button=document.createElement('button');
+  button.type='button';
+  button.id='alviCrispDismiss';
+  button.className='alvi-crisp-dismiss';
+  button.setAttribute('aria-label','Închide chatul');
+  button.textContent='×';
+  button.addEventListener('click',()=>{
+    window.$crisp.push(['do','chat:close']);
+    window.$crisp.push(['do','chat:hide']);
+    document.body.classList.remove('alvi-crisp-open');
+  });
+  document.body.appendChild(button);
+})();
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&document.body.classList.contains('alvi-crisp-open')){
+    window.$crisp.push(['do','chat:close']);
+    window.$crisp.push(['do','chat:hide']);
+    document.body.classList.remove('alvi-crisp-open');
+    document.getElementById('contactHubChat')?.focus();
+  }
 });
 contactHub?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setContactHub(false)));
 document.addEventListener('click',e=>{
