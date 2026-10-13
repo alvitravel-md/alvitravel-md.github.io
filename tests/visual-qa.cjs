@@ -47,7 +47,7 @@ function contrast(c1,c2){
         page.on('pageerror',err=>errors.push(err.message));
         try{
           const response=await page.goto(BASE+link,{waitUntil:'domcontentloaded',timeout:25000});
-          check(response.status()===200,link+' HTTP 200');
+          check([200,304].includes(response.status()),link+' HTTP 200 or 304 (cached) — got '+response.status());
           await page.waitForSelector('#alviThemeToggle',{timeout:10000});
           await new Promise(r=>setTimeout(r,400));
           const report=await page.evaluate(()=>{
@@ -55,6 +55,7 @@ function contrast(c1,c2){
             const dest=[...document.querySelectorAll('.destination-card')].map(el=>({cls:el.className,bg:style(el).backgroundImage,visible:el.getBoundingClientRect().width>100}));
             const cb=document.querySelector('#callbackPhone');
             const iti=document.querySelector('.callback-form .iti__selected-dial-code');
+            const itiReady=typeof window.intlTelInput==='function';
             const blog=document.querySelector('.blog-article');
             const faq=document.querySelector('.faq-list summary');
             const button=document.querySelector('#alviThemeToggle');
@@ -62,7 +63,7 @@ function contrast(c1,c2){
             return {
               mode:document.documentElement.getAttribute('data-alvi-theme'),scroll:document.documentElement.scrollWidth-window.innerWidth,
               dest,cb:cb?{bg:style(cb).backgroundColor,text:style(cb).color,fill:style(cb).webkitTextFillColor,placeholder:cb.placeholder}:null,
-              dial:iti?{text:iti.textContent.trim(),color:style(iti).color}:null,
+              dial:iti?{text:iti.textContent.trim(),color:style(iti).color}:null,itiReady,
               blog:blog?{bg:style(blog).backgroundColor,pcolor:style(blog.querySelector('p')).color}:null,
               faq:faq?{bg:style(faq.parentElement).backgroundColor,text:style(faq).color}:null,
               button:button?box(button):null,nav:document.querySelector('.site-header')?.getBoundingClientRect().width,
@@ -83,12 +84,16 @@ function contrast(c1,c2){
           if(link==='/'){
             check(report.cb!==null,viewport.width+' callback input exists');
             if(report.cb)check(contrast(report.cb.text,report.cb.bg)>=4.5,viewport.width+' '+mode+' callback field contrast 4.5+: '+contrast(report.cb.text,report.cb.bg).toFixed(2));
+            if(report.itiReady && report.cb){
+              check(report.dial&&report.dial.text.includes('373'),viewport.width+' '+mode+' Moldova country dial code is shown');
+              if(report.dial)check(contrast(report.dial.color,report.cb.bg)>=4.5,viewport.width+' '+mode+' country dial code readable');
+            }
             check(!report.crispOpen,viewport.width+' '+mode+' Crisp closed by default');
             check(report.close,viewport.width+' '+mode+' Crisp failsafe dismiss exists');
           }
           if(mode==='dark'&&report.blog && report.blog.bg.startsWith('rgb('))check(contrast(report.blog.pcolor,report.blog.bg)>=4.5,link+' '+viewport.width+' dark blog text contrast');
           if(mode==='dark'&&report.faq && report.faq.bg.startsWith('rgb('))check(contrast(report.faq.text,report.faq.bg)>=4.5,link+' '+viewport.width+' dark FAQ contrast');
-          if(errors.length)console.log('Page JS warnings ('+link+'): ',errors.slice(0,3));
+          check(errors.length===0,link+' '+viewport.width+' '+mode+' no JavaScript exceptions'+(errors.length?': '+errors.slice(0,2).join('; '):''));
         }catch(e){problems.push(link+' '+viewport.width+' '+mode+': '+e.message);console.error('FAIL',e.stack)}
         await page.close();
       }

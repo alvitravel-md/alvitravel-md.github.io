@@ -428,7 +428,7 @@ function applyLanguage(langCode){
 
 const lang=document.getElementById('lang');
 const savedLang=(()=>{try{return localStorage.getItem('alvi_lang')}catch(_){return null}})();
-if(savedLang&&['ro','ru','en'].includes(savedLang)){lang.value=savedLang;requestAnimationFrame(()=>applyLanguage(savedLang));}
+if(lang&&savedLang&&['ro','ru','en'].includes(savedLang)){lang.value=savedLang;requestAnimationFrame(()=>applyLanguage(savedLang));}
 lang?.addEventListener('change',e=>applyLanguage(e.target.value));
 
 function openGmailApp(event){
