@@ -232,17 +232,7 @@ html[data-alvi-theme="dark"] .booking-form input[type=date]::-webkit-calendar-pi
 /* Visual QA fixes — 2026-10-13: keep photographic backgrounds intact, restore input contrast,
    prevent phantom chat overlays and remove mobile clipping. */
 /* IMPORTANT: background-color instead of the background shorthand preserves existing CSS background-image. */
-html[data-alvi-theme="dark"] .destination-card,
-html[data-alvi-theme="dark"] .destination-tile,
-html[data-alvi-theme="dark"] .destination-hero,
-html[data-alvi-theme="dark"] .hero,
-html[data-alvi-theme="dark"] .blog-hero,
-html[data-alvi-theme="dark"] .card-with-photo{
-  background-image:var(--alvi-photo-override, revert-layer);
-}
-/* Revert the prior property declaration without replacing the background images on visual cards. */
 html[data-alvi-theme="dark"] .destination-card{
-  background-image:revert-layer!important;
   background-position:center!important;
   background-size:cover!important;
   color:#fff!important;
