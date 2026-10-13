@@ -334,3 +334,41 @@ html,body{max-width:100%;overflow-x:clip}
  .destination-card{background-size:cover!important}
  .contact-card,.booking-form,.offer-card,.excursion-card{min-width:0}
 }
+
+/* Independent dismiss control for a Crisp chat panel that fails to paint. */
+.alvi-crisp-dismiss{
+  display:none;position:fixed;top:92px;right:24px;z-index:2147483000;
+  width:39px;height:39px;align-items:center;justify-content:center;
+  border:1px solid #cbd9e6;border-radius:12px;
+  background:#fff;color:#173956;font:400 27px/1 Arial,sans-serif;
+  box-shadow:0 6px 18px rgba(13,42,75,.18);
+  cursor:pointer
+}
+body.alvi-crisp-open .alvi-crisp-dismiss{display:flex}
+.alvi-crisp-dismiss:hover{background:#eff6fc}
+.alvi-crisp-dismiss:focus-visible{outline:3px solid #79addf;outline-offset:3px}
+@media(max-width:700px){.alvi-crisp-dismiss{top:82px;right:14px}}
+/* Keep the site content unobscured by any decorative floating panels. */
+.alvi-chat-nudge,.alvi-chat-badge{display:none!important}
+html[data-alvi-theme="dark"] .quick-destination-trigger,
+html[data-alvi-theme="dark"] .quick-destination-menu,
+html[data-alvi-theme="dark"] .quick-destination-option{
+  background-color:#142e48!important;color:#eaf4fd!important;border-color:#35536e!important
+}
+html[data-alvi-theme="dark"] .quick-destination-option:hover{background-color:#234965!important}
+html[data-alvi-theme="dark"] .search-card .field label,
+html[data-alvi-theme="dark"] .booking-form .field label,
+html[data-alvi-theme="dark"] .children-ages-title{color:#d2e0ee!important}
+html[data-alvi-theme="dark"] #reviews .reviews-all-link,
+html[data-alvi-theme="dark"] #reviews .reviews-rating-link{color:#f3f8ff!important}
+html[data-alvi-theme="dark"] .about-badge :is(strong,span),
+html[data-alvi-theme="dark"] .stats :is(strong,span),
+html[data-alvi-theme="dark"] .booking-result :is(h3,p){
+  color:#e5f0fa!important
+}
+html[data-alvi-theme="dark"] .destination-card .destination-badge{color:#17324c!important}
+@media(max-width:700px){
+  .contact-hub,.standalone-chat-button{max-width:calc(100vw - 20px)}
+  .callback-form .iti__country-container{max-width:47%!important}
+  .callback-form .iti input[type=tel]{font-size:16px!important}
+}
