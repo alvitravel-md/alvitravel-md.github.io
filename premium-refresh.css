@@ -432,3 +432,20 @@ body.alvi-crisp-open .crisp-client{
   pointer-events:auto!important;
 }
 body:not(.alvi-crisp-open) #alviCrispDismiss{display:none!important}
+
+
+/* FIX: the previously invisible social links left their WHITE MENU PANEL VISIBLE
+   because premium CSS always gave the container a background. The closed panel
+   must leave no painted box, shadow or click target whatsoever. */
+#contactHub:not(.is-open) #contactHubMenu{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+#contactHub.is-open #contactHubMenu{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}

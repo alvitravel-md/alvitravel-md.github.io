@@ -92,6 +92,23 @@ function contrast(c1,c2){
             }
             check(!report.crispOpen,viewport.width+' '+mode+' Crisp closed by default');
             check(report.close,viewport.width+' '+mode+' Crisp failsafe dismiss exists');
+
+            const socialPanel=await page.evaluate(()=>{
+              const hub=document.getElementById('contactHub');
+              const menu=document.getElementById('contactHubMenu');
+              const trigger=document.getElementById('contactHubToggle');
+              if(!hub||!menu||!trigger)return {missing:true};
+              const closed={display:getComputedStyle(menu).display,height:menu.getBoundingClientRect().height,aria:menu.getAttribute('aria-hidden')};
+              trigger.click();
+              const opened={display:getComputedStyle(menu).display,height:menu.getBoundingClientRect().height,aria:menu.getAttribute('aria-hidden'),expanded:trigger.getAttribute('aria-expanded')};
+              trigger.click();
+              const closedAgain={display:getComputedStyle(menu).display,height:menu.getBoundingClientRect().height,aria:menu.getAttribute('aria-hidden')};
+              return {closed,opened,closedAgain};
+            });
+            check(socialPanel.closed?.display==='none'&&socialPanel.closed.height===0&&socialPanel.closed.aria==='true',viewport.width+' '+mode+' COLLAPSED social menu has NO white rectangle');
+            check(socialPanel.opened?.display==='flex'&&socialPanel.opened.height>0&&socialPanel.opened.aria==='false'&&socialPanel.opened.expanded==='true',viewport.width+' '+mode+' social menu opens visibly');
+            check(socialPanel.closedAgain?.display==='none'&&socialPanel.closedAgain.height===0,viewport.width+' '+mode+' menu leaves NO panel after closing');
+
             check(!report.crispScriptBeforeClick,viewport.width+' '+mode+' Crisp widget script NEVER loads on page entry');
             check(!report.crispClientBeforeClick,viewport.width+' '+mode+' no empty floating Crisp widget on page entry');
             const activated=await page.evaluate(()=>{
