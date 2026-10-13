@@ -148,13 +148,15 @@ html[data-alvi-theme="dark"] .nav-actions select,html[data-alvi-theme="dark"] #l
 html[data-alvi-theme="dark"] .alvi-theme-toggle{background:#152f49!important;color:#e9f3fc!important;border-color:#34516f!important}
 html[data-alvi-theme="dark"] .alvi-theme-toggle:hover{background:#1e4060!important}
 html[data-alvi-theme="dark"] .section:not(.blue-section):not(.hero),html[data-alvi-theme="dark"] #offers,
-html[data-alvi-theme="dark"] .excursions-section{background:#0b1e32!important;color:#edf4fb!important}
-html[data-alvi-theme="dark"] .soft,html[data-alvi-theme="dark"] .callback-section{background:#0c2237!important;color:#edf4fb!important}
+html[data-alvi-theme="dark"] .excursions-section{background-color:#0b1e32!important;color:#edf4fb!important}
+html[data-alvi-theme="dark"] .soft,html[data-alvi-theme="dark"] .callback-section{background-color:#0c2237!important;color:#edf4fb!important}
 html[data-alvi-theme="dark"] .section-head p,html[data-alvi-theme="dark"] .offer-body p,
 html[data-alvi-theme="dark"] .excursion-body p{color:#b5c7da!important}
-html[data-alvi-theme="dark"] :is(.offer-card,.excursion-card,.destination-card,.why-card,.booking-form,.booking-intro,.contact-card,.callback-card,.search-card,.about-badge,.group-travel-card,.faq-card,.blog-card,.cta-band,.destination-facts,.stats div){
-  background:#122e49!important;border-color:#304965!important;color:#edf4fb!important
+html[data-alvi-theme="dark"] :is(.offer-card,.excursion-card,.why-card,.booking-form,.booking-intro,.contact-card,.search-card,.about-badge,.group-travel-card,.faq-card,.blog-card,.cta-band,.destination-facts,.stats div){
+  background-color:#122e49!important;border-color:#304965!important;color:#edf4fb!important
 }
+/* Background-image based destination cards must retain their actual photographs. */
+html[data-alvi-theme="dark"] .destination-card{border-color:#304965!important;color:#fff!important}
 html[data-alvi-theme="dark"] :is(.offer-body,.excursion-body,.booking-intro,.contact-card,.destination-card) h2,
 html[data-alvi-theme="dark"] :is(.offer-body,.excursion-body,.booking-intro,.contact-card,.destination-card) h3{color:#edf4fb!important}
 html[data-alvi-theme="dark"] .offer-bottom{border-color:#324960}
@@ -225,3 +227,120 @@ html[data-alvi-theme="dark"] .booking-form input[type=date]::-webkit-calendar-pi
   .excursion-card:hover>img,.offer-card:hover>img{transform:scale(1.02)}
 }
 @media(prefers-reduced-motion:reduce){.excursion-card>img,.offer-card>img{transition:none}}
+
+
+/* Visual QA fixes — 2026-10-13: keep photographic backgrounds intact, restore input contrast,
+   prevent phantom chat overlays and remove mobile clipping. */
+/* IMPORTANT: background-color instead of the background shorthand preserves existing CSS background-image. */
+html[data-alvi-theme="dark"] .destination-card,
+html[data-alvi-theme="dark"] .destination-tile,
+html[data-alvi-theme="dark"] .destination-hero,
+html[data-alvi-theme="dark"] .hero,
+html[data-alvi-theme="dark"] .blog-hero,
+html[data-alvi-theme="dark"] .card-with-photo{
+  background-image:var(--alvi-photo-override, revert-layer);
+}
+/* Revert the prior property declaration without replacing the background images on visual cards. */
+html[data-alvi-theme="dark"] .destination-card{
+  background-image:revert-layer!important;
+  background-position:center!important;
+  background-size:cover!important;
+  color:#fff!important;
+}
+html[data-alvi-theme="dark"] .destination-card .card-copy,
+html[data-alvi-theme="dark"] .destination-card .card-copy :is(h2,h3,h4,p,span,strong),
+html[data-alvi-theme="dark"] .destination-card .link-btn{color:#fff!important}
+html[data-alvi-theme="dark"] .destination-card .shade{background:linear-gradient(0deg,rgba(3,22,40,.89) 0%,rgba(3,22,40,.08) 75%)!important}
+html[data-alvi-theme="dark"] .destination-badge{background:rgba(255,255,255,.96)!important;color:#15314b!important}
+/* Restore the blue CTA block's artwork: previously replaced by the generic card rule. */
+html[data-alvi-theme="dark"] .callback-card{
+  background:linear-gradient(135deg,#0b396b,#0c599e)!important;
+  color:#fff!important;border-color:rgba(255,255,255,.2)!important
+}
+html[data-alvi-theme="dark"] .callback-card :is(h2,h3,p,small,.kicker){color:#fff!important}
+html[data-alvi-theme="dark"] .callback-card .kicker{color:#fce08b!important}
+html[data-alvi-theme="dark"] .callback-section{background:linear-gradient(180deg,#0c2237 0%,#0b1e32 100%)!important}
+/* Make all phone inputs readable in both themes; country dial codes are outside the <input>. */
+.booking-form .iti,.callback-form .iti{width:100%!important;max-width:100%!important;min-width:0!important}
+.callback-form{min-width:0!important}
+.callback-form>.iti,.booking-form .iti{min-width:0!important}
+.callback-form .iti input[type=tel],
+.booking-form .iti input[type=tel]{
+  box-sizing:border-box!important;display:block!important;width:100%!important;min-width:0!important;
+  height:52px!important;background:#fff!important;color:#18324c!important;
+  -webkit-text-fill-color:#18324c!important;caret-color:#18324c!important;
+  border:1px solid #d9e3ed!important;border-radius:13px!important;
+  padding-right:14px!important;font-weight:600!important;font-size:15px!important
+}
+.callback-form .iti input::placeholder,.booking-form .iti input::placeholder,
+html[data-alvi-theme="dark"] .callback-form .iti input::placeholder,
+html[data-alvi-theme="dark"] .booking-form .iti input::placeholder{
+  color:#73859a!important;-webkit-text-fill-color:#73859a!important;opacity:1!important
+}
+html[data-alvi-theme="dark"] .callback-form .iti input[type=tel],
+html[data-alvi-theme="dark"] .booking-form .iti input[type=tel]{
+  background:#fff!important;color:#18324c!important;
+  -webkit-text-fill-color:#18324c!important;caret-color:#18324c!important;
+  border-color:#ccdae6!important
+}
+.iti__selected-country,.iti__selected-country-primary,.iti__selected-dial-code,
+.callback-form .iti__selected-country,.booking-form .iti__selected-country{
+  color:#18324c!important;-webkit-text-fill-color:#18324c!important
+}
+.iti__selected-dial-code{
+  font:750 14px/1.3 Manrope,system-ui,sans-serif!important;
+  color:#18324c!important;opacity:1!important
+}
+.iti__selected-country{background:transparent!important;border:0!important;min-height:44px!important}
+.iti__country-container{max-width:46%!important}
+.iti__arrow{border-top-color:#4e6277!important;opacity:1!important}
+html[data-alvi-theme="dark"] .iti__selected-country,
+html[data-alvi-theme="dark"] .iti__selected-country-primary,
+html[data-alvi-theme="dark"] .iti__selected-dial-code{color:#18324c!important;-webkit-text-fill-color:#18324c!important}
+html[data-alvi-theme="dark"] .iti__arrow{border-top-color:#4e6277!important}
+html[data-alvi-theme="dark"] .iti__dropdown-content{
+  background:#112d48!important;color:#eff6fd!important;border-color:#385671!important;
+  box-shadow:0 12px 40px rgba(0,0,0,.3)!important
+}
+html[data-alvi-theme="dark"] .iti__country-list,
+html[data-alvi-theme="dark"] .iti__country,
+html[data-alvi-theme="dark"] .iti__search-container{background:#112d48!important;color:#eff6fd!important}
+html[data-alvi-theme="dark"] .iti__country-name{color:#eff6fd!important}
+html[data-alvi-theme="dark"] .iti__dial-code{color:#b4c8dc!important}
+html[data-alvi-theme="dark"] .iti__country:hover,
+html[data-alvi-theme="dark"] .iti__highlight{background:#244663!important}
+html[data-alvi-theme="dark"] .iti__search-input{
+  background:#112d48!important;color:#eff6fd!important;-webkit-text-fill-color:#eff6fd!important
+}
+html[data-alvi-theme="dark"] .iti__search-input::placeholder{color:#b3c7dc!important;-webkit-text-fill-color:#b3c7dc!important}
+@media(min-width:701px) and (max-width:1080px){
+  .callback-card{grid-template-columns:minmax(0,1fr)!important;gap:20px!important}
+  .callback-form{grid-template-columns:minmax(0,1fr) auto!important}
+}
+@media(max-width:700px){
+  .callback-card{width:100%!important;max-width:100%!important;padding:24px 18px!important}
+  .callback-form{grid-template-columns:minmax(0,1fr)!important}
+  .callback-form .iti,.callback-form .btn{width:100%!important;min-width:0!important}
+}
+@media(max-width:500px){.iti__country-container{max-width:44%!important}}
+/* Fine text contrast across all sections, including blog, team, FAQs, booking, and footer. */
+html[data-alvi-theme="dark"] :is(.about-copy,.booking-intro,.contact-card,.faq-item,.blog-card,.blog-content,.review-card,.offer-body,.excursion-body,.group-travel-section) :is(p,small,li,label){color:#cad9e8!important}
+html[data-alvi-theme="dark"] :is(.about-copy,.booking-intro,.contact-card,.faq-item,.blog-card,.blog-content,.review-card,.offer-body,.excursion-body) :is(h2,h3,h4,strong){color:#f0f6fc!important}
+html[data-alvi-theme="dark"] :is(.faq-item,.faq-item summary,.contact-list a,.booking-intro a,.about-copy a,.footer-seo-links a){color:#dbeaf9!important}
+html[data-alvi-theme="dark"] :is(.section-head p,.optional-note,.photo-credit,.offer-benefits,.review-meta){color:#b5c9db!important}
+html[data-alvi-theme="dark"] footer{background-color:#061a2c!important;color:#dce9f5!important}
+html[data-alvi-theme="dark"] footer :is(a,p,span,strong){color:#dce9f5!important}
+html[data-alvi-theme="dark"] .footer-brand>span{color:#fff!important}
+html[data-alvi-theme="dark"] .btn.btn-gold,html[data-alvi-theme="dark"] .alvi-premium-cta{color:#173149!important}
+html[data-alvi-theme="dark"] .search-card input[type=date]::-webkit-calendar-picker-indicator,
+html[data-alvi-theme="dark"] .booking-form input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}
+/* Interactive card and mobile layout stability */
+html,body{max-width:100%;overflow-x:clip}
+.grid,.destination-grid,.destinations-expanded,.offer-grid,.excursion-grid{min-width:0}
+.destination-card,.offer-card,.excursion-card{min-width:0;max-width:100%}
+.destination-card{background-position:center;background-repeat:no-repeat;background-size:cover}
+@media(max-width:700px){
+ .destination-grid,.destinations-expanded,.offer-grid,.excursion-grid{grid-template-columns:minmax(0,1fr)!important}
+ .destination-card{background-size:cover!important}
+ .contact-card,.booking-form,.offer-card,.excursion-card{min-width:0}
+}
