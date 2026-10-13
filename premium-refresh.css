@@ -201,3 +201,27 @@ html[data-alvi-theme="dark"] .nav{background:#0c2943!important;border-color:#294
 .contact-list .instagram-icon{border:0!important;background:transparent!important;overflow:hidden!important}
 .contact-list .instagram-icon img{display:block;width:100%!important;height:100%!important;object-fit:contain}
 @media(max-width:700px){#destinations{padding-top:56px!important}}
+
+/* Contrast fixes for dark mode: legacy forms used fixed dark text values. */
+html[data-alvi-theme="dark"] .search-card .field input,
+html[data-alvi-theme="dark"] .search-card .field select,
+html[data-alvi-theme="dark"] .booking-form input,
+html[data-alvi-theme="dark"] .booking-form select,
+html[data-alvi-theme="dark"] .booking-form textarea,
+html[data-alvi-theme="dark"] .callback-form input{
+  background:#152e48!important;color:#ecf4fc!important;
+  -webkit-text-fill-color:#ecf4fc!important;border-color:#355570!important
+}
+html[data-alvi-theme="dark"] .search-card .field label,
+html[data-alvi-theme="dark"] .booking-form .field label,
+html[data-alvi-theme="dark"] .callback-form label,
+html[data-alvi-theme="dark"] .contact-card p,
+html[data-alvi-theme="dark"] .about-copy p{color:#c8d8e7!important}
+html[data-alvi-theme="dark"] .search-card input[type=date]::-webkit-calendar-picker-indicator,
+html[data-alvi-theme="dark"] .booking-form input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}
+/* Image micro-interaction without changing the photographed location. */
+.excursion-card>img,.offer-card>img{transition:transform .35s ease}
+@media(hover:hover){
+  .excursion-card:hover>img,.offer-card:hover>img{transform:scale(1.02)}
+}
+@media(prefers-reduced-motion:reduce){.excursion-card>img,.offer-card>img{transition:none}}
