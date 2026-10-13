@@ -7,19 +7,19 @@
   "theme_color": "#0a63c7",
   "icons": [
     {
-      "src": "/favicon.png?v=20261013",
+      "src": "/brandmark-20261014.png",
       "sizes": "64x64",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/alvitravel-heart.svg?v=20261013",
+      "src": "/brandmark-20261014.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/apple-touch-icon.png?v=20261013",
+      "src": "/apple-touch-20261014.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"

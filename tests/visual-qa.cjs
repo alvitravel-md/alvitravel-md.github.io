@@ -30,6 +30,12 @@ function contrast(c1,c2){
     const id=path.relative(process.cwd(),file);
     check(html.includes('/premium-refresh.css?'),id+' has latest theme stylesheet');
     check(html.includes('/premium-refresh.js?'),id+' has theme script');
+    check(html.includes('href="/brandmark-20261014.png"'),id+' uses current PNG favicon');
+    check(html.includes('href="/brandmark-20261014.svg"'),id+' uses current SVG favicon');
+    check(html.includes('href="/brandmark-20261014.ico"'),id+' uses current ICO fallback');
+    check(!html.includes('favicon-heart-20261010.svg?v=20261013'),id+' has no stale old favicon ref');
+    if(id.startsWith('blog/'))check(!html.includes('href="/""'),id+' has correctly formed homepage link');
+
   }
   const chrome=process.env.CHROME_PATH||['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/opt/google/chrome/chrome'].find(p=>fs.existsSync(p));
   if(!chrome)throw Error('Chrome is not installed on the runner');
