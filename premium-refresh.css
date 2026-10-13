@@ -449,3 +449,18 @@ body:not(.alvi-crisp-open) #alviCrispDismiss{display:none!important}
   opacity:1!important;
   pointer-events:auto!important;
 }
+
+/* Manager portrait in the About section. Maintain a clean, natural crop. */
+#about .about-photo{background:transparent!important;min-width:0}
+#about .about-photo img{
+ display:block!important;width:100%!important;height:clamp(340px,40vw,540px)!important;
+ aspect-ratio:auto!important;object-fit:cover!important;object-position:center 34%!important;
+ background:#eef3f7!important;border-radius:26px!important;
+}
+@media(max-width:700px){
+ #about .about-photo img{
+   width:100%!important;height:clamp(320px,95vw,485px)!important;
+   object-fit:cover!important;object-position:center 32%!important;
+   border-radius:20px!important;
+ }
+}
