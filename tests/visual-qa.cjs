@@ -30,9 +30,15 @@ function contrast(c1,c2){
     const id=path.relative(process.cwd(),file);
     check(html.includes('/premium-refresh.css?'),id+' has latest theme stylesheet');
     check(html.includes('/premium-refresh.js?'),id+' has theme script');
-    check(html.includes('href="/brandmark-20261014.png"'),id+' uses current PNG favicon');
-    check(html.includes('href="/brandmark-20261014.svg"'),id+' uses current SVG favicon');
-    check(html.includes('href="/brandmark-20261014.ico"'),id+' uses current ICO fallback');
+    const isBlog=id.startsWith('blog/');
+    const iconPrefix=isBlog?'/blog/alvitravel-heart-v3':'/brandmark-20261014';
+    check(html.includes('href="'+iconPrefix+'.png"'),id+' uses current PNG favicon');
+    check(html.includes('href="'+iconPrefix+'.svg"'),id+' uses current SVG favicon');
+    check(html.includes('href="'+iconPrefix+'.ico"'),id+' uses current ICO fallback');
+    if(isBlog){
+      check(html.includes('rel="mask-icon"'),id+' includes Safari pinned-tab mask');
+      check(html.includes('href="/blog/apple-touch-heart-v3.png"'),id+' includes Apple touch icon');
+    }
     check(!html.includes('favicon-heart-20261010.svg?v=20261013'),id+' has no stale old favicon ref');
     if(id.startsWith('blog/'))check(!html.includes('href="/""'),id+' has correctly formed homepage link');
 
@@ -40,6 +46,33 @@ function contrast(c1,c2){
   const chrome=process.env.CHROME_PATH||['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/opt/google/chrome/chrome'].find(p=>fs.existsSync(p));
   if(!chrome)throw Error('Chrome is not installed on the runner');
   const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox','--disable-dev-shm-usage']});
+  // Verify the blog's raster favicon matches the official blue/gold heart SVG artwork.
+  const iconPage=await browser.newPage();
+  await iconPage.goto(BASE+'/blog/',{waitUntil:'domcontentloaded'});
+  const faviconMatch=await iconPage.evaluate(async ()=>{
+    async function pixels(src){
+      const img=new Image();
+      img.src=src;
+      await img.decode();
+      const canvas=document.createElement('canvas');
+      canvas.width=64;canvas.height=64;
+      const ctx=canvas.getContext('2d',{willReadFrequently:true});
+      ctx.drawImage(img,0,0,64,64);
+      return ctx.getImageData(0,0,64,64).data;
+    }
+    const svg=await pixels('/blog/alvitravel-heart-v3.svg');
+    const png=await pixels('/blog/alvitravel-heart-v3.png');
+    let sum=0;
+    for(let i=0;i<svg.length;i+=4){
+      const sa=svg[i+3]/255,pa=png[i+3]/255;
+      for(let c=0;c<3;c++)sum+=Math.abs(svg[i+c]*sa-png[i+c]*pa);
+      sum+=Math.abs(svg[i+3]-png[i+3]);
+    }
+    return {normalizedDifference:sum/(svg.length*255)};
+  });
+  check(faviconMatch.normalizedDifference<0.08,
+    'Blog heart PNG and SVG have matching artwork: diff '+faviconMatch.normalizedDifference.toFixed(4));
+  await iconPage.close();
   const samples=['/','/destinatii.html','/turcia.html','/blog/','/blog/vacanta-turcia-din-chisinau.html'];
   for(const viewport of [{width:390,height:844},{width:768,height:920},{width:1366,height:900}]){
     for(const mode of ['light','dark']){

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1592d0"/>
+      <stop offset="1" stop-color="#0067a9"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffc21a"/>
+      <stop offset="1" stop-color="#ff9d00"/>
+    </linearGradient>
+  </defs>
+  <circle cx="70" cy="62" r="34" fill="url(#gold)"/>
+  <path d="M122 85C96 54 65 51 46 69 18 95 32 135 62 160l66 58c8 7 18 13 24 17-6-16-14-29-27-42L66 139c-20-18-26-43-10-58 15-15 39-10 66 18z" fill="url(#blue)"/>
+  <path d="M128 90c25-30 58-38 82-20 30 22 34 66 6 96l-67 71c-1-16 1-29 8-43l50-52c20-21 18-50 1-64-16-13-44-10-80 12z" fill="url(#gold)"/>
+  <path d="M102 49c15 3 28 12 38 25-2-17-10-31-24-41-9-7-22 5-14 16z" fill="url(#blue)"/>
+  <path d="M137 50c0-18 4-33 11-46 4-7 14-4 13 4-2 17-7 34-15 49z" fill="url(#blue)"/>
+  <path d="M126 44c-3-12-3-22 0-31 2-6 10-5 12 1 2 9 1 20-2 31z" fill="url(#blue)"/>
+  <path d="M43 59c8-11 19-18 33-20" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+</svg>
