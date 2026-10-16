@@ -488,28 +488,42 @@ if(document.readyState==='loading'){
 }
 
 
-/* Crisp is intentionally not loaded until the visitor explicitly opens Chat online.
-   Loading it on every page produced an empty white third-party iframe overlay. */
+/* The Crisp SDK loads only after explicit visitor interaction.
+   Wait for SDK readiness before opening the actual chat frame. */
+window.$crisp=window.$crisp||[];
+window.$crisp.push(['safe',true]);
 function loadCrispChat(){
-  const websiteId=(window.ALVI_CRISP_WEBSITE_ID||'').trim();
-  if(!websiteId||window.__alviCrispLoaded)return !!websiteId;
+  const websiteId=String(window.ALVI_CRISP_WEBSITE_ID||'ec025d45-6979-45ea-a41c-969bfe7d6007').trim();
+  if(!websiteId)return false;
+  if(window.__alviCrispLoaded)return true;
   window.__alviCrispLoaded=true;
-  window.$crisp=window.$crisp||[];
   window.CRISP_WEBSITE_ID=websiteId;
-  window.$crisp.push(['safe',true]);
-  window.$crisp.push(['do','chat:hide']);
-  window.$crisp.push(['set','session:data',[[['site','alvitravel.md']]]]);
+  const existingReadyTrigger=window.CRISP_READY_TRIGGER;
+  window.CRISP_READY_TRIGGER=function(){
+    window.__alviCrispReady=true;
+    if(typeof existingReadyTrigger==='function'){
+      try{existingReadyTrigger()}catch(e){console.warn('Crisp ready listener failed',e)}
+    }
+    if(window.__alviUserOpenedChat){
+      window.$crisp.push(['do','chat:show']);
+      window.$crisp.push(['do','chat:open']);
+    }else{
+      window.$crisp.push(['do','chat:hide']);
+    }
+  };
   const script=document.createElement('script');
   script.src='https://client.crisp.chat/l.js';
   script.async=true;
-  script.crossOrigin='anonymous';
+  // The official Crisp snippet does not set crossOrigin: Safari can reject
+  // third-party scripts when a CORS-only fetch is unnecessarily required.
   script.onerror=()=>{
     window.__alviCrispLoadFailed=true;
+    window.__alviCrispLoaded=false;
+    window.__alviUserOpenedChat=false;
     document.body.classList.remove('alvi-crisp-open');
-    const button=document.getElementById('contactHubChat');
-    if(button)button.setAttribute('aria-label','Chat indisponibil. Contactează-ne prin WhatsApp');
-    const label=button?.querySelector('.standalone-chat-label');
-    if(label)label.textContent='WhatsApp';
+    document.getElementById('contactHubChat')?.removeAttribute('aria-busy');
+    const label=document.querySelector('#contactHubChat .standalone-chat-label');
+    if(label)label.textContent='Chat indisponibil';
   };
   document.head.appendChild(script);
   return true;
@@ -530,23 +544,41 @@ function setContactHub(open){
 }
 contactHubToggle?.addEventListener('click',()=>setContactHub(!contactHub?.classList.contains('is-open')));
 /* Keep controls separate from the Crisp panel while it is open. */
-window.$crisp=window.$crisp||[];
-window.$crisp.push(['on','chat:opened',()=>{setContactHub(false);if(window.__alviUserOpenedChat)document.body.classList.add('alvi-crisp-open');else window.$crisp.push(['do','chat:close']);}]);
-window.$crisp.push(['on','chat:closed',()=>{window.__alviUserOpenedChat=false;document.body.classList.remove('alvi-crisp-open');window.$crisp.push(['do','chat:hide']);}]);
+window.$crisp.push(['on','chat:opened',()=>{
+  setContactHub(false);
+  const button=document.getElementById('contactHubChat');
+  button?.removeAttribute('aria-busy');
+  const label=button?.querySelector('.standalone-chat-label');
+  if(label)label.textContent='Chat online';
+  if(window.__alviUserOpenedChat)document.body.classList.add('alvi-crisp-open');
+  else {
+    window.$crisp.push(['do','chat:close']);
+    window.$crisp.push(['do','chat:hide']);
+  }
+}]);
+window.$crisp.push(['on','chat:closed',()=>{
+  window.__alviUserOpenedChat=false;
+  document.body.classList.remove('alvi-crisp-open');
+  document.getElementById('contactHubChat')?.removeAttribute('aria-busy');
+  window.$crisp.push(['do','chat:hide']);
+}]);
 document.getElementById('contactHubChat')?.addEventListener('click',()=>{
   setContactHub(false);
   if(window.__alviCrispLoadFailed){
     window.open('https://wa.me/37368004449','_blank','noopener');
     return;
   }
-  // Show only on an explicit visitor click; never render a Crisp panel on page load.
+  // A first click starts Crisp loading; open again when CRISP_READY_TRIGGER fires.
   window.__alviUserOpenedChat=true;
   document.body.classList.add('alvi-crisp-open');
+  document.getElementById('contactHubChat')?.setAttribute('aria-busy','true');
   if(!loadCrispChat()){
     document.body.classList.remove('alvi-crisp-open');
+    document.getElementById('contactHubChat')?.removeAttribute('aria-busy');
     window.open('https://wa.me/37368004449','_blank','noopener');
     return;
   }
+  // Supported by Crisp's queue before initialization and after it is ready.
   window.$crisp.push(['do','chat:show']);
   window.$crisp.push(['do','chat:open']);
 });
