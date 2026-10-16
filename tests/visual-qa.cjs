@@ -161,6 +161,36 @@ function contrast(c1,c2){
             });
             check(activated.active&&activated.loaded&&activated.closed,viewport.width+' '+mode+' chat starts ONLY on click and can be dismissed');
 
+            if(viewport.width===1366&&mode==='light'){
+              // Unlike the old test, this verifies that the real Crisp SDK finishes
+              // initialization and the conversation window actually OPENS.
+              await page.click('#contactHubChat');
+              let opened=false,debug;
+              try{
+                await page.waitForFunction(
+                  ()=>!!(window.__alviCrispReady&&window.$crisp&&
+                    typeof window.$crisp.is==='function'&&window.$crisp.is('chat:opened')),
+                  {timeout:18000,polling:200}
+                );
+                opened=true;
+              }catch(e){debug='SDK did not show opened chat: '+e.message}
+              const state=await page.evaluate(()=>({
+                scriptLoaded:!!document.querySelector('script[src*="client.crisp.chat/l.js"]'),
+                ready:!!window.__alviCrispReady,
+                opened:typeof window.$crisp?.is==='function'?window.$crisp.is('chat:opened'):null,
+                wrapperPresent:!!document.querySelector('.crisp-client'),
+                wrapperVisible:!!document.querySelector('.crisp-client')&&
+                  getComputedStyle(document.querySelector('.crisp-client')).visibility==='visible',
+                ariaBusy:document.getElementById('contactHubChat')?.getAttribute('aria-busy'),
+                fallback:!!window.__alviCrispLoadFailed
+              }));
+              console.log('ACTUAL CRISP SDK STATUS:',JSON.stringify(state));
+              check(opened&&state.ready&&state.wrapperVisible,'Real Crisp chat opens after user click: '+JSON.stringify(state)+(debug||''));
+              if(opened)await page.screenshot({path:'qa-screens/home-1366-crisp-open.png'});
+              await page.evaluate(()=>document.querySelector('#alviCrispDismiss')?.click());
+            }
+
+
           }
           if(link!=='/')check(!report.crispScriptBeforeClick,link+' '+viewport.width+' '+mode+' inner page does not auto-create Crisp widget');
           if(mode==='dark'&&report.blog && report.blog.bg.startsWith('rgb('))check(contrast(report.blog.pcolor,report.blog.bg)>=4.5,link+' '+viewport.width+' dark blog text contrast');
