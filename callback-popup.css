@@ -1,0 +1,41 @@
+
+/* Original AlviTravel consultation modal — no Crisp iframe overrides */
+.alvi-call-modal[hidden],.alvi-call-form[hidden],.alvi-call-success[hidden]{display:none!important}
+.alvi-call-modal{position:fixed;inset:0;z-index:2147482900;background:rgba(5,20,42,.64);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:grid;place-items:center;padding:14px;overflow-y:auto;opacity:0;transition:opacity .23s ease;overscroll-behavior:contain}
+.alvi-call-modal.is-open{opacity:1}
+body.alvi-call-modal-open{overflow:hidden!important}
+.alvi-call-dialog{position:relative;width:min(100%,495px);max-height:min(94dvh,820px);overflow-y:auto;border-radius:25px;background:#fff;box-shadow:0 30px 90px rgba(0,18,42,.34);transform:translateY(12px);transition:transform .24s ease;outline:0;font-family:inherit}
+.alvi-call-modal.is-open .alvi-call-dialog{transform:none}
+.alvi-call-top{position:relative;min-height:225px;padding:23px 29px 28px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;color:#fff;background:linear-gradient(110deg,rgba(4,36,75,.93),rgba(6,96,153,.72)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=72') center/cover no-repeat}
+.alvi-call-top::after{content:"";position:absolute;right:-100px;bottom:-140px;width:350px;height:350px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 0 0 44px rgba(255,255,255,.045),0 0 0 100px rgba(255,255,255,.025);pointer-events:none}
+.alvi-call-brand{position:relative;z-index:1;display:flex;gap:9px;align-items:center;font-weight:900;font-size:15px;color:#fff}
+.alvi-call-brand img{width:37px;height:37px;border-radius:10px;background:#fff;padding:3px;object-fit:contain}
+.alvi-call-brand small{display:block;margin-top:2px;color:#d7e8f6;font-size:9px;letter-spacing:1.3px;font-weight:700}
+.alvi-call-head{position:relative;z-index:1;margin-top:25px;max-width:345px}
+.alvi-call-overline{font-size:10px;font-weight:850;letter-spacing:1.5px;color:#f4d38e}
+.alvi-call-head h2{font-size:clamp(29px,5.5vw,37px)!important;line-height:1.03!important;letter-spacing:-1px!important;font-weight:950!important;margin:8px 0!important;color:#fff!important}
+.alvi-call-head p{font-size:13px!important;line-height:1.55!important;color:#e9f1f8!important;margin:0!important}
+.alvi-call-close{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(8,36,67,.34);cursor:pointer;font:normal 26px/1 Arial,sans-serif}
+.alvi-call-close:hover{background:#fff;color:#143b60}
+.alvi-call-form{padding:23px 29px 24px;display:grid;gap:13px}
+.alvi-call-field{display:grid;gap:6px}
+.alvi-call-field label{color:#203e5c;font-size:12px;font-weight:800}
+.alvi-call-field input{box-sizing:border-box;width:100%;min-height:51px;border:1px solid #dce5ee;border-radius:13px;padding:12px 15px;background:#f5f8fb;font:600 15px/1.3 inherit;color:#18364e;outline:none}
+.alvi-call-field input::placeholder{color:#91a0b0;font-weight:500}
+.alvi-call-field input:focus{border-color:#2483bb;background:#fff;box-shadow:0 0 0 3px rgba(32,131,191,.11)}
+.alvi-call-consent{display:grid;grid-template-columns:19px 1fr;align-items:start;gap:9px;cursor:pointer;font-size:11px;line-height:1.5;color:#4b637b;margin:2px 0}
+.alvi-call-consent input{width:18px;height:18px;margin:1px 0 0;accent-color:#1577ad;cursor:pointer}
+.alvi-call-consent a{color:#1169a0;text-decoration:underline;text-underline-offset:2px;font-weight:750}
+.alvi-call-submit{min-height:53px;border:0;border-radius:14px;width:100%;background:linear-gradient(106deg,#edbc67,#f7d68e);color:#173856;font-family:inherit;font-size:15px;font-weight:850;cursor:pointer;box-shadow:0 8px 17px rgba(175,119,34,.18)}
+.alvi-call-submit:hover{filter:brightness(1.035)}
+.alvi-call-submit:disabled{opacity:.65;cursor:wait}
+.alvi-call-error{font-size:12px;line-height:1.4;color:#b14138;min-height:0}
+.alvi-call-error:empty{display:none}
+.alvi-call-caption{font-size:10px;text-align:center;color:#8191a1;margin:-3px 0 0}
+.alvi-call-success{padding:37px 28px;text-align:center}
+.alvi-call-success i{display:grid;place-items:center;margin:0 auto 12px;width:52px;height:52px;border-radius:50%;background:#e7f8ee;color:#219366;font-size:26px;font-style:normal}
+.alvi-call-success h3{color:#173856;font-size:23px;margin:0 0 9px}
+.alvi-call-success p{font-size:14px;line-height:1.65;color:#4b637b;margin:0 0 25px}
+@media(max-width:550px){.alvi-call-dialog{border-radius:22px;max-height:92dvh}.alvi-call-top{min-height:207px;padding:19px 22px 22px}.alvi-call-head h2{font-size:30px!important}.alvi-call-form{padding:20px 21px;gap:10px}.alvi-call-field input{min-height:48px}.alvi-call-close{right:12px;top:12px}}
+@media(max-height:620px){.alvi-call-modal{place-items:start center}.alvi-call-top{min-height:160px}.alvi-call-head{margin-top:8px}.alvi-call-form{padding-top:14px;padding-bottom:14px}}
+@media(prefers-reduced-motion:reduce){.alvi-call-modal,.alvi-call-dialog{transition:none}}
