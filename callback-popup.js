@@ -57,7 +57,7 @@
     if(name.length<3||!phone)return;
     const button=form.querySelector('button[type=submit]');button.disabled=true;button.textContent='Se trimite…';status.textContent='';
     try{
-      const payload=new URLSearchParams({siteKey:'alvitravel-web-2026',name:/^[=+\\-@]/.test(name)?"'"+name:name,phone:"'"+phone,destination:'',date:'',adults:'0',children:'0',childAges:'',budget:'',message:'Solicitare consultație din popup',source:'callback-popup'});
+      const payload=new URLSearchParams({siteKey:'alvitravel-web-2026',name:/^[=+@-]/.test(name)?"'"+name:name,phone:"'"+phone,destination:'',date:'',adults:'0',children:'0',childAges:'',budget:'',message:'Solicitare consultație din popup',source:'callback-popup'});
       await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:payload.toString(),keepalive:true});
       status.textContent='Cererea a fost transmisă. Te vom contacta cât mai curând.';
       button.textContent='Trimis ✓';form.reset();sessionStorage.setItem('alvi-popup-dismissed','1');try{localStorage.setItem('alvi-popup-sent-at',String(Date.now()))}catch(e){}
