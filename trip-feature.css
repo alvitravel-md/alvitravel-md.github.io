@@ -1,0 +1,20 @@
+/* Featured excursion, home page only */
+.alvi-live-offer{padding:50px 0 70px;background:linear-gradient(180deg,#fff,#f4faf9)}
+.alvi-live-eyebrow{display:flex;align-items:center;gap:8px;color:#147e86;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin:0 0 18px}
+.alvi-live-grid{display:grid;grid-template-columns:.93fr 1.07fr;background:#fff;border-radius:25px;overflow:hidden;box-shadow:0 18px 60px rgba(5,53,70,.12);border:1px solid #e3edee}
+.alvi-live-photo{min-height:365px;position:relative;overflow:hidden;background:#164b5d}
+.alvi-live-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.alvi-live-date{position:absolute;left:20px;top:20px;background:#ffffffed;color:#0b4555;font-size:13px;font-weight:900;padding:12px 16px;border-radius:30px;box-shadow:0 8px 24px #0003}
+.alvi-live-body{padding:38px 37px 34px;display:flex;flex-direction:column;justify-content:center}
+.alvi-live-badge{align-self:flex-start;background:#ddf7eb;color:#126648;padding:8px 12px;border-radius:60px;font-weight:900;font-size:11px}
+.alvi-live-body h2{font-size:clamp(24px,2.9vw,39px);color:#092b3c;line-height:1.18;margin:15px 0 12px;letter-spacing:-.03em}
+.alvi-live-body p{font-size:14px;line-height:1.8;color:#57717f;margin:0 0 13px}
+.alvi-live-list{list-style:none;padding:0;margin:7px 0 22px;display:flex;flex-wrap:wrap;gap:8px}
+.alvi-live-list li{background:#f0f7f7;padding:8px 11px;border-radius:9px;font-size:11px;font-weight:800;color:#2e5864}
+.alvi-live-footer{display:flex;gap:16px;justify-content:space-between;align-items:center;border-top:1px solid #e7eff0;padding-top:21px}
+.alvi-live-price{font-weight:900;color:#082f42;font-size:29px;letter-spacing:-.03em;line-height:1}
+.alvi-live-price small{display:block;color:#68808b;font-size:11px;letter-spacing:0;font-weight:700;margin-top:5px}
+.alvi-live-button{color:#132f3e;background:#f0c47b;border-radius:13px;padding:14px 16px;font-weight:900;font-size:12px;line-height:1.35;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:transform .15s}
+.alvi-live-button:hover{transform:translateY(-2px)}
+@media(max-width:850px){.alvi-live-grid{grid-template-columns:1fr}.alvi-live-photo{min-height:300px}.alvi-live-body{padding:25px}}
+@media(max-width:500px){.alvi-live-offer{padding:26px 0 45px}.alvi-live-grid{border-radius:19px}.alvi-live-photo{min-height:255px}.alvi-live-body{padding:23px 19px}.alvi-live-footer{align-items:stretch;flex-direction:column}.alvi-live-price{font-size:27px}.alvi-live-button{width:100%}}
