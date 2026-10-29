@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17172c">
+<meta name="description" content="Quiz educativ interactiv pentru clasele V-VI: securitate online, AI, deepfake si protejarea conturilor.">
+<title>Detectivul Digital — Quiz interactiv</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color-scheme:dark;--bg:#151628;--card:#23243a;--text:#f8f8ff;--muted:#bbb9cf;--line:#55546f;--a:#d9ff75;--b:#b4a5ff;--good:#7ce4c1;--bad:#ff9cb4}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;padding:22px;background:radial-gradient(circle at 85% 5%,#382d5b,transparent 40%),linear-gradient(130deg,#121427,#1b1b30);display:grid;place-items:center;color:var(--text)}
+main{width:min(920px,100%);min-height:470px;border:1px solid #514e70;background:var(--card);border-radius:26px;box-shadow:0 20px 65px #06040d66;padding:clamp(24px,5vw,55px);overflow:hidden}
+.eyebrow{font-weight:800;color:var(--a);font-size:12px;letter-spacing:.17em;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.05;letter-spacing:-.045em;margin:18px 0}h2{font-size:clamp(27px,4vw,42px);line-height:1.15;margin:20px 0 24px;letter-spacing:-.03em}
+p{line-height:1.65}.lead{color:var(--muted);font-size:clamp(16px,2vw,20px);max-width:680px}
+.highlight{color:var(--a)}.pills{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}.pill{background:#3c365b;border:1px solid #5e577d;padding:9px 12px;border-radius:40px;font-size:12px;font-weight:700}
+button{font:inherit;cursor:pointer;border-radius:13px;font-weight:800}button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.action{background:var(--a);color:#1b1b26;border:0;padding:15px 24px;margin-top:14px;font-size:16px}.action:disabled{opacity:.44;cursor:not-allowed}
+.secondary{background:#46415f;border:1px solid #696280;color:#fff}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font-size:13px}.progress{height:8px;border-radius:12px;background:#494760;margin:20px 0 27px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--b),var(--a));transition:width .2s}
+.options{display:grid;gap:12px;margin:24px 0}.choice{width:100%;min-height:67px;background:#302c48;border:2px solid var(--line);color:var(--text);padding:13px 16px;text-align:left;display:flex;align-items:center;gap:15px;font-size:17px}
+.choice:disabled{opacity:1;cursor:default}.choice:hover:not(:disabled){border-color:var(--b)}.choice.selected{border-color:var(--a)}.choice.right{border-color:var(--good);background:#22493e}.choice.wrong{border-color:var(--bad);background:#4f2c40}
+.letter{background:#51476f;border-radius:10px;min-width:42px;height:42px;display:grid;place-items:center;color:var(--a);font-weight:900}
+.answer{padding:20px;border:1px solid var(--good);background:#224139;color:#ecfff5;border-radius:14px;line-height:1.6}.answer strong{color:var(--a)}
+.tip{font-size:13px;color:var(--muted);line-height:1.6;margin-top:17px}.score{font-size:clamp(58px,9vw,90px);font-weight:900;color:var(--a);letter-spacing:-.08em;margin:12px 0}.score small{font-size:23px;letter-spacing:0;color:var(--muted)}
+footer{margin-top:36px;color:#a6a0bf;letter-spacing:.1em;font-size:12px}
+@media(max-width:570px){body{padding:10px}main{border-radius:18px;min-height:0;padding:23px}.choice{font-size:15px}.top{align-items:flex-start}.action{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"><h1>Detectivul Digital</h1><p>Se încarcă jocul...</p></main>
+<script>
+(function(){
+"use strict";
+var Q=[
+{q:"O fotografie pare foarte reală. Ce poți concluziona?",o:["Este sigur autentică.","Trebuie să verific sursa și contextul.","Este sigur creată cu AI."],a:1,e:"Aspectul unei imagini nu dovedește autenticitatea. Verifică sursa originală, data și alte confirmări."},
+{q:"Primești: «Ai câștigat monede în joc! Trimite codul SMS». Ce faci?",o:["Trimit codul imediat.","Cer unui coleg să trimită codul.","Nu trimit codul și raportez mesajul."],a:2,e:"Codurile de verificare sunt confidențiale. Nu le comunica nimănui, nici pentru un presupus premiu."},
+{q:"Ce este un deepfake?",o:["Un clip sau sunet care poate imita realist o persoană.","Un antivirus pentru telefon.","Un joc despre roboți."],a:0,e:"Un deepfake poate imita vocea sau chipul cuiva. Faptul că un clip pare real nu dovedește că persoana a spus sau făcut acel lucru."},
+{q:"Cum alegi o parolă bună?",o:["Pun numele meu și data nașterii.","Folosesc o parolă lungă și unică.","Folosesc aceeași parolă peste tot."],a:1,e:"Folosește parole lungi, unice pentru fiecare cont. Nu include informații personale evidente."},
+{q:"Ce înseamnă autentificare în doi pași (2FA)?",o:["O confirmare suplimentară la conectare.","Trimiterea parolei către prieteni.","Intrarea în cont fără protecție."],a:0,e:"2FA adaugă o verificare în plus. Nu transmite altcuiva codurile sau cererile de confirmare."},
+{q:"Vezi un videoclip jenant despre un coleg. Ce faci?",o:["Îl distribui imediat.","Nu îl distribui și cer sprijin unui adult.","Îl trimit altui grup."],a:1,e:"Chiar și o imagine falsă poate răni. Nu amplifica distribuirea; discută cu un adult de încredere."},
+{q:"Un cont pretinde că este al profesorului. Cum verifici?",o:["Mă uit doar la poza de profil.","Număr emojiurile.","Confirm identitatea printr-un canal oficial sau deja cunoscut."],a:2,e:"Un nume, o fotografie sau o voce pot fi imitate. Contactează profesorul printr-un canal sigur."},
+{q:"Primești o știre șocantă într-o imagine. Primul pas?",o:["Verific sursa și caut confirmări.","O redistribui imediat.","O cred fiindcă are aprecieri."],a:0,e:"Aprecierile și distribuirile nu sunt dovezi. Compară cu surse credibile înainte de a distribui."}
+];
+var root=document.getElementById("app"),index=-1,selected=-1,shown=false,score=0;
+function make(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined)x.textContent=txt;return x}
+function action(txt,cb,cls){var b=make("button","action"+(cls?" "+cls:""),txt);b.type="button";b.addEventListener("click",cb);return b}
+function reset(){index=0;selected=-1;shown=false;score=0;render()}
+function next(){index++;selected=-1;shown=false;render()}
+function reveal(){if(selected<0||shown)return;shown=true;if(selected===Q[index].a)score++;render()}
+function render(){
+root.replaceChildren();
+if(index===-1){
+root.append(make("div","eyebrow","AMELIA · CLASELE V–VI"),make("h1","","Detectivul Digital"),make("h2","","Quiz fulger: Real sau AI?"),make("p","lead","8 întrebări interactive despre siguranța online. Elevii aleg o variantă, apoi profesorul dezvăluie explicația."));
+var tags=make("div","pills");["8 întrebări","A / B / C","Fără cont","Fără internet după descărcare"].forEach(function(t){tags.append(make("span","pill",t))});root.append(tags,action("Începe jocul",reset),make("p","tip","Poți proiecta quiz-ul la clasă sau îl poți deschide individual, pe telefon ori calculator."),make("footer","","PRIVEȘTE · GÂNDEȘTE · VERIFICĂ"));return;
+}
+if(index>=Q.length){
+root.append(make("div","eyebrow","MISIUNE ÎNDEPLINITĂ"),make("h1","","Felicitări, detectivilor!"),make("p","lead","Ați încheiat toate cele 8 întrebări."),make("div","score",score+" / "+Q.length),make("p","lead","Regula de aur: verifică sursa, protejează codurile, nu redistribui materiale dăunătoare și cere ajutor când ai dubii."),action("Joacă din nou",reset),make("footer","","NIMIC NU TREBUIE CREZUT DOAR PENTRU CĂ PARE REAL."));return;
+}
+var item=Q[index],top=make("div","top");top.append(make("span","eyebrow","DETECTIVUL DIGITAL"),make("strong","",String(index+1)+" / "+Q.length));root.append(top);
+var prog=make("div","progress"),p=make("span");p.style.width=((index+1)/Q.length*100)+"%";prog.append(p);root.append(prog,make("div","pill","ALEGE RĂSPUNSUL"),make("h2","",item.q));
+var opts=make("div","options");item.o.forEach(function(txt,j){var b=make("button","choice",undefined);b.type="button";if(selected===j)b.classList.add("selected");if(shown&&j===item.a)b.classList.add("right");if(shown&&j===selected&&j!==item.a)b.classList.add("wrong");b.disabled=shown;b.setAttribute("aria-pressed",selected===j?"true":"false");b.append(make("span","letter","ABC".charAt(j)),make("span","",txt));b.addEventListener("click",function(){if(!shown){selected=j;render()}});opts.append(b)});root.append(opts);
+if(shown){var box=make("div","answer");box.append(make("strong","","Răspuns corect: "+"ABC".charAt(item.a)+". "),document.createTextNode(item.e));root.append(box,action(index===Q.length-1?"Vezi rezultatul":"Întrebarea următoare",next));}
+else{var btn=action("Dezvăluie răspunsul",reveal);btn.disabled=selected<0;root.append(btn);}
+root.append(make("p","tip",shown?"Discută explicația înainte de a continua.":"Răspunsul rămâne ascuns până după alegere."),make("footer","","FĂRĂ CONT · FĂRĂ RECLAME · FĂRĂ COLECTARE DE DATE"));
+}
+render();
+})();
+</script>
+</body>
+</html>
