@@ -114,6 +114,8 @@ if (location.pathname === '/index.html') {
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-20261014.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/premium-refresh.css?v=20261014-manager">
+<link rel="stylesheet" href="/winter-students-teaser.css?v=20261118-1">
+<script src="/winter-students-teaser.js?v=20261118-1" defer></script>
 <script src="/premium-refresh.js?v=20261013-v1" defer></script>
 </head>
 <body>
@@ -149,6 +151,59 @@ if (location.pathname === '/index.html') {
 
 
 
+
+<!-- Winter student trip preview: details pending. Countdown is to the start of reveal WEEK, not a firm reveal time. -->
+<section class="winter-drop" id="winterStudentReveal" aria-labelledby="winterRevealTitle">
+  <div class="container">
+    <article class="winter-drop__shell">
+      <div class="winter-drop__content">
+        <div class="winter-drop__top">
+          <span class="winter-drop__flag" data-winter-copy="eyebrow">ALVITRAVEL × STUDENȚI</span>
+          <span class="winter-drop__status" data-winter-copy="badge">REVEAL SĂPTĂMÂNA VIITOARE</span>
+        </div>
+        <h2 class="winter-drop__title" id="winterRevealTitle">
+          <span data-winter-copy="title">O iarnă care merită</span>
+          <em data-winter-copy="titleAccent">să devină legendă.</em>
+        </h2>
+        <p class="winter-drop__intro" data-winter-copy="intro">Pauză de la sesiune? Pregătim o escapadă de iarnă exclusiv pentru studenți: munți înzăpeziți, vibe de ski &amp; snowboard și o gașcă de tineri gata de amintiri memorabile. Destinația rămâne deocamdată secretă.</p>
+        <ul class="winter-drop__pills" aria-label="Indicii despre excursia surpriză">
+          <li data-winter-copy="chipMountains">🏔 Munți &amp; zăpadă</li>
+          <li data-winter-copy="chipSki">🏂 Ski &amp; snowboard</li>
+          <li data-winter-copy="chipStudents">🎓 Exclusiv studenți</li>
+          <li data-winter-copy="chipFriends">✨ Gașcă &amp; distracție</li>
+        </ul>
+        <div class="winter-drop__countdown-panel">
+          <p class="winter-drop__countdown-heading" data-winter-copy="timerHeading">Până începe săptămâna dezvăluirii</p>
+          <div class="winter-drop__timer" role="timer" aria-label="Numărătoare până la începutul săptămânii anunțului" aria-live="off">
+            <div class="winter-drop__unit"><strong class="winter-drop__value" data-winter-digit="days">00</strong><span class="winter-drop__label" data-winter-copy="days">Zile</span></div>
+            <div class="winter-drop__unit"><strong class="winter-drop__value" data-winter-digit="hours">00</strong><span class="winter-drop__label" data-winter-copy="hours">Ore</span></div>
+            <div class="winter-drop__unit"><strong class="winter-drop__value" data-winter-digit="minutes">00</strong><span class="winter-drop__label" data-winter-copy="minutes">Minute</span></div>
+            <div class="winter-drop__unit"><strong class="winter-drop__value" data-winter-digit="seconds">00</strong><span class="winter-drop__label" data-winter-copy="seconds">Secunde</span></div>
+          </div>
+          <p class="winter-drop__after" id="winterRevealStatus" aria-live="polite"></p>
+        </div>
+        <div class="winter-drop__actions">
+          <a class="winter-drop__cta" id="winterRevealWhatsapp" href="https://wa.me/37368004449?text=Salut%21%20Vreau%20sa%20aflu%20cand%20se%20anunta%20excursia%20de%20iarna%20pentru%20studenti." target="_blank" rel="noopener"><span data-winter-copy="cta">Vreau să aflu primul</span> <span aria-hidden="true">↗</span></a>
+          <a class="winter-drop__cta winter-drop__cta--outline" href="https://www.instagram.com/alvitravel.agency/" target="_blank" rel="noopener"><span data-winter-copy="instagram">Urmărește pe Instagram</span> <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="winter-drop__fineprint" data-winter-copy="fine">Locul, data plecării, prețul special și programul vor fi anunțate în săptămâna 23–29 noiembrie. Nu sunt încă deschise înscrierile.</p>
+      </div>
+      <div class="winter-drop__visual">
+        <img src="https://images.unsplash.com/photo-1682834725172-01488041708d?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" alt="Peisaj cu pârtii și munți înzăpeziți, fotografie ilustrativă" loading="lazy" decoding="async" width="1000" height="1200">
+        <span class="winter-drop__illustration" data-winter-copy="illustration">Imagine ilustrativă</span>
+        <div class="winter-drop__mystery">
+          <p class="winter-drop__mystery-title" data-winter-copy="mystery">SECRET PÂNĂ LA REVEAL</p>
+          <div class="winter-drop__mystery-row">
+            <span data-winter-copy="mysteryWhere">Unde? 🔒</span>
+            <span data-winter-copy="mysteryWhen">Când? 🔒</span>
+            <span data-winter-copy="mysteryPrice">Ce preț? 🔒</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- End AlviTravel student winter preview -->
 
 <section class="alvi-live-offer" id="excursie-romania-noiembrie" aria-labelledby="alviLiveTitle">
   <div class="container">
